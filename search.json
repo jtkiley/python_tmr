@@ -1,0 +1,289 @@
+[
+  {
+    "objectID": "slides/0c.html#python-ii",
+    "href": "slides/0c.html#python-ii",
+    "title": "Python Tools for Management Research",
+    "section": "Python II",
+    "text": "Python II\n\nFunctions, methods, and control structures let us create a procedure and reuse it.\n\nWe’re moving a bit closer to actual programming: define a small procedure, make decisions, and repeat work. It’s sometimes instructive to contrast with physical terms: imagine a machine that could perfectly process an input, scale practically infinitely for relatively little cost, and have any part easily changed."
+  },
+  {
+    "objectID": "slides/0c.html#overview",
+    "href": "slides/0c.html#overview",
+    "title": "Python Tools for Management Research",
+    "section": "Overview",
+    "text": "Overview\n\n\nFunctions\nInput, procedure, return.\n\n\nMethods\nFunctions attached to objects.\n\n\nControl structures\nIf-then statements and loops."
+  },
+  {
+    "objectID": "slides/0c.html#functions-and-methods",
+    "href": "slides/0c.html#functions-and-methods",
+    "title": "Python Tools for Management Research",
+    "section": "Functions and methods",
+    "text": "Functions and methods\nMuch like math, functions are objects that take input and map that input to a particular output.\nIn programming, we tend to refer to input as arguments, and output as returns.\n\ndef f_to_c(temp_f):\n    return (temp_f - 32) * 5 / 9\n\nprint(f_to_c(72))\n\n22.22222222222222\n\n\nThere are many built in, and we can make our own."
+  },
+  {
+    "objectID": "slides/0c.html#function-parts",
+    "href": "slides/0c.html#function-parts",
+    "title": "Python Tools for Management Research",
+    "section": "Function parts",
+    "text": "Function parts\ndef f_to_c(temp_f):\n    return (temp_f - 32) * 5 / 9\n\n\nDefinition\ndef creates the function and gives it a name.\n\n\nParameters\nThe parentheses define what input the function expects.\n\n\nBody\nThe indented block is the procedure to execute.\n\n\nReturn\nreturn sends a value back to where the function was called."
+  },
+  {
+    "objectID": "slides/0c.html#methods",
+    "href": "slides/0c.html#methods",
+    "title": "Python Tools for Management Research",
+    "section": "Methods",
+    "text": "Methods\nRemember that everything in Python is an object.\nObjects have methods, which are functions attached to objects and defined with their type in mind.\n\nc_string = \"MY CAPS LOCK KEY IS BROKEN, APPARENTLY.\"\n\nprint(c_string.lower())\nprint(c_string.lower().replace(\"broken\", \"fixed\"))\n\nmy caps lock key is broken, apparently.\nmy caps lock key is fixed, apparently."
+  },
+  {
+    "objectID": "slides/0c.html#mutability",
+    "href": "slides/0c.html#mutability",
+    "title": "Python Tools for Management Research",
+    "section": "Mutability",
+    "text": "Mutability\nMutability describes whether objects themselves can be changed.\nThis is different from changing the object that a name points to.\n\n\nBasic types\nOften immutable.\nExample: text = text.lower()\n\n\nData structures\nOften mutable.\nExample: items.append(\"new\")"
+  },
+  {
+    "objectID": "slides/0c.html#mutability-is-about-objects",
+    "href": "slides/0c.html#mutability-is-about-objects",
+    "title": "Python Tools for Management Research",
+    "section": "Mutability is about objects",
+    "text": "Mutability is about objects\n\nc_list = [1, 2, 3, 4]\nd_list = c_list\n\nc_list.append(5)\n\nprint(c_list)\nprint(d_list)\nprint(c_list is d_list)\n\n[1, 2, 3, 4, 5]\n[1, 2, 3, 4, 5]\nTrue\n\n\nBoth names point to the same object. If we need a separate list, we make a copy.\n\nd_list = c_list.copy()\nprint(c_list is d_list)\n\nFalse"
+  },
+  {
+    "objectID": "slides/0c.html#control-structures",
+    "href": "slides/0c.html#control-structures",
+    "title": "Python Tools for Management Research",
+    "section": "Control structures",
+    "text": "Control structures\nControl structures allow code to make decisions and repeat procedures.\n\na = 5\n\nif a &gt; 5:\n    print(\"a is greater than five.\")\nelif a == 5:\n    print(\"a is exactly five.\")\nelse:\n    print(\"a is something else.\")\n\na is exactly five."
+  },
+  {
+    "objectID": "slides/0c.html#indentation-matters",
+    "href": "slides/0c.html#indentation-matters",
+    "title": "Python Tools for Management Research",
+    "section": "Indentation matters",
+    "text": "Indentation matters\nIn Python, spacing is part of the syntax.\n\nif a &gt; 4:\n    print(\"This is inside the if statement.\")\nprint(\"This prints either way.\")\n\nThis is inside the if statement.\nThis prints either way.\n\n\nIn some other languages, code blocks use braces. Python uses indentation."
+  },
+  {
+    "objectID": "slides/0c.html#while-loops",
+    "href": "slides/0c.html#while-loops",
+    "title": "Python Tools for Management Research",
+    "section": "While loops",
+    "text": "While loops\nWhile some condition is true, do something.\nThe condition needs to somehow become false, or this will run forever.\n\nb = 1\nwhile b &lt; 5:\n    print(f\"b is {b}\")\n    b = b + 1\n\nb is 1\nb is 2\nb is 3\nb is 4"
+  },
+  {
+    "objectID": "slides/0c.html#for-loops",
+    "href": "slides/0c.html#for-loops",
+    "title": "Python Tools for Management Research",
+    "section": "For loops",
+    "text": "For loops\nFor each item in some sequence, do something.\nThis has a natural end point, unlike the more general while loop.\n\nfor num in [1, 2, 3, 4, 5]:\n    print(num + 1)\n\n2\n3\n4\n5\n6"
+  },
+  {
+    "objectID": "slides/0c.html#convenience-syntax",
+    "href": "slides/0c.html#convenience-syntax",
+    "title": "Python Tools for Management Research",
+    "section": "Convenience syntax",
+    "text": "Convenience syntax\nWe often use the same control structures in the same ways.\nLanguage designers sometimes give us syntax that makes common patterns easier.\n\ne_list = [\"THIS\", \"LIST\", \"HAS\", \"ITEMS\", \"IN\", \"CAPS\"]\n\nnew_list = []\nfor item in e_list:\n    new_list.append(item.lower())\n\nprint(new_list)\n\n['this', 'list', 'has', 'items', 'in', 'caps']\n\n\n\n[item.lower() for item in e_list]\n\n['this', 'list', 'has', 'items', 'in', 'caps']"
+  },
+  {
+    "objectID": "slides/0c.html#hands-on",
+    "href": "slides/0c.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen notebooks/0c_python2.ipynb."
+  },
+  {
+    "objectID": "slides/0c.html#summary",
+    "href": "slides/0c.html#summary",
+    "title": "Python Tools for Management Research",
+    "section": "Summary",
+    "text": "Summary\n\nFunctions and methods let us take a procedure and give it a name.\nMutability is sometimes tricky, but basic types are generally immutable and data structures are generally mutable.\nControl structures allow code to make decisions and repeat procedures."
+  },
+  {
+    "objectID": "slides/0c.html#end-of-the-day",
+    "href": "slides/0c.html#end-of-the-day",
+    "title": "Python Tools for Management Research",
+    "section": "End of the day",
+    "text": "End of the day\n\nYou now know all of the basics of programming. (Whoa!)\n\nThe core set of things that we need to do to write computations is surprisingly short. There’s a lot beyond this, but it’s about efficiency, productivity, convenience, and style."
+  },
+  {
+    "objectID": "slides/0a.html#the-key",
+    "href": "slides/0a.html#the-key",
+    "title": "Python Tools for Management Research",
+    "section": "The key",
+    "text": "The key\n\nPython and the tools we use let us make our workflows into research evidence.\n\nWe are learning a carefully curated subset of Python to use modern research tools to get reproducible results, verifiable procedures, and sharable artifacts."
+  },
+  {
+    "objectID": "slides/0a.html#course-path",
+    "href": "slides/0a.html#course-path",
+    "title": "Python Tools for Management Research",
+    "section": "Course path",
+    "text": "Course path\n\n\nDay 0\nPython foundations\nNotebooks, Markdown, basic syntax, and the first working habits.\n\nDay 1\nPolars\nRead, inspect, transform, and save research data.\n\nDay 2\nProjects\nGit, GitHub, Codespaces, and environment management.\n\nDay 3\nQuarto outputs\nDocuments, manuscripts, slides, and code-generated results."
+  },
+  {
+    "objectID": "slides/0a.html#why-python",
+    "href": "slides/0a.html#why-python",
+    "title": "Python Tools for Management Research",
+    "section": "Why Python?",
+    "text": "Why Python?\n\nApproachability: Python is a well-designed modern language that handles a lot for us.\nFeatures: many useful tools are already built, so we often glue pieces together.\nLearning resources: wide use gives us extensive documentation, examples, and help.\nScalability: similar workflows can move from a laptop, to the cloud, to a computing cluster."
+  },
+  {
+    "objectID": "slides/0a.html#what-do-you-really-need-to-know",
+    "href": "slides/0a.html#what-do-you-really-need-to-know",
+    "title": "Python Tools for Management Research",
+    "section": "What do you really need to know?",
+    "text": "What do you really need to know?\n\n\nBasics\nCore focus: Python interpreter, notebooks, variables, strings, numbers, lists, dictionaries, packages, and documentation.\n\nData Preparation\nCore focus: reading data, inspecting structure, transforming columns, merging, querying, and writing results.\n\n\n\nGood-enough Programming\nSupporting focus: functions, loops, reusable patterns, readable code, and handling errors without panic.\n\nSoftware Engineering\nWarning sign: useful, but lower ROI for most research workflows.\nExamples: classes and inheritance, package development, testing and continuous integration, cross-version support, open-source contributions."
+  },
+  {
+    "objectID": "slides/0a.html#compared-with-familiar-tools",
+    "href": "slides/0a.html#compared-with-familiar-tools",
+    "title": "Python Tools for Management Research",
+    "section": "Compared with familiar tools",
+    "text": "Compared with familiar tools\n\n\nExcel\n\nCan destroy data, such as Twitter IDs.\nSlows considerably with otherwise small datasets.\nLeaves no great audit trail on changes.\n\n\nStats packages and R\n\nStata (for example) is great at modeling and not much else.\nR is also great at modeling, though less versatile than Python.\nPython shines as general-purpose glue around data, automation, and outputs."
+  },
+  {
+    "objectID": "slides/0a.html#why-environments-matter",
+    "href": "slides/0a.html#why-environments-matter",
+    "title": "Python Tools for Management Research",
+    "section": "Why environments matter",
+    "text": "Why environments matter\nPackages are tools. Research projects need the right tools, in compatible versions, kept together with the project.\nWe use devcontainers and environments as recipes that we can ship with the project, so we can reproduce the computing environment later, on another computer, or for a coauthor."
+  },
+  {
+    "objectID": "slides/0a.html#the-course-environment",
+    "href": "slides/0a.html#the-course-environment",
+    "title": "Python Tools for Management Research",
+    "section": "The course environment",
+    "text": "The course environment\nGitHub Codespaces gives everyone the same working environment in the browser.\nThe devcontainer defines the Python version, Quarto, VS Code extensions, and course packages as project infrastructure rather than one-off setup steps.\nThat matters for research because things change: coauthor writing code or verifying results, another computer, new computer, OS upgrade, and so on."
+  },
+  {
+    "objectID": "slides/0a.html#why-notebooks",
+    "href": "slides/0a.html#why-notebooks",
+    "title": "Python Tools for Management Research",
+    "section": "Why notebooks?",
+    "text": "Why notebooks?\n\n\nWhat they hold\n\nReference\nNarrative\nProcedure\nOutput\nGood-enough sharing\n\n\nWhy that helps\nThe explanation, code, and results live near each other. That makes the notebook useful for planning, decision-making, doing, outputting, and sharing."
+  },
+  {
+    "objectID": "slides/0a.html#errors-are-information",
+    "href": "slides/0a.html#errors-are-information",
+    "title": "Python Tools for Management Research",
+    "section": "Errors are information",
+    "text": "Errors are information\nProgramming languages are very literal. They attempt to evaluate exactly what we give them.\n\nThe best part is that they do exactly what we say. The worst part is that they do exactly what we say.\n\nNameError: name 'polarz' is not defined\nIt’s fine. They make us resolve ambiguity, and they tell us exactly what is wrong. We can read the error, fix it, and move on. And repeat. A lot."
+  },
+  {
+    "objectID": "slides/0a.html#hands-on",
+    "href": "slides/0a.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen notebooks/0a_intro.ipynb."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Python Tools for Management Research",
+    "section": "",
+    "text": "This small site will collect rendered course slides as they are added. The repository remains the main home for notebooks, data, and project files."
+  },
+  {
+    "objectID": "index.html#slides",
+    "href": "index.html#slides",
+    "title": "Python Tools for Management Research",
+    "section": "Slides",
+    "text": "Slides\n\n\n\nsegment\ntopic\nslides\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nview\n\n\n0b\nPython basics I\nview\n\n\n0c\nPython basics II\nview\n\n\n1a\nPolars: read, inspect, transform, and write data\ncoming later\n\n\n1b\nPolars: aggregation, joins, and research data workflows\ncoming later\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\ncoming later\n\n\n2a\nGit and GitHub for research projects\ncoming later\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\ncoming later\n\n\n2c\nPython project and environment management\ncoming later\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
+  },
+  {
+    "objectID": "slides/0b.html#python-i",
+    "href": "slides/0b.html#python-i",
+    "title": "Python Tools for Management Research",
+    "section": "Python I",
+    "text": "Python I\n\nAs a start, we’ll learn to read, run, modify, and reason about small pieces of Python.\n\nThis segment is about basic data types and built-in data structures. There’s no need to memorize syntax; you’ll find that you retain the stuff you use often and can look up the rest."
+  },
+  {
+    "objectID": "slides/0b.html#python-i-1",
+    "href": "slides/0b.html#python-i-1",
+    "title": "Python Tools for Management Research",
+    "section": "Python I",
+    "text": "Python I\n\n\nObject types\nStrings, integers, floats, booleans, None, and dates.\n\n\nData structures\nLists and dictionaries.\n\n\nLearning habit\nRun small examples, edit them, and observe the changes (if any)."
+  },
+  {
+    "objectID": "slides/0b.html#python-objects",
+    "href": "slides/0b.html#python-objects",
+    "title": "Python Tools for Management Research",
+    "section": "Python objects",
+    "text": "Python objects\nEverything in Python is an object.\nObjects have attributes and methods that allow us to work with them.\n\nname = \"Jason\"\nname.lower()\n\n'jason'"
+  },
+  {
+    "objectID": "slides/0b.html#assignment",
+    "href": "slides/0b.html#assignment",
+    "title": "Python Tools for Management Research",
+    "section": "Assignment",
+    "text": "Assignment\nVariables in Python can be thought of as names we give to objects.\n\nproject = \"earnings-call-study\"\nyear = 2026\n\nprint(project)\nprint(year + 1)\n\nearnings-call-study\n2027\n\n\nNames point to objects, but they are distinct. As we’ll see, an object can have no name, one name, or many names. In general, names let us refer to objects without recreating them."
+  },
+  {
+    "objectID": "slides/0b.html#what-you-already-know",
+    "href": "slides/0b.html#what-you-already-know",
+    "title": "Python Tools for Management Research",
+    "section": "What you already know",
+    "text": "What you already know\nYou have likely worked with data type issues in existing stats software.\n\nStata often requires a format change for dates in datasets to be recognizable as dates.\nYou may have used destring to change a number represented as text into a numeric datatype.\nPython is explicit about these distinctions, which seems pedantic until it becomes useful."
+  },
+  {
+    "objectID": "slides/0b.html#integers",
+    "href": "slides/0b.html#integers",
+    "title": "Python Tools for Management Research",
+    "section": "Integers",
+    "text": "Integers\nSame as math: counting numbers, zero, and negatives.\nInteger literals are numbers without decimals.\n\na = 2\nb = 3\n\nprint(f\"Addition:       {a + b}\")\nprint(f\"Subtraction:    {a - b}\")\nprint(f\"Multiplication: {a * b}\")\nprint(f\"Exponentiation: {b ** a}\")\n\nAddition:       5\nSubtraction:    -1\nMultiplication: 6\nExponentiation: 9\n\n\nConvert with int()."
+  },
+  {
+    "objectID": "slides/0b.html#floating-point-numbers",
+    "href": "slides/0b.html#floating-point-numbers",
+    "title": "Python Tools for Management Research",
+    "section": "Floating point numbers",
+    "text": "Floating point numbers\nAny number with a decimal.\nStored as an approximation, but it is rarely an issue for our use.\n\nprice = 19.99\ngrowth = 1.23456e02\n\nprint(price)\nprint(growth)\nprint(float(\"6.02\"))\n\n19.99\n123.456\n6.02\n\n\nScientific notation works, too. Convert with float()."
+  },
+  {
+    "objectID": "slides/0b.html#ints-and-floats",
+    "href": "slides/0b.html#ints-and-floats",
+    "title": "Python Tools for Management Research",
+    "section": "Ints and floats",
+    "text": "Ints and floats\nInts can be added, subtracted, multiplied, and exponentiated.\nAnything with a float, or int division, returns a float.\n\nprint(type(3 + 2))\nprint(type(3 / 2))\nprint(type(3 // 2))\n\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'int'&gt;"
+  },
+  {
+    "objectID": "slides/0b.html#strings",
+    "href": "slides/0b.html#strings",
+    "title": "Python Tools for Management Research",
+    "section": "Strings",
+    "text": "Strings\nOne Zero or more characters.\nThat includes special characters like newlines.\n\ngreeting = \"Hello!\"\nname = \"Jason\"\n\nprint(f\"{greeting} My name is {name}.\")\n\nHello! My name is Jason.\n\n\nConvert with str()."
+  },
+  {
+    "objectID": "slides/0b.html#other-common-types",
+    "href": "slides/0b.html#other-common-types",
+    "title": "Python Tools for Management Research",
+    "section": "Other common types",
+    "text": "Other common types\n\n\nBoolean\nTrue or False, often returned by comparisons.\n\n5 &gt; 3\n\nTrue\n\n\n\n\nNone\nA deliberate null value.\nExample: result = None\n\n\nDatetime\nDates, times, and differences between them.\nExample: datetime.datetime.now()\n\n\nPackage types\nPackages add many more object types. We can also make our own, though that is mostly beyond our scope."
+  },
+  {
+    "objectID": "slides/0b.html#lists",
+    "href": "slides/0b.html#lists",
+    "title": "Python Tools for Management Research",
+    "section": "Lists",
+    "text": "Lists\nLists are data structures that contain a sequence of objects.\nThey can contain many types of objects, though usually we use one main type at a time.\n\ntickers = [\"msft\", \"aapl\", \"nvda\"]\n\nprint(tickers[0])\nprint(tickers[:2])\n\nmsft\n['msft', 'aapl']"
+  },
+  {
+    "objectID": "slides/0b.html#dictionaries",
+    "href": "slides/0b.html#dictionaries",
+    "title": "Python Tools for Management Research",
+    "section": "Dictionaries",
+    "text": "Dictionaries\nDictionaries are data structures with key-value pairs.\nKeys must be unique and immutable.\n\nfirm = {\n    \"ticker\": \"msft\",\n    \"founding_year\": 1975,\n}\n\nprint(firm[\"ticker\"])\nprint(firm)\n\nmsft\n{'ticker': 'msft', 'founding_year': 1975}\n\n\nWe often use dictionaries for lookups or as a lightweight representation of a row of data."
+  },
+  {
+    "objectID": "slides/0b.html#hands-on",
+    "href": "slides/0b.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen notebooks/0b_python1.ipynb."
+  },
+  {
+    "objectID": "slides/0b.html#summary",
+    "href": "slides/0b.html#summary",
+    "title": "Python Tools for Management Research",
+    "section": "Summary",
+    "text": "Summary\n\nPython basic data types should be generally familiar.\nData structures like lists and dictionaries are an upgrade in functionality from most stats software.\nThe notebook is our practice surface: run code, change code, observe output, repeat."
+  }
+]
