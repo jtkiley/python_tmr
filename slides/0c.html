@@ -237,7 +237,7 @@ Jason T. Kiley
 <h2>Functions and methods</h2>
 <p>Much like math, functions are objects that take input and map that input to a particular output.</p>
 <p>In programming, we tend to refer to input as arguments, and output as returns.</p>
-<div id="82fe5de3" class="cell" data-execution_count="1">
+<div id="45d8435b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> f_to_c(temp_f):</span>
 <span id="cb1-2"><a></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span> <span class="op">/</span> <span class="dv">9</span></span>
 <span id="cb1-3"><a></a></span>
@@ -275,7 +275,7 @@ Jason T. Kiley
 <h2>Methods</h2>
 <p>Remember that everything in Python is an object.</p>
 <p>Objects have methods, which are functions attached to objects and defined with their type in mind.</p>
-<div id="4c4be26c" class="cell" data-execution_count="2">
+<div id="062111a7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>c_string <span class="op">=</span> <span class="st">"MY CAPS LOCK KEY IS BROKEN, APPARENTLY."</span></span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a><span class="bu">print</span>(c_string.lower())</span>
@@ -305,7 +305,7 @@ my caps lock key is fixed, apparently.</code></pre>
 </section>
 <section id="mutability-is-about-objects" class="slide level2">
 <h2>Mutability is about objects</h2>
-<div id="ce74350a" class="cell" data-execution_count="3">
+<div id="24ffa8f3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>c_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb6-2"><a></a>d_list <span class="op">=</span> c_list</span>
 <span id="cb6-3"><a></a></span>
@@ -321,7 +321,7 @@ True</code></pre>
 </div>
 </div>
 <p>Both names point to the same object. If we need a separate list, we make a copy.</p>
-<div id="5dda539c" class="cell" data-execution_count="4">
+<div id="61867ccc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>d_list <span class="op">=</span> c_list.copy()</span>
 <span id="cb8-2"><a></a><span class="bu">print</span>(c_list <span class="kw">is</span> d_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -332,7 +332,7 @@ True</code></pre>
 <section id="control-structures" class="slide level2">
 <h2>Control structures</h2>
 <p>Control structures allow code to make decisions and repeat procedures.</p>
-<div id="aabe3c90" class="cell" data-execution_count="5">
+<div id="9b10e383" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>a <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb10-2"><a></a></span>
 <span id="cb10-3"><a></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">5</span>:</span>
@@ -349,7 +349,7 @@ True</code></pre>
 <section id="indentation-matters" class="slide level2">
 <h2>Indentation matters</h2>
 <p>In Python, spacing is part of the syntax.</p>
-<div id="15e6e83b" class="cell" data-execution_count="6">
+<div id="16262ac1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">4</span>:</span>
 <span id="cb12-2"><a></a>    <span class="bu">print</span>(<span class="st">"This is inside the if statement."</span>)</span>
 <span id="cb12-3"><a></a><span class="bu">print</span>(<span class="st">"This prints either way."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -364,7 +364,7 @@ This prints either way.</code></pre>
 <h2>While loops</h2>
 <p>While some condition is true, do something.</p>
 <p>The condition needs to somehow become false, or this will run forever.</p>
-<div id="56c01f8a" class="cell" data-execution_count="7">
+<div id="670ae288" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>b <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb14-2"><a></a><span class="cf">while</span> b <span class="op">&lt;</span> <span class="dv">5</span>:</span>
 <span id="cb14-3"><a></a>    <span class="bu">print</span>(<span class="ss">f"b is </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -381,7 +381,7 @@ b is 4</code></pre>
 <h2>For loops</h2>
 <p>For each item in some sequence, do something.</p>
 <p>This has a natural end point, unlike the more general <code>while</code> loop.</p>
-<div id="e061d08e" class="cell" data-execution_count="8">
+<div id="e7da993d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="cf">for</span> num <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]:</span>
 <span id="cb16-2"><a></a>    <span class="bu">print</span>(num <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -397,7 +397,7 @@ b is 4</code></pre>
 <h2>Convenience syntax</h2>
 <p>We often use the same control structures in the same ways.</p>
 <p>Language designers sometimes give us syntax that makes common patterns easier.</p>
-<div id="1cbeaec5" class="cell" data-execution_count="9">
+<div id="004b962e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>e_list <span class="op">=</span> [<span class="st">"THIS"</span>, <span class="st">"LIST"</span>, <span class="st">"HAS"</span>, <span class="st">"ITEMS"</span>, <span class="st">"IN"</span>, <span class="st">"CAPS"</span>]</span>
 <span id="cb18-2"><a></a></span>
 <span id="cb18-3"><a></a>new_list <span class="op">=</span> []</span>
@@ -409,7 +409,7 @@ b is 4</code></pre>
 <pre><code>['this', 'list', 'has', 'items', 'in', 'caps']</code></pre>
 </div>
 </div>
-<div id="e4fb228f" class="cell" data-execution_count="10">
+<div id="7688cbb4" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>[item.lower() <span class="cf">for</span> item <span class="kw">in</span> e_list]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>['this', 'list', 'has', 'items', 'in', 'caps']</code></pre>
@@ -722,7 +722,7 @@ b is 4</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/jtkiley\.github\.io\/python_tmr\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
