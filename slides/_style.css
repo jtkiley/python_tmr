@@ -149,8 +149,14 @@
     width: 82%;
 }
 
-.reveal code {
+.reveal p code,
+.reveal li code,
+.reveal td code {
     color: var(--ptmr-blue);
+}
+
+.reveal pre code {
+    color: #24292e;
 }
 
 .mermaid {
@@ -226,4 +232,21 @@
     font-size: 0.82em;
     font-weight: 750;
     margin-bottom: 0.35em;
+}
+
+.scroll-code {
+    max-height: 430px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.scroll-code div.sourceCode,
+.scroll-code pre.sourceCode,
+.scroll-code .code-copy-outer-scaffold {
+    overflow: visible !important;
+}
+
+.scroll-code pre {
+    margin-bottom: 0;
+    margin-top: 0;
 }
