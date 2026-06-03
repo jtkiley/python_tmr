@@ -1,24 +1,45 @@
 [
   {
-    "objectID": "materials/2b_devcontainers.html",
-    "href": "materials/2b_devcontainers.html",
-    "title": "2b Activity: Devcontainers and Codespaces",
+    "objectID": "materials/2c_pyproject.html",
+    "href": "materials/2c_pyproject.html",
+    "title": "2c Activity: Python Project Management",
     "section": "",
-    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2b_devcontainers.html#goal",
-    "href": "materials/2b_devcontainers.html#goal",
-    "title": "2b Activity: Devcontainers and Codespaces",
+    "objectID": "materials/2c_pyproject.html#goal",
+    "href": "materials/2c_pyproject.html#goal",
+    "title": "2c Activity: Python Project Management",
     "section": "",
-    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2b_devcontainers.html#activity",
-    "href": "materials/2b_devcontainers.html#activity",
-    "title": "2b Activity: Devcontainers and Codespaces",
+    "objectID": "materials/2c_pyproject.html#activity",
+    "href": "materials/2c_pyproject.html#activity",
+    "title": "2c Activity: Python Project Management",
     "section": "Activity",
-    "text": "Activity\n\n1. Open The Practice Repo2. Add Devcontainer Files3. Inspect the Recipe4. Rebuild if Prompted5. Commit And Push\n\n\nStart on GitHub in Chrome or Edge.\n\nOpen the python_tmr_practice repository you created in 2a.\nClick the green Code button.\nClick the Codespaces tab.\nOpen the existing Codespace, or create a new one if needed.\n\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn VS Code Web:\n\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for add dev.\nChoose Codespaces: Add Dev Container Configuration Files….\nChoose a Python configuration.\nIf asked for a Python version, choose Python 3.13 if it is available. Otherwise, accept the default.\nAccept the remaining default options.\n\nThe exact list of choices can change a little over time. The important thing is that we are adding a .devcontainer/ folder to the repository.\n\n  I added devcontainer configuration files from the Command Palette. \n  I found the .devcontainer/ folder in the Explorer. \n\n\n\nOpen .devcontainer/devcontainer.json.\nLook for:\n\nthe name of the configuration;\nthe base image or feature choices;\nany VS Code extension recommendations;\nany setup commands.\n\nDo not worry if your file does not match the course repository.\n\n  I opened .devcontainer/devcontainer.json. \n  I identified at least one thing this file controls. \n\n\n\nVS Code may ask whether you want to rebuild or reopen the Codespace using the new configuration.\nOnce you’re finished editing, you can follow the prompts to rebuild or use the Command Palette to search for and choose Codespaces: Rebuild Container.\nThe key thing to note is that the repository now contains our environment recipe.\n\n  I can explain why changing the devcontainer may require rebuilding the Codespace. \n\n\n\nUse Source Control:\n\nReview the .devcontainer/ changes.\nFind the .devcontainer/ files under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python devcontainer configuration.\nPush or sync the commit to GitHub.\n\n  I reviewed the .devcontainer/ changes. \n  I committed the .devcontainer/ configuration. \n  I pushed or synced the commit to GitHub."
+    "text": "Activity\n\n1. Open The Practice Repo2. Create pyproject.toml3. Read The File4. Install From The Project5. Pin The Versions We Care About6. Reinstall From The Pinned Project7. Test In A Notebook8. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces.\nThis should be the same repository you used for 2a and 2b.\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn the Explorer, create a file named pyproject.toml at the top level of the repository.\nThere are tools that can generate a starter pyproject.toml, such as uv init, Poetry, and Hatch. For this activity, we will write a very small one ourselves so we can see exactly what each piece does.\nAdd this starter content:\n[build-system]\nrequires = [\"setuptools\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"python-tmr-practice\"\nversion = \"0.1.0\"\nrequires-python = \"&gt;=3.13\"\ndependencies = [\n    \"ipykernel\",\n    \"nbformat\",\n    \"pandas\",\n    \"plotly\",\n    \"polars\",\n]\n\n[tool.setuptools]\npy-modules = []\nSave the file.\n\n  I created and saved pyproject.toml. \n\n\n\nNotice the pieces:\n\nname: the project name;\nversion: a project version;\nrequires-python: the Python version expectation;\ndependencies: Python packages the project needs;\ntool.setuptools: a small setting that says this practice project does not define an importable Python package.\n\nRight now the dependency list names the packages we want, without requiring exact versions. This file stores the project configuration, but it does not install anything just by existing.\n\n  I can identify the dependency list in pyproject.toml. \n\n\n\nOpen a terminal and run:\npython -m pip install -e .\nThis installs from the project file. Since the dependency list does not specify exact versions yet, pip will choose current compatible versions.\nThen check that Polars imports:\npython -c \"import polars as pl; print(pl.__version__)\"\n\n  I installed from pyproject.toml with python -m pip install -e .. \n  I confirmed that Polars imports. \n\n\n\nAfter installing, ask Python what is installed:\npython -m pip freeze\nThe terminal will print a long list of installed packages. We are using this as a readout, not saving it to a file.\nFind the lines for the packages we intentionally installed:\nipykernel==...\nnbformat==...\npandas==...\nplotly==...\npolars==...\nEdit the dependencies part of pyproject.toml so it looks like this, using the version numbers from your terminal:\ndependencies = [\n    \"ipykernel==...\",\n    \"nbformat==...\",\n    \"pandas==...\",\n    \"plotly==...\",\n    \"polars==...\",\n]\nDo not copy every package from pip freeze. Many of those are packages that our chosen packages need. The installer can solve those later.\n\n  I ran python -m pip freeze in the terminal. \n  I copied the package versions I care about into pyproject.toml. \n\n\n\nThe file now records the packages this project needs and the versions we want to keep using.\nRun:\npython -m pip install -e .\nIn this Codespace, most of the work may already be done. The important point is that pyproject.toml is now a recipe that a future environment can use.\n\n  I reinstalled from the pinned pyproject.toml. \n\n\n\nCreate a new notebook named environment_check.ipynb.\nIf VS Code asks you to choose a kernel, choose the Python environment for this Codespace.\nIn the first code cell, paste and run:\nimport pandas as pd\nimport plotly.express as px\nimport polars as pl\n\nprint(\"Polars:\", pl.__version__)\nprint(\"pandas:\", pd.__version__)\nIn a second code cell, paste and run:\nsample_pl = pl.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\nsample_pd = pd.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\ntotal_projects = sample_pl.select(pl.col(\"projects\").sum()).item()\nprint(\"Total projects:\", total_projects)\n\nfig = px.line(\n    sample_pd,\n    x=\"year\",\n    y=\"projects\",\n    markers=True,\n)\nfig.show()\n\n  I created environment_check.ipynb. \n  I ran a notebook cell that imports Polars, pandas, and Plotly. \n  I ran a notebook cell that creates a small Plotly figure. \n\n\n\nUse Source Control:\n\nReview the changes.\nFind pyproject.toml and environment_check.ipynb under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python project environment files.\nPush or sync the commit to GitHub.\n\n  I reviewed the environment file changes. \n  I committed the environment files. \n  I pushed or synced the commit to GitHub."
+  },
+  {
+    "objectID": "materials/2a_github.html",
+    "href": "materials/2a_github.html",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#goal",
+    "href": "materials/2a_github.html#goal",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#activity",
+    "href": "materials/2a_github.html#activity",
+    "title": "2a Activity: Git and GitHub",
+    "section": "Activity",
+    "text": "Activity\n\n1. Create A Repository2. Open it in Codespaces3. Make One Change4. Commit the Change5. Push To GitHub6. Mark A Shared Version\n\n\nStart on GitHub in Chrome or Edge.\n\nGo to https://github.com.\nClick + in the upper-right corner.\nChoose New repository.\nName the repository python_tmr_practice.\nChoose Private.\nCheck Add a README file.\nClick Create repository.\n\n\n  I created a new private GitHub repository with a README. \n  I confirmed this is a new practice repository, not my fork of the course repository. \n\n\n\nFrom the new repository page:\n\nClick the green Code button.\nClick the Codespaces tab.\nClick Create codespace on main.\nWait for VS Code Web to open.\n\nIf GitHub asks whether you trust the authors of the files, choose the “Yes” option.\n\n  I opened the new practice repository in Codespaces. \n  I opened Source Control in VS Code Web. \n\n\n\nOpen README.md.\nAdd a short research-project note, such as:\n## Project Notes\n\nThis repository is a practice project for learning Git and GitHub.\nSave the file.\nReturn to Source Control and click the changed file to review the diff.\n\n  I edited and saved README.md. \n  I reviewed the diff in Source Control. \n\nUseful terminal reference:\ngit status --short\ngit diff\n\n\nIn Source Control:\n\nFind README.md under Changes.\nHover over README.md and click the + button to stage it.\nConfirm that README.md moved from Changes to Staged Changes.\nWrite a descriptive commit message in the message box.\nClick Commit.\n\nIf you have multiple changed files, stage only the files that belong together in this commit.\nA good message for this practice change might be:\nAdded project notes to README.\n\n  I staged README.md. \n  I wrote a descriptive commit message. \n  I committed the change. \n\nUseful terminal reference:\ngit add README.md\ngit commit -m \"Added project notes to README.\"\ngit log --oneline --max-count=5\n\n\nIn VS Code Web, use Sync Changes or Push (from the … menu) in Source Control.\nThen return to the repository page on GitHub and confirm the README change appears there.\n\n  I pushed or synced the commit to GitHub. \n  I found the updated README on GitHub. \n\nUseful terminal reference:\ngit push\n\n\nNow pretend this repository contains a draft you are sending to coauthors.\nIn Source Control:\n\nFind the Graph section.\nRight-click the most recent commit.\nChoose Create Tag….\nName the tag 2026-06-03-to-MP, or substitute “MP” with the initials of your imaginary coauthor.\nConfirm the tag.\n\nThen push the tag to GitHub from the terminal:\ngit push origin 2026-06-03-to-MP\nReturn to the repository page on GitHub and confirm that the tag appears.\n\n  I created a tag from the Source Control graph. \n  I found the tag on GitHub. \n  I can explain why a tag is useful when sending a draft or submitting a paper."
   },
   {
     "objectID": "slides/2b.html#devcontainers-and-codespaces",
@@ -326,7 +347,7 @@
     "href": "index.html#materials",
     "title": "Python Tools for Management Research",
     "section": "Materials",
-    "text": "Materials\n\n\n\nsegment\ntopic\nmaterials\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nslides\n\n\n0b\nPython basics I\nslides\n\n\n0c\nPython basics II\nslides\n\n\n1a\nPolars: read, inspect, transform, and write data\nslides\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nslides\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nslides\n\n\n2a\nGit and GitHub for research projects\nslides / activity\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\nslides / activity\n\n\n2c\nPython project and environment management\ncoming later\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
+    "text": "Materials\n\n\n\nsegment\ntopic\nmaterials\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nslides\n\n\n0b\nPython basics I\nslides\n\n\n0c\nPython basics II\nslides\n\n\n1a\nPolars: read, inspect, transform, and write data\nslides\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nslides\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nslides\n\n\n2a\nGit and GitHub for research projects\nslides / activity\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\nslides / activity\n\n\n2c\nPython project and environment management\nslides / activity\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
   },
   {
     "objectID": "slides/0a.html#the-key",
@@ -658,24 +679,87 @@
     "text": "Hands-on\nOpen the 2a activity page."
   },
   {
-    "objectID": "materials/2a_github.html",
-    "href": "materials/2a_github.html",
-    "title": "2a Activity: Git and GitHub",
-    "section": "",
-    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "objectID": "slides/2c.html#python-project-and-environment-management",
+    "href": "slides/2c.html#python-project-and-environment-management",
+    "title": "Python Tools for Management Research",
+    "section": "Python project and environment management",
+    "text": "Python project and environment management\n\nPinning our package versions is a key part of reproducibility, and better than the alternatives.\n\nWe are making the Python part of a project authoritative and reproducible."
   },
   {
-    "objectID": "materials/2a_github.html#goal",
-    "href": "materials/2a_github.html#goal",
-    "title": "2a Activity: Git and GitHub",
-    "section": "",
-    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "objectID": "slides/2c.html#break-or-never-upgrade",
+    "href": "slides/2c.html#break-or-never-upgrade",
+    "title": "Python Tools for Management Research",
+    "section": "Break or never upgrade?",
+    "text": "Break or never upgrade?\nThe problem we’re working around is what happens when we don’t have separate environments for different projects.\nWe end up with a choice between never upgrading (so we don’t break anything) or breaking things in order to upgrade."
   },
   {
-    "objectID": "materials/2a_github.html#activity",
-    "href": "materials/2a_github.html#activity",
-    "title": "2a Activity: Git and GitHub",
+    "objectID": "slides/2c.html#separate-environments",
+    "href": "slides/2c.html#separate-environments",
+    "title": "Python Tools for Management Research",
+    "section": "Separate environments",
+    "text": "Separate environments\nHaving separate environments for different projects allows us to have a defined set of packages and versions for each project.\nThis avoids the break-or-never-upgrade problem, and also makes our projects more reproducible."
+  },
+  {
+    "objectID": "slides/2c.html#pyproject.toml-1",
+    "href": "slides/2c.html#pyproject.toml-1",
+    "title": "Python Tools for Management Research",
+    "section": "pyproject.toml",
+    "text": "pyproject.toml\nModern Python projects commonly use pyproject.toml.\nIt can store:\n\nproject name and metadata;\nrequired Python version;\npackage dependencies;\ntool settings."
+  },
+  {
+    "objectID": "slides/2c.html#a-small-example",
+    "href": "slides/2c.html#a-small-example",
+    "title": "Python Tools for Management Research",
+    "section": "A small example",
+    "text": "A small example\n[project]\nname = \"python-tmr-practice\"\nversion = \"0.1.0\"\nrequires-python = \"&gt;=3.13\"\ndependencies = [\n    \"polars\",\n]"
+  },
+  {
+    "objectID": "slides/2c.html#why-not-just-pip-install",
+    "href": "slides/2c.html#why-not-just-pip-install",
+    "title": "Python Tools for Management Research",
+    "section": "Why not just pip install?",
+    "text": "Why not just pip install?\npip install polars fixes the current environment.\nIt does not, by itself, capture what the project needs to work as intended or exactly as originally done."
+  },
+  {
+    "objectID": "slides/2c.html#use-the-terminal-as-a-readout",
+    "href": "slides/2c.html#use-the-terminal-as-a-readout",
+    "title": "Python Tools for Management Research",
+    "section": "Use the terminal as a readout",
+    "text": "Use the terminal as a readout\npip freeze shows the packages installed in the current environment. We can use it as a terminal readout, then copy the versions we intentionally care about into pyproject.toml.\nWe do not need to save the whole list or copy every package in it. Be sparing: let the solver do its job."
+  },
+  {
+    "objectID": "slides/2c.html#the-practical-workflow",
+    "href": "slides/2c.html#the-practical-workflow",
+    "title": "Python Tools for Management Research",
+    "section": "The practical workflow",
+    "text": "The practical workflow\nWhen a project needs a package:\n\nadd the direct package to pyproject.toml;\ninstall from the project and let pip solve versions;\nuse pip freeze to see the installed versions;\npin the direct packages you care about;\ncommit the project file;\nreinstall when you need to prove the recipe."
+  },
+  {
+    "objectID": "slides/2c.html#hands-on",
+    "href": "slides/2c.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 2c activity page."
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html",
+    "href": "materials/2b_devcontainers.html",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#goal",
+    "href": "materials/2b_devcontainers.html#goal",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#activity",
+    "href": "materials/2b_devcontainers.html#activity",
+    "title": "2b Activity: Devcontainers and Codespaces",
     "section": "Activity",
-    "text": "Activity\n\n1. Create A Repository2. Open it in Codespaces3. Make One Change4. Commit the Change5. Push To GitHub6. Mark A Shared Version\n\n\nStart on GitHub in Chrome or Edge.\n\nGo to https://github.com.\nClick + in the upper-right corner.\nChoose New repository.\nName the repository python_tmr_practice.\nChoose Private.\nCheck Add a README file.\nClick Create repository.\n\n\n  I created a new private GitHub repository with a README. \n  I confirmed this is a new practice repository, not my fork of the course repository. \n\n\n\nFrom the new repository page:\n\nClick the green Code button.\nClick the Codespaces tab.\nClick Create codespace on main.\nWait for VS Code Web to open.\n\nIf GitHub asks whether you trust the authors of the files, choose the “Yes” option.\n\n  I opened the new practice repository in Codespaces. \n  I opened Source Control in VS Code Web. \n\n\n\nOpen README.md.\nAdd a short research-project note, such as:\n## Project Notes\n\nThis repository is a practice project for learning Git and GitHub.\nSave the file.\nReturn to Source Control and click the changed file to review the diff.\n\n  I edited and saved README.md. \n  I reviewed the diff in Source Control. \n\nUseful terminal reference:\ngit status --short\ngit diff\n\n\nIn Source Control:\n\nFind README.md under Changes.\nHover over README.md and click the + button to stage it.\nConfirm that README.md moved from Changes to Staged Changes.\nWrite a descriptive commit message in the message box.\nClick Commit.\n\nIf you have multiple changed files, stage only the files that belong together in this commit.\nA good message for this practice change might be:\nAdded project notes to README.\n\n  I staged README.md. \n  I wrote a descriptive commit message. \n  I committed the change. \n\nUseful terminal reference:\ngit add README.md\ngit commit -m \"Added project notes to README.\"\ngit log --oneline --max-count=5\n\n\nIn VS Code Web, use Sync Changes or Push (from the … menu) in Source Control.\nThen return to the repository page on GitHub and confirm the README change appears there.\n\n  I pushed or synced the commit to GitHub. \n  I found the updated README on GitHub. \n\nUseful terminal reference:\ngit push\n\n\nNow pretend this repository contains a draft you are sending to coauthors.\nIn Source Control:\n\nFind the Graph section.\nRight-click the most recent commit.\nChoose Create Tag….\nName the tag 2026-06-03-to-MP, or substitute “MP” with the initials of your imaginary coauthor.\nConfirm the tag.\n\nThen push the tag to GitHub from the terminal:\ngit push origin 2026-06-03-to-MP\nReturn to the repository page on GitHub and confirm that the tag appears.\n\n  I created a tag from the Source Control graph. \n  I found the tag on GitHub. \n  I can explain why a tag is useful when sending a draft or submitting a paper."
+    "text": "Activity\n\n1. Open The Practice Repo2. Add Devcontainer Files3. Inspect the Recipe4. Rebuild if Prompted5. Commit And Push\n\n\nStart on GitHub in Chrome or Edge.\n\nOpen the python_tmr_practice repository you created in 2a.\nClick the green Code button.\nClick the Codespaces tab.\nOpen the existing Codespace, or create a new one if needed.\n\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn VS Code Web:\n\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for add dev.\nChoose Codespaces: Add Dev Container Configuration Files….\nChoose a Python configuration.\nIf asked for a Python version, choose Python 3.13 if it is available. Otherwise, accept the default.\nAccept the remaining default options.\n\nThe exact list of choices can change a little over time. The important thing is that we are adding a .devcontainer/ folder to the repository.\n\n  I added devcontainer configuration files from the Command Palette. \n  I found the .devcontainer/ folder in the Explorer. \n\n\n\nOpen .devcontainer/devcontainer.json.\nLook for:\n\nthe name of the configuration;\nthe base image or feature choices;\nany VS Code extension recommendations;\nany setup commands.\n\nDo not worry if your file does not match the course repository.\n\n  I opened .devcontainer/devcontainer.json. \n  I identified at least one thing this file controls. \n\n\n\nVS Code may ask whether you want to rebuild or reopen the Codespace using the new configuration.\nOnce you’re finished editing, you can follow the prompts to rebuild or use the Command Palette to search for and choose Codespaces: Rebuild Container.\nThe key thing to note is that the repository now contains our environment recipe.\n\n  I can explain why changing the devcontainer may require rebuilding the Codespace. \n\n\n\nUse Source Control:\n\nReview the .devcontainer/ changes.\nFind the .devcontainer/ files under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python devcontainer configuration.\nPush or sync the commit to GitHub.\n\n  I reviewed the .devcontainer/ changes. \n  I committed the .devcontainer/ configuration. \n  I pushed or synced the commit to GitHub."
   }
 ]

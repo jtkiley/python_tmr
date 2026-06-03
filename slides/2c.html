@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">0b: Python Basics I</p>
+  <p class="subtitle">2c: Python Project and Environment Management</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,214 +209,87 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="python-i" class="slide level2">
-<h2>Python I</h2>
+<section id="python-project-and-environment-management" class="slide level2">
+<h2>Python project and environment management</h2>
 <div class="big-claim">
-<p>As a start, we’ll learn to read, run, modify, and reason about small pieces of Python.</p>
+<p>Pinning our package versions is a key part of reproducibility, and better than the alternatives.</p>
 </div>
-<p>This segment is about basic data types and built-in data structures. There’s no need to memorize syntax; you’ll find that you retain the stuff you use often and can look up the rest.</p>
+<p>We are making the Python part of a project authoritative and reproducible.</p>
 </section>
-<section id="python-i-1" class="slide level2">
-<h2>Python I</h2>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Object types</span></p>
-<p>Strings, integers, floats, booleans, <code>None</code>, and dates.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Data structures</span></p>
-<p>Lists and dictionaries.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Learning habit</span></p>
-<p>Run small examples, edit them, and observe the changes (if any).</p>
-</div>
-</div>
+<section>
+<section id="the-dependency-problem" class="title-slide slide level1 center">
+<h1>The dependency problem</h1>
+
 </section>
-<section id="python-objects" class="slide level2">
-<h2>Python objects</h2>
-<p>Everything in Python is an object.</p>
-<p>Objects have attributes and methods that allow us to work with them.</p>
-<div id="f1c7e2e6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>name <span class="op">=</span> <span class="st">"Jason"</span></span>
-<span id="cb1-2"><a></a>name.lower()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>'jason'</code></pre>
-</div>
-</div>
+<section id="break-or-never-upgrade" class="slide level2">
+<h2>Break or never upgrade?</h2>
+<p>The problem we’re working around is what happens when we don’t have separate environments for different projects.</p>
+<p>We end up with a choice between never upgrading (so we don’t break anything) or breaking things in order to upgrade.</p>
 </section>
-<section id="assignment" class="slide level2">
-<h2>Assignment</h2>
-<p>Variables in Python can be thought of as names we give to objects.</p>
-<div id="4970fb92" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>project <span class="op">=</span> <span class="st">"earnings-call-study"</span></span>
-<span id="cb3-2"><a></a>year <span class="op">=</span> <span class="dv">2026</span></span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a><span class="bu">print</span>(project)</span>
-<span id="cb3-5"><a></a><span class="bu">print</span>(year <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>earnings-call-study
-2027</code></pre>
-</div>
-</div>
-<p>Names point to objects, but they are distinct. As we’ll see, an object can have no name, one name, or many names. In general, names let us refer to objects without recreating them.</p>
+<section id="separate-environments" class="slide level2">
+<h2>Separate environments</h2>
+<p>Having separate environments for different projects allows us to have a defined set of packages and versions for each project.</p>
+<p>This avoids the break-or-never-upgrade problem, and also makes our projects more reproducible.</p>
+</section></section>
+<section>
+<section id="pyproject.toml" class="title-slide slide level1 center">
+<h1><code>pyproject.toml</code></h1>
+
 </section>
-<section id="what-you-already-know" class="slide level2">
-<h2>What you already know</h2>
-<p>You have likely worked with data type issues in existing stats software.</p>
+<section id="pyproject.toml-1" class="slide level2">
+<h2><code>pyproject.toml</code></h2>
+<p>Modern Python projects commonly use <code>pyproject.toml</code>.</p>
+<p>It can store:</p>
 <ul>
-<li>Stata often requires a format change for dates in datasets to be recognizable as dates.</li>
-<li>You may have used <code>destring</code> to change a number represented as text into a numeric datatype.</li>
-<li>Python is explicit about these distinctions, which seems pedantic until it becomes useful.</li>
+<li>project name and metadata;</li>
+<li>required Python version;</li>
+<li>package dependencies;</li>
+<li>tool settings.</li>
 </ul>
 </section>
-<section id="integers" class="slide level2">
-<h2>Integers</h2>
-<p>Same as math: counting numbers, zero, and negatives.</p>
-<p>Integer literals are numbers without decimals.</p>
-<div id="e82d1c3d" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>a <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb5-2"><a></a>b <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="bu">print</span>(<span class="ss">f"Addition:       </span><span class="sc">{</span>a <span class="op">+</span> b<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-5"><a></a><span class="bu">print</span>(<span class="ss">f"Subtraction:    </span><span class="sc">{</span>a <span class="op">-</span> b<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-6"><a></a><span class="bu">print</span>(<span class="ss">f"Multiplication: </span><span class="sc">{</span>a <span class="op">*</span> b<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-7"><a></a><span class="bu">print</span>(<span class="ss">f"Exponentiation: </span><span class="sc">{</span>b <span class="op">**</span> a<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Addition:       5
-Subtraction:    -1
-Multiplication: 6
-Exponentiation: 9</code></pre>
-</div>
-</div>
-<p>Convert with <code>int()</code>.</p>
+<section id="a-small-example" class="slide level2">
+<h2>A small example</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a></a><span class="kw">[project]</span></span>
+<span id="cb1-2"><a></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"python-tmr-practice"</span></span>
+<span id="cb1-3"><a></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb1-4"><a></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.13"</span></span>
+<span id="cb1-5"><a></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb1-6"><a></a>    <span class="st">"polars"</span><span class="op">,</span></span>
+<span id="cb1-7"><a></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="floating-point-numbers" class="slide level2">
-<h2>Floating point numbers</h2>
-<p>Any number with a decimal.</p>
-<p>Stored as an approximation, but it is rarely an issue for our use.</p>
-<div id="f43f68af" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>price <span class="op">=</span> <span class="fl">19.99</span></span>
-<span id="cb7-2"><a></a>growth <span class="op">=</span> <span class="fl">1.23456e02</span></span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="bu">print</span>(price)</span>
-<span id="cb7-5"><a></a><span class="bu">print</span>(growth)</span>
-<span id="cb7-6"><a></a><span class="bu">print</span>(<span class="bu">float</span>(<span class="st">"6.02"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>19.99
-123.456
-6.02</code></pre>
-</div>
-</div>
-<p>Scientific notation works, too. Convert with <code>float()</code>.</p>
+<section id="why-not-just-pip-install" class="slide level2">
+<h2>Why not just <code>pip install</code>?</h2>
+<p><code>pip install polars</code> fixes the current environment.</p>
+<p>It does not, by itself, capture what the project needs to work as intended or exactly as originally done.</p>
+</section></section>
+<section>
+<section id="capturing-versions" class="title-slide slide level1 center">
+<h1>Capturing versions</h1>
+
 </section>
-<section id="ints-and-floats" class="slide level2">
-<h2>Ints and floats</h2>
-<p>Ints can be added, subtracted, multiplied, and exponentiated.</p>
-<p>Anything with a float, or int division, returns a float.</p>
-<div id="743dbae0" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span>))</span>
-<span id="cb9-2"><a></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="dv">3</span> <span class="op">/</span> <span class="dv">2</span>))</span>
-<span id="cb9-3"><a></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="dv">3</span> <span class="op">//</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'int'&gt;
-&lt;class 'float'&gt;
-&lt;class 'int'&gt;</code></pre>
-</div>
-</div>
+<section id="use-the-terminal-as-a-readout" class="slide level2">
+<h2>Use the terminal as a readout</h2>
+<p><code>pip freeze</code> shows the packages installed in the current environment. We can use it as a terminal readout, then copy the versions we intentionally care about into <code>pyproject.toml</code>.</p>
+<p>We do not need to save the whole list or copy every package in it. Be sparing: let the solver do its job.</p>
 </section>
-<section id="strings" class="slide level2">
-<h2>Strings</h2>
-<p><del>One</del> <em>Zero</em> or more characters.</p>
-<p>That includes special characters like newlines.</p>
-<div id="29f5e9bf" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>greeting <span class="op">=</span> <span class="st">"Hello!"</span></span>
-<span id="cb11-2"><a></a>name <span class="op">=</span> <span class="st">"Jason"</span></span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>greeting<span class="sc">}</span><span class="ss"> My name is </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello! My name is Jason.</code></pre>
-</div>
-</div>
-<p>Convert with <code>str()</code>.</p>
-</section>
-<section id="other-common-types" class="slide level2">
-<h2>Other common types</h2>
-<div class="syntax-grid">
-<div class="syntax-card green-left">
-<p><span class="card-title">Boolean</span></p>
-<p><code>True</code> or <code>False</code>, often returned by comparisons.</p>
-<div id="e51906b6" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="dv">5</span> <span class="op">&gt;</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>True</code></pre>
-</div>
-</div>
-</div>
-<div class="syntax-card red-left">
-<p><span class="card-title">None</span></p>
-<p>A deliberate null value.</p>
-<p>Example: <code>result = None</code></p>
-</div>
-<div class="syntax-card gold-left">
-<p><span class="card-title">Datetime</span></p>
-<p>Dates, times, and differences between them.</p>
-<p>Example: <code>datetime.datetime.now()</code></p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Package types</span></p>
-<p>Packages add many more object types. We can also make our own, though that is mostly beyond our scope.</p>
-</div>
-</div>
-</section>
-<section id="lists" class="slide level2">
-<h2>Lists</h2>
-<p>Lists are data structures that contain a sequence of objects.</p>
-<p>They can contain many types of objects, though usually we use one main type at a time.</p>
-<div id="7eacaf9c" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>tickers <span class="op">=</span> [<span class="st">"msft"</span>, <span class="st">"aapl"</span>, <span class="st">"nvda"</span>]</span>
-<span id="cb15-2"><a></a></span>
-<span id="cb15-3"><a></a><span class="bu">print</span>(tickers[<span class="dv">0</span>])</span>
-<span id="cb15-4"><a></a><span class="bu">print</span>(tickers[:<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>msft
-['msft', 'aapl']</code></pre>
-</div>
-</div>
-</section>
-<section id="dictionaries" class="slide level2">
-<h2>Dictionaries</h2>
-<p>Dictionaries are data structures with key-value pairs.</p>
-<p>Keys must be unique and immutable.</p>
-<div id="9645956d" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>firm <span class="op">=</span> {</span>
-<span id="cb17-2"><a></a>    <span class="st">"ticker"</span>: <span class="st">"msft"</span>,</span>
-<span id="cb17-3"><a></a>    <span class="st">"founding_year"</span>: <span class="dv">1975</span>,</span>
-<span id="cb17-4"><a></a>}</span>
-<span id="cb17-5"><a></a></span>
-<span id="cb17-6"><a></a><span class="bu">print</span>(firm[<span class="st">"ticker"</span>])</span>
-<span id="cb17-7"><a></a><span class="bu">print</span>(firm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>msft
-{'ticker': 'msft', 'founding_year': 1975}</code></pre>
-</div>
-</div>
-<p>We often use dictionaries for lookups or as a lightweight representation of a row of data.</p>
+<section id="the-practical-workflow" class="slide level2">
+<h2>The practical workflow</h2>
+<p>When a project needs a package:</p>
+<ol type="1">
+<li>add the direct package to <code>pyproject.toml</code>;</li>
+<li>install from the project and let <code>pip</code> solve versions;</li>
+<li>use <code>pip freeze</code> to see the installed versions;</li>
+<li>pin the direct packages you care about;</li>
+<li>commit the project file;</li>
+<li>reinstall when you need to prove the recipe.</li>
+</ol>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/0b_python1.ipynb</code>.</p>
-</section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
-<ul>
-<li>Python basic data types should be generally familiar.</li>
-<li>Data structures like lists and dictionaries are an upgrade in functionality from most stats software.</li>
-<li>The notebook is our practice surface: run code, change code, observe output, repeat.</li>
-</ul>
+<p>Open the <code>2c</code> activity page.</p>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
