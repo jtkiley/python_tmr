@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">1a: Polars I</p>
+  <p class="subtitle">2a: Git and GitHub</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,110 +209,194 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="polars-i" class="slide level2">
-<h2>Polars I</h2>
+<section id="git-and-github" class="slide level2">
+<h2>Git and GitHub</h2>
 <div class="big-claim">
-<p>Let’s turn tabular data work into clear, reproducible Python.</p>
+<p>We benefit greatly from having an authoritative record of what we’ve changed.</p>
 </div>
-<p>This segment is the basic workflow: read data, inspect it, clean it, transform it, and write it back out.</p>
+<p>This segment is about using Git and GitHub to keep that record, and to mark the versions we share with other people.</p>
 </section>
-<section id="why-dataframes" class="slide level2">
-<h2>Why dataframes?</h2>
-<p>Most empirical research data work is tabular data work.</p>
+<section>
+<section id="why-git" class="title-slide slide level1 center">
+<h1>Why Git?</h1>
+
+</section>
+<section id="the-four-years-later-problem" class="slide level2">
+<h2>The four-years-later problem</h2>
+<p>A few years back, someone emailed me to ask why a measure was scaled in an odd-looking way. I hadn’t touched the paper in maybe four years.</p>
+<p>Because it was in a git repository (“repo”), I looked up the commit history and found the change. I had made the scaling change in response to a request from the typesetter to make the journal table fit better.</p>
+<p>Knowing exactly when and what we changed, with our own description of why, is a great help when returning to a project in an R&amp;R, for a follow-on project, or when someone asks.</p>
+</section>
+<section id="a-short-history-of-git" class="slide level2">
+<h2>A short history of Git</h2>
+<p>Git came out of Linux kernel development in 2005, after the BitKeeper CEO pulled the free license in response to a Linux developer writing a tool to interact with BitKeeper to help development.</p>
+<p>Linus Torvalds wrote the original Git code in 10 days, and he designed it with practical goals: speed, simple design, distributed work, support for many parallel lines of development, and the ability to handle a very large project efficiently.</p>
+<p>The <a href="https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git" target="_blank">Pro Git short history</a> has the fuller version.</p>
+<p>BitKeeper is no longer in business. 😬🤦‍♂️</p>
+</section>
+<section id="what-git-is-for" class="slide level2">
+<h2>What Git is for</h2>
 <div class="type-grid">
 <div class="type-card green-left">
-<p><span class="card-title">Rows</span></p>
-<p>Observations, records, documents, firm-years, estimates, events.</p>
+<p><span class="card-title">History</span></p>
+<p>What changed, when it changed, and who changed it.</p>
 </div>
 <div class="type-card">
-<p><span class="card-title">Columns</span></p>
-<p>Variables, identifiers, timestamps, measures, labels.</p>
+<p><span class="card-title">Meaning</span></p>
+<p>Commit messages can explain what the change meant.</p>
 </div>
 <div class="type-card gold-left">
-<p><span class="card-title">Operations</span></p>
-<p>Select, filter, transform, aggregate, join, and write.</p>
+<p><span class="card-title">Versions</span></p>
+<p>Tags annotate commits, and are useful to note ones sent to coauthors, conferences, or journals.</p>
 </div>
 </div>
 </section>
-<section id="pandas-and-polars" class="slide level2">
-<h2>Pandas and Polars</h2>
-<div class="columns">
-<div class="column plain-card" style="width:50%;">
-<p><span class="card-title">Pandas</span></p>
-<p>Older, everywhere, and deeply connected to the Python data ecosystem.</p>
-<p>Extremely useful when another package hands us a pandas object, or when pandas reads a format we need.</p>
-</div><div class="column plain-card green-left" style="width:50%;">
-<p><span class="card-title">Polars</span></p>
-<p>Newer, fast, expression-oriented, and designed around efficient dataframe operations.</p>
-<p>Useful for research pipelines where we care about readable transformations and performance.</p>
-</div></div>
-<p><a href="https://docs.pola.rs/user-guide/migration/pandas/" target="_blank">Polars has a short guide for users coming from pandas</a>.</p>
+<section id="what-not-to-put-in-git" class="slide level2">
+<h2>What not to put in Git</h2>
+<p>Git is mostly for source material, and particularly code and writing that are plain text (at least in the underlying representation).</p>
+<p>We generally do not want to put large data files or intermediate output in Git. Store large data safely separately, and remember that intermediate output can be reproduced with code and raw data.</p>
 </section>
-<section id="how-well-use-both" class="slide level2">
-<h2>How we’ll use both</h2>
-<p>Some research formats are still easiest to read with pandas.</p>
-<div id="8870a467" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>firmyear_pd <span class="op">=</span> pd.read_stata(<span class="st">"../data/firmyear.dta"</span>)</span>
-<span id="cb1-5"><a></a>firmyear <span class="op">=</span> pl.from_pandas(firmyear_pd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then we do the dataframe work in Polars.</p>
-<p><a href="https://docs.pola.rs/api/python/stable/reference/api/polars.from_pandas.html" target="_blank"><code>pl.from_pandas()</code></a> gives us an easy way to use pandas to read data and then work with it in Polars.</p>
+<section id="differentiating-git-and-github" class="slide level2">
+<h2>Differentiating Git and GitHub</h2>
+<p>Git is the local version-control system. It runs on our own computer or in a container like Codespaces.</p>
+<p>GitHub is a website that stores the repository, shows its history, and makes it easier to share. It has a lot of added tools that make Git nice to work with, too.</p>
+<p>In this course, we will mostly use Git through VS Code Web in Codespaces and inspect the remote copy on GitHub.</p>
+</section></section>
+<section>
+<section id="what-goes-where" class="title-slide slide level1 center">
+<h1>What goes where?</h1>
+
 </section>
-<section id="polars-philosophy" class="slide level2">
-<h2>Polars philosophy</h2>
-<p>Polars benefitted from observing the many years of pandas and starting with a clean slate.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Expressions</span></p>
-<p>Use <code>pl.col()</code> and friends to describe column computations.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Pipelines</span></p>
-<p>Chain operations so the data work reads as a sequence of decisions.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Lazy option</span></p>
-<p>Build a query first, then run it when we ask for the result.</p>
-</div>
-</div>
-<p>The <a href="https://docs.pola.rs/user-guide/expressions/" target="_blank">Polars expression docs</a> are the main reference.</p>
-</section>
-<section id="why-the-design-matters" class="slide level2">
-<h2>Why the design matters</h2>
-<p>Polars is designed to stay inside optimized dataframe operations instead of bouncing in and out of slow row-by-row Python work.</p>
-<p>The lazy API can see a whole query before running it, which enables query optimization and can reduce unnecessary work. We’ll talk about that in <code>1c</code>.</p>
-<p>The <a href="https://docs.pola.rs/user-guide/concepts/lazy-api/" target="_blank">lazy API docs</a> have the deeper version.</p>
-</section>
-<section id="what-we-will-practice" class="slide level2">
-<h2>What we will practice</h2>
+<section id="best-locations-in-general" class="slide level2">
+<h2>Best locations in general</h2>
 <div class="syntax-grid">
 <div class="syntax-card green-left">
-<p><span class="card-title">Read and inspect</span></p>
-<p>Load a Stata file through pandas, convert to Polars, and inspect shape, columns, schema, and nulls.</p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Clean and transform</span></p>
-<p>Cast types, rename columns, select columns, filter rows, and create new variables.</p>
+<p><span class="card-title">Git</span></p>
+<p>Code, notebooks, Quarto source, README files, small durable data, configuration.</p>
 </div>
 <div class="syntax-card gold-left">
-<p><span class="card-title">Work by group</span></p>
-<p>Use <code>.over()</code> for firm-level calculations inside firm-year data.</p>
+<p><span class="card-title">Elsewhere</span></p>
+<p>Restricted data, raw data that are too large, generated outputs, and exports.</p>
+</div>
+</div>
+</section>
+<section id="git-stores-the-recipe" class="slide level2">
+<h2>Git stores the recipe</h2>
+<p>The best candidates for Git are usually source material:</p>
+<ul>
+<li>code that reads or creates data;</li>
+<li>source writing in Quarto or Markdown;</li>
+<li>configuration such as <code>pyproject.toml</code>;</li>
+<li>small research files that document decisions.</li>
+</ul>
+</section>
+<section id="small-data-can-belong-in-git" class="slide level2">
+<h2>Small data can belong in Git</h2>
+<p>Small data like identifier mappings and data corrections are good examples of data to include in Git. A dropped-observations file is another.</p>
+<p>Example columns: <code>observation_id</code>, <code>drop</code>, <code>rationale</code>, <code>source</code>, <code>researcher</code>, <code>date_reviewed</code>.</p>
+<p>The analysis can merge that rationale into the original data and filter transparently.</p>
+</section>
+<section id="raw-data-and-generated-output" class="slide level2">
+<h2>Raw data and generated output</h2>
+<div class="syntax-grid">
+<div class="syntax-card green-left">
+<p><span class="card-title">Raw data</span></p>
+<p>Keep in secure synced storage, recreate with code, or ideally both.</p>
 </div>
 <div class="syntax-card red-left">
-<p><span class="card-title">Write outputs</span></p>
-<p>Write dated CSV and Parquet files that can be reused later.</p>
+<p><span class="card-title">Generated files</span></p>
+<p>Keep locally or in an output folder when they can be recreated.</p>
 </div>
 </div>
+</section>
+<section id="secrets-are-different" class="slide level2">
+<h2>Secrets are different</h2>
+<p>If you commit a password, API key, token, private certificate, or restricted data file, assume it has been exposed.</p>
+<p>Deleting it later, or even rewriting history, does not reliably fix the problem because the secret may still be in Git history, remote copies, forks, caches, or clones.</p>
+<p>When you notice that, the top priority is making the secret inoperable (e.g., changing a password; revoking and replacing an API key).</p>
+</section></section>
+<section>
+<section id="commits-and-tags" class="title-slide slide level1 center">
+<h1>Commits and tags</h1>
+
+</section>
+<section id="commit-messages-carry-rationale" class="slide level2">
+<h2>Commit messages carry rationale</h2>
+<p>Not great:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>update stuff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Much better:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>Scale assets variable per typesetter request.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Much better:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a></a>Integrating SG's 2026-03-15 draft comments.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="semantic-commits" class="slide level2">
+<h2>Semantic commits</h2>
+<p>A good commit is a coherent set of changes that accomplish something. It might revise a measure, add a robustness check, or integrate one set of coauthor comments.</p>
+<p>The content and commit message are how we package up the work we do in ways that are meaningful to us.</p>
+<p>One really helpful feature is the ability to stage only specific changes in a file, so that we can separate out different changes into different commits, even if we already edited both into the same file.</p>
+</section>
+<section id="tags-mark-notable-commits" class="slide level2">
+<h2>Tags mark notable commits</h2>
+<p>A normal workflow is committing as you work.</p>
+<p>Then, when you’re reasonably sure that you’re happy with the changes you’ve made, push to GitHub. When in doubt, push and carry on, because the history isn’t supposed to be pretty.</p>
+<p>For particular notable commits (i.e.&nbsp;not many of them), we can add tags. I like these for versions that I share with coauthors or submit somewhere.</p>
+<ul>
+<li><code>2026-04-20-to-JB-for-friendly</code></li>
+<li><code>2026-05-25-amj-R1-submission</code></li>
+<li><code>2026-01-15-sms-conference-submission</code></li>
+</ul>
+<aside class="notes">
+<p>Until you push, it is possible to remove commits or change them without making a mess of the shared history. This is a useful thing to know later, but not something we need to practice today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="workflow" class="title-slide slide level1 center">
+<h1>Workflow</h1>
+
+</section>
+<section id="vs-code-web-workflow" class="slide level2">
+<h2>VS Code Web workflow</h2>
+<ol type="1">
+<li>Make a change.</li>
+<li>Open Source Control.</li>
+<li>Review the diff.</li>
+<li>Stage related files.</li>
+<li>Write a descriptive commit message.</li>
+<li>Commit.</li>
+<li>Sync or push.</li>
+</ol>
+</section>
+<section id="github-workflow" class="slide level2">
+<h2>GitHub workflow</h2>
+<p>On GitHub, we can:</p>
+<ul>
+<li>confirm the commit appears online;</li>
+<li>browse the commit history;</li>
+<li>inspect files at a prior commit;</li>
+<li>find tags for shared versions.</li>
+</ul>
+</section>
+<section id="collaboration-with-git" class="slide level2">
+<h2>Collaboration with Git</h2>
+<p>Most coauthors don’t use Git. That is fine.</p>
+<p>We can use Git to help us organize our work, and integrate coauthor comments and work, even if they don’t use Git themselves. As I said before, tags are a great feature to help bridge work that happens inside and outside of Git.</p>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/1a_polars.ipynb</code>.</p>
+<p>Open the <code>2a</code> activity page.</p>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">1a: Polars I</p>
+  <p class="subtitle">2b: Devcontainers and Codespaces</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,110 +209,149 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="polars-i" class="slide level2">
-<h2>Polars I</h2>
+<section id="devcontainers-and-codespaces" class="slide level2">
+<h2>Devcontainers and Codespaces</h2>
 <div class="big-claim">
-<p>Let’s turn tabular data work into clear, reproducible Python.</p>
+<p>Devcontainers let us standardize the operating system and tools for a project, no matter where we run it.</p>
 </div>
-<p>This segment is the basic workflow: read data, inspect it, clean it, transform it, and write it back out.</p>
+<p>We will put our environment setup into the project repository, instead of leaving it implicit (and often undocumented and not reproducible).</p>
 </section>
-<section id="why-dataframes" class="slide level2">
-<h2>Why dataframes?</h2>
-<p>Most empirical research data work is tabular data work.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Rows</span></p>
-<p>Observations, records, documents, firm-years, estimates, events.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Columns</span></p>
-<p>Variables, identifiers, timestamps, measures, labels.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Operations</span></p>
-<p>Select, filter, transform, aggregate, join, and write.</p>
-</div>
-</div>
+<section>
+<section id="why-environments" class="title-slide slide level1 center">
+<h1>Why environments?</h1>
+
 </section>
-<section id="pandas-and-polars" class="slide level2">
-<h2>Pandas and Polars</h2>
-<div class="columns">
-<div class="column plain-card" style="width:50%;">
-<p><span class="card-title">Pandas</span></p>
-<p>Older, everywhere, and deeply connected to the Python data ecosystem.</p>
-<p>Extremely useful when another package hands us a pandas object, or when pandas reads a format we need.</p>
-</div><div class="column plain-card green-left" style="width:50%;">
-<p><span class="card-title">Polars</span></p>
-<p>Newer, fast, expression-oriented, and designed around efficient dataframe operations.</p>
-<p>Useful for research pipelines where we care about readable transformations and performance.</p>
-</div></div>
-<p><a href="https://docs.pola.rs/user-guide/migration/pandas/" target="_blank">Polars has a short guide for users coming from pandas</a>.</p>
+<section id="we-have-already-been-using-one" class="slide level2">
+<h2>We have already been using one</h2>
+<p>Our course repository has a <code>.devcontainer/</code> folder.</p>
+<p>That folder is why our Codespace can open with:</p>
+<ul>
+<li>the right Python version;</li>
+<li>Quarto available;</li>
+<li>VS Code extensions installed;</li>
+<li>project setup commands already run.</li>
+</ul>
 </section>
-<section id="how-well-use-both" class="slide level2">
-<h2>How we’ll use both</h2>
-<p>Some research formats are still easiest to read with pandas.</p>
-<div id="8870a467" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>firmyear_pd <span class="op">=</span> pd.read_stata(<span class="st">"../data/firmyear.dta"</span>)</span>
-<span id="cb1-5"><a></a>firmyear <span class="op">=</span> pl.from_pandas(firmyear_pd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then we do the dataframe work in Polars.</p>
-<p><a href="https://docs.pola.rs/api/python/stable/reference/api/polars.from_pandas.html" target="_blank"><code>pl.from_pandas()</code></a> gives us an easy way to use pandas to read data and then work with it in Polars.</p>
+<section id="the-problem" class="slide level2">
+<h2>The problem</h2>
+<p>Research projects often work on one computer and then don’t quite work or don’t work the same on another.</p>
+<p>Common causes:</p>
+<ul>
+<li>a different Python version;</li>
+<li>missing system tools;</li>
+<li>packages installed in one place but not another;</li>
+<li>a different operating system or version;</li>
+<li>different file paths;</li>
+<li>setup steps that were done manually and never written down.</li>
+</ul>
+</section></section>
+<section>
+<section id="devcontainers-and-codespaces-1" class="title-slide slide level1 center">
+<h1>Devcontainers and Codespaces</h1>
+
 </section>
-<section id="polars-philosophy" class="slide level2">
-<h2>Polars philosophy</h2>
-<p>Polars benefitted from observing the many years of pandas and starting with a clean slate.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Expressions</span></p>
-<p>Use <code>pl.col()</code> and friends to describe column computations.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Pipelines</span></p>
-<p>Chain operations so the data work reads as a sequence of decisions.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Lazy option</span></p>
-<p>Build a query first, then run it when we ask for the result.</p>
-</div>
-</div>
-<p>The <a href="https://docs.pola.rs/user-guide/expressions/" target="_blank">Polars expression docs</a> are the main reference.</p>
+<section id="what-a-devcontainer-does" class="slide level2">
+<h2>What a devcontainer does</h2>
+<p>A devcontainer is a project-level recipe for a development environment, using a container that provides a consistent Linux-based environment in a lightweight way.</p>
+<p>It’s like a programmatic way of describing how our computer is set up.</p>
 </section>
-<section id="why-the-design-matters" class="slide level2">
-<h2>Why the design matters</h2>
-<p>Polars is designed to stay inside optimized dataframe operations instead of bouncing in and out of slow row-by-row Python work.</p>
-<p>The lazy API can see a whole query before running it, which enables query optimization and can reduce unnecessary work. We’ll talk about that in <code>1c</code>.</p>
-<p>The <a href="https://docs.pola.rs/user-guide/concepts/lazy-api/" target="_blank">lazy API docs</a> have the deeper version.</p>
+<section id="configuration-as-code" class="slide level2">
+<h2>Configuration as code</h2>
+<p>The devcontainer files go in the repository along with our work. We can review, edit, commit, push, and share them like other project files.</p>
+<p>That is the main idea: the setup is part of the project, not just something we happened to do on one computer.</p>
 </section>
-<section id="what-we-will-practice" class="slide level2">
-<h2>What we will practice</h2>
-<div class="syntax-grid">
-<div class="syntax-card green-left">
-<p><span class="card-title">Read and inspect</span></p>
-<p>Load a Stata file through pandas, convert to Polars, and inspect shape, columns, schema, and nulls.</p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Clean and transform</span></p>
-<p>Cast types, rename columns, select columns, filter rows, and create new variables.</p>
-</div>
-<div class="syntax-card gold-left">
-<p><span class="card-title">Work by group</span></p>
-<p>Use <code>.over()</code> for firm-level calculations inside firm-year data.</p>
-</div>
-<div class="syntax-card red-left">
-<p><span class="card-title">Write outputs</span></p>
-<p>Write dated CSV and Parquet files that can be reused later.</p>
-</div>
-</div>
+<section id="codespaces" class="slide level2">
+<h2>Codespaces</h2>
+<p>Codespaces runs our environment in the cloud and opens it in VS Code Web. That’s a nice way to work, because it makes no assumptions about our local computer, other than that it has a web browser and internet connection.</p>
+<p>It is important to note that we can run devcontainers locally by installing VS Code and Docker Desktop, and that’s often the way I work. But Codespaces is a great option on a computer with onerous IT permissions or for a course where we can do more fun content by not needing to troubleshoot local installs.</p>
+</section></section>
+<section>
+<section id="the-recipe" class="title-slide slide level1 center">
+<h1>The recipe</h1>
+
+</section>
+<section id="the-main-file" class="slide level2">
+<h2>The main file</h2>
+<p>The main devcontainer file is usually:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>.devcontainer/devcontainer.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It can specify the base image, features, VS Code extensions, and setup commands.</p>
+<p>Note that we can actually have multiple devcontainer files in a project, though it’s beyond our scope for today.</p>
+</section>
+<section id="a-minimal-example" class="slide level2">
+<h2>A minimal example</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a></a><span class="fu">{</span></span>
+<span id="cb2-2"><a></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Research Python"</span><span class="fu">,</span></span>
+<span id="cb2-3"><a></a>    <span class="dt">"image"</span><span class="fu">:</span> <span class="st">"mcr.microsoft.com/devcontainers/python:3.13"</span><span class="fu">,</span></span>
+<span id="cb2-4"><a></a>    <span class="dt">"customizations"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-5"><a></a>        <span class="dt">"vscode"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-6"><a></a>            <span class="dt">"extensions"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"ms-python.python"</span><span class="ot">,</span> <span class="st">"ms-toolsai.jupyter"</span><span class="ot">]</span></span>
+<span id="cb2-7"><a></a>        <span class="fu">}</span></span>
+<span id="cb2-8"><a></a>    <span class="fu">}</span></span>
+<span id="cb2-9"><a></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="common-pieces" class="slide level2">
+<h2>Common pieces</h2>
+<p>In <code>devcontainer.json</code>, we often see:</p>
+<ul>
+<li><code>image</code>: the base container image;</li>
+<li><code>features</code>: extra system tools;</li>
+<li><code>customizations</code>: VS Code settings and extensions;</li>
+<li><code>postCreateCommand</code>: setup commands after creation.</li>
+</ul>
+</section>
+<section id="devcontainer-versus-pyproject.toml" class="slide level2">
+<h2>Devcontainer versus <code>pyproject.toml</code></h2>
+<p>The devcontainer describes the broader computing environment.</p>
+<p><code>pyproject.toml</code> describes the Python project.</p>
+<p>We usually need both.</p>
+</section></section>
+<section>
+<section id="what-belongs-there" class="title-slide slide level1 center">
+<h1>What belongs there?</h1>
+
+</section>
+<section id="what-belongs-in-the-devcontainer" class="slide level2">
+<h2>What belongs in the devcontainer?</h2>
+<p>Good candidates:</p>
+<ul>
+<li>Python version or base image;</li>
+<li>devcontainer features such as Quarto;</li>
+<li>editor extensions that support the workflow;</li>
+<li>setup commands that should run when the environment is created.</li>
+</ul>
+</section>
+<section id="what-does-not-belong-there" class="slide level2">
+<h2>What does not belong there?</h2>
+<p>Usually not:</p>
+<ul>
+<li>passwords or tokens (definitely not! 😬);</li>
+<li>project data;</li>
+<li>generated outputs;</li>
+<li>one-off personal preferences that coauthors don’t need/want.</li>
+</ul>
+</section></section>
+<section>
+<section id="workflow" class="title-slide slide level1 center">
+<h1>Workflow</h1>
+
+</section>
+<section id="rebuilds-are-normal" class="slide level2">
+<h2>Rebuilds are normal</h2>
+<p>Changing the devcontainer recipe often means rebuilding or reopening the Codespace.</p>
+<p>That can take a few minutes the first time, and it is usually faster for subsequent rebuilds because parts of the prior build are cached.</p>
+<p>We’re updating the recipe, so we need to actually “bake” it with a rebuild.</p>
+</section>
+<section id="commit-the-recipe" class="slide level2">
+<h2>Commit the recipe</h2>
+<p>The devcontainer files and any setup scripts they call should be in Git.</p>
+<p>That way, the project carries its environment recipe along with the code, writing, and configuration.</p>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/1a_polars.ipynb</code>.</p>
+<p>Open the <code>2b</code> activity page.</p>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -1,0 +1,65 @@
+.guide-progress {
+    background: #f7f8fa;
+    border: 1px solid #d8dde3;
+    border-left: 6px solid #2a8f63;
+    border-radius: 8px;
+    margin: 1rem 0 1.25rem;
+    padding: 0.85rem 1rem;
+}
+
+.guide-progress p {
+    margin-bottom: 0.35rem;
+}
+
+.task-list {
+    display: grid;
+    gap: 0.55rem;
+    margin: 1rem 0 1.25rem;
+}
+
+.task-check {
+    align-items: flex-start;
+    background: #f7f8fa;
+    border: 1px solid #d8dde3;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    gap: 0.65rem;
+    line-height: 1.35;
+    padding: 0.75rem 0.85rem;
+}
+
+.task-check input {
+    margin-top: 0.18rem;
+}
+
+.task-check:has(input:checked) {
+    border-color: #2a8f63;
+}
+
+.task-check:has(input:checked) span {
+    color: #59636e;
+    text-decoration: line-through;
+}
+
+.path-card {
+    background: #f7f8fa;
+    border: 1px solid #d8dde3;
+    border-radius: 8px;
+    margin: 1rem 0;
+    padding: 0.9rem 1rem;
+}
+
+.path-card strong {
+    color: #275dad;
+}
+
+.reset-progress {
+    background: #ffffff;
+    border: 1px solid #c94c4c;
+    border-radius: 6px;
+    color: #8f2c2c;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.65rem;
+}

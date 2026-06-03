@@ -1,5 +1,131 @@
 [
   {
+    "objectID": "materials/2b_devcontainers.html",
+    "href": "materials/2b_devcontainers.html",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#goal",
+    "href": "materials/2b_devcontainers.html#goal",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#activity",
+    "href": "materials/2b_devcontainers.html#activity",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "Activity",
+    "text": "Activity\n\n1. Open The Practice Repo2. Add Devcontainer Files3. Inspect the Recipe4. Rebuild if Prompted5. Commit And Push\n\n\nStart on GitHub in Chrome or Edge.\n\nOpen the python_tmr_practice repository you created in 2a.\nClick the green Code button.\nClick the Codespaces tab.\nOpen the existing Codespace, or create a new one if needed.\n\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn VS Code Web:\n\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for add dev.\nChoose Codespaces: Add Dev Container Configuration Files….\nChoose a Python configuration.\nIf asked for a Python version, choose Python 3.13 if it is available. Otherwise, accept the default.\nAccept the remaining default options.\n\nThe exact list of choices can change a little over time. The important thing is that we are adding a .devcontainer/ folder to the repository.\n\n  I added devcontainer configuration files from the Command Palette. \n  I found the .devcontainer/ folder in the Explorer. \n\n\n\nOpen .devcontainer/devcontainer.json.\nLook for:\n\nthe name of the configuration;\nthe base image or feature choices;\nany VS Code extension recommendations;\nany setup commands.\n\nDo not worry if your file does not match the course repository.\n\n  I opened .devcontainer/devcontainer.json. \n  I identified at least one thing this file controls. \n\n\n\nVS Code may ask whether you want to rebuild or reopen the Codespace using the new configuration.\nOnce you’re finished editing, you can follow the prompts to rebuild or use the Command Palette to search for and choose Codespaces: Rebuild Container.\nThe key thing to note is that the repository now contains our environment recipe.\n\n  I can explain why changing the devcontainer may require rebuilding the Codespace. \n\n\n\nUse Source Control:\n\nReview the .devcontainer/ changes.\nFind the .devcontainer/ files under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python devcontainer configuration.\nPush or sync the commit to GitHub.\n\n  I reviewed the .devcontainer/ changes. \n  I committed the .devcontainer/ configuration. \n  I pushed or synced the commit to GitHub."
+  },
+  {
+    "objectID": "slides/2b.html#devcontainers-and-codespaces",
+    "href": "slides/2b.html#devcontainers-and-codespaces",
+    "title": "Python Tools for Management Research",
+    "section": "Devcontainers and Codespaces",
+    "text": "Devcontainers and Codespaces\n\nDevcontainers let us standardize the operating system and tools for a project, no matter where we run it.\n\nWe will put our environment setup into the project repository, instead of leaving it implicit (and often undocumented and not reproducible)."
+  },
+  {
+    "objectID": "slides/2b.html#we-have-already-been-using-one",
+    "href": "slides/2b.html#we-have-already-been-using-one",
+    "title": "Python Tools for Management Research",
+    "section": "We have already been using one",
+    "text": "We have already been using one\nOur course repository has a .devcontainer/ folder.\nThat folder is why our Codespace can open with:\n\nthe right Python version;\nQuarto available;\nVS Code extensions installed;\nproject setup commands already run."
+  },
+  {
+    "objectID": "slides/2b.html#the-problem",
+    "href": "slides/2b.html#the-problem",
+    "title": "Python Tools for Management Research",
+    "section": "The problem",
+    "text": "The problem\nResearch projects often work on one computer and then don’t quite work or don’t work the same on another.\nCommon causes:\n\na different Python version;\nmissing system tools;\npackages installed in one place but not another;\na different operating system or version;\ndifferent file paths;\nsetup steps that were done manually and never written down."
+  },
+  {
+    "objectID": "slides/2b.html#what-a-devcontainer-does",
+    "href": "slides/2b.html#what-a-devcontainer-does",
+    "title": "Python Tools for Management Research",
+    "section": "What a devcontainer does",
+    "text": "What a devcontainer does\nA devcontainer is a project-level recipe for a development environment, using a container that provides a consistent Linux-based environment in a lightweight way.\nIt’s like a programmatic way of describing how our computer is set up."
+  },
+  {
+    "objectID": "slides/2b.html#configuration-as-code",
+    "href": "slides/2b.html#configuration-as-code",
+    "title": "Python Tools for Management Research",
+    "section": "Configuration as code",
+    "text": "Configuration as code\nThe devcontainer files go in the repository along with our work. We can review, edit, commit, push, and share them like other project files.\nThat is the main idea: the setup is part of the project, not just something we happened to do on one computer."
+  },
+  {
+    "objectID": "slides/2b.html#codespaces",
+    "href": "slides/2b.html#codespaces",
+    "title": "Python Tools for Management Research",
+    "section": "Codespaces",
+    "text": "Codespaces\nCodespaces runs our environment in the cloud and opens it in VS Code Web. That’s a nice way to work, because it makes no assumptions about our local computer, other than that it has a web browser and internet connection.\nIt is important to note that we can run devcontainers locally by installing VS Code and Docker Desktop, and that’s often the way I work. But Codespaces is a great option on a computer with onerous IT permissions or for a course where we can do more fun content by not needing to troubleshoot local installs."
+  },
+  {
+    "objectID": "slides/2b.html#the-main-file",
+    "href": "slides/2b.html#the-main-file",
+    "title": "Python Tools for Management Research",
+    "section": "The main file",
+    "text": "The main file\nThe main devcontainer file is usually:\n.devcontainer/devcontainer.json\nIt can specify the base image, features, VS Code extensions, and setup commands.\nNote that we can actually have multiple devcontainer files in a project, though it’s beyond our scope for today."
+  },
+  {
+    "objectID": "slides/2b.html#a-minimal-example",
+    "href": "slides/2b.html#a-minimal-example",
+    "title": "Python Tools for Management Research",
+    "section": "A minimal example",
+    "text": "A minimal example\n{\n    \"name\": \"Research Python\",\n    \"image\": \"mcr.microsoft.com/devcontainers/python:3.13\",\n    \"customizations\": {\n        \"vscode\": {\n            \"extensions\": [\"ms-python.python\", \"ms-toolsai.jupyter\"]\n        }\n    }\n}"
+  },
+  {
+    "objectID": "slides/2b.html#common-pieces",
+    "href": "slides/2b.html#common-pieces",
+    "title": "Python Tools for Management Research",
+    "section": "Common pieces",
+    "text": "Common pieces\nIn devcontainer.json, we often see:\n\nimage: the base container image;\nfeatures: extra system tools;\ncustomizations: VS Code settings and extensions;\npostCreateCommand: setup commands after creation."
+  },
+  {
+    "objectID": "slides/2b.html#devcontainer-versus-pyproject.toml",
+    "href": "slides/2b.html#devcontainer-versus-pyproject.toml",
+    "title": "Python Tools for Management Research",
+    "section": "Devcontainer versus pyproject.toml",
+    "text": "Devcontainer versus pyproject.toml\nThe devcontainer describes the broader computing environment.\npyproject.toml describes the Python project.\nWe usually need both."
+  },
+  {
+    "objectID": "slides/2b.html#what-belongs-in-the-devcontainer",
+    "href": "slides/2b.html#what-belongs-in-the-devcontainer",
+    "title": "Python Tools for Management Research",
+    "section": "What belongs in the devcontainer?",
+    "text": "What belongs in the devcontainer?\nGood candidates:\n\nPython version or base image;\ndevcontainer features such as Quarto;\neditor extensions that support the workflow;\nsetup commands that should run when the environment is created."
+  },
+  {
+    "objectID": "slides/2b.html#what-does-not-belong-there",
+    "href": "slides/2b.html#what-does-not-belong-there",
+    "title": "Python Tools for Management Research",
+    "section": "What does not belong there?",
+    "text": "What does not belong there?\nUsually not:\n\npasswords or tokens (definitely not! 😬);\nproject data;\ngenerated outputs;\none-off personal preferences that coauthors don’t need/want."
+  },
+  {
+    "objectID": "slides/2b.html#rebuilds-are-normal",
+    "href": "slides/2b.html#rebuilds-are-normal",
+    "title": "Python Tools for Management Research",
+    "section": "Rebuilds are normal",
+    "text": "Rebuilds are normal\nChanging the devcontainer recipe often means rebuilding or reopening the Codespace.\nThat can take a few minutes the first time, and it is usually faster for subsequent rebuilds because parts of the prior build are cached.\nWe’re updating the recipe, so we need to actually “bake” it with a rebuild."
+  },
+  {
+    "objectID": "slides/2b.html#commit-the-recipe",
+    "href": "slides/2b.html#commit-the-recipe",
+    "title": "Python Tools for Management Research",
+    "section": "Commit the recipe",
+    "text": "Commit the recipe\nThe devcontainer files and any setup scripts they call should be in Git.\nThat way, the project carries its environment recipe along with the code, writing, and configuration."
+  },
+  {
+    "objectID": "slides/2b.html#hands-on",
+    "href": "slides/2b.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 2b activity page."
+  },
+  {
     "objectID": "slides/1c.html#polars-iii",
     "href": "slides/1c.html#polars-iii",
     "title": "Python Tools for Management Research",
@@ -193,14 +319,14 @@
     "href": "index.html",
     "title": "Python Tools for Management Research",
     "section": "",
-    "text": "This small site will collect rendered course slides as they are added. The repository remains the main home for notebooks, data, and project files."
+    "text": "This small site will collect rendered course slides and supporting materials as they are added. The repository remains the main home for notebooks, data, and project files."
   },
   {
-    "objectID": "index.html#slides",
-    "href": "index.html#slides",
+    "objectID": "index.html#materials",
+    "href": "index.html#materials",
     "title": "Python Tools for Management Research",
-    "section": "Slides",
-    "text": "Slides\n\n\n\nsegment\ntopic\nslides\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nview\n\n\n0b\nPython basics I\nview\n\n\n0c\nPython basics II\nview\n\n\n1a\nPolars: read, inspect, transform, and write data\nview\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nview\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nview\n\n\n2a\nGit and GitHub for research projects\ncoming later\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\ncoming later\n\n\n2c\nPython project and environment management\ncoming later\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
+    "section": "Materials",
+    "text": "Materials\n\n\n\nsegment\ntopic\nmaterials\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nslides\n\n\n0b\nPython basics I\nslides\n\n\n0c\nPython basics II\nslides\n\n\n1a\nPolars: read, inspect, transform, and write data\nslides\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nslides\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nslides\n\n\n2a\nGit and GitHub for research projects\nslides / activity\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\nslides / activity\n\n\n2c\nPython project and environment management\ncoming later\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
   },
   {
     "objectID": "slides/0a.html#the-key",
@@ -404,5 +530,152 @@
     "title": "Python Tools for Management Research",
     "section": "Hands-on",
     "text": "Hands-on\nOpen notebooks/1b_polars.ipynb."
+  },
+  {
+    "objectID": "slides/2a.html#git-and-github",
+    "href": "slides/2a.html#git-and-github",
+    "title": "Python Tools for Management Research",
+    "section": "Git and GitHub",
+    "text": "Git and GitHub\n\nWe benefit greatly from having an authoritative record of what we’ve changed.\n\nThis segment is about using Git and GitHub to keep that record, and to mark the versions we share with other people."
+  },
+  {
+    "objectID": "slides/2a.html#the-four-years-later-problem",
+    "href": "slides/2a.html#the-four-years-later-problem",
+    "title": "Python Tools for Management Research",
+    "section": "The four-years-later problem",
+    "text": "The four-years-later problem\nA few years back, someone emailed me to ask why a measure was scaled in an odd-looking way. I hadn’t touched the paper in maybe four years.\nBecause it was in a git repository (“repo”), I looked up the commit history and found the change. I had made the scaling change in response to a request from the typesetter to make the journal table fit better.\nKnowing exactly when and what we changed, with our own description of why, is a great help when returning to a project in an R&R, for a follow-on project, or when someone asks."
+  },
+  {
+    "objectID": "slides/2a.html#a-short-history-of-git",
+    "href": "slides/2a.html#a-short-history-of-git",
+    "title": "Python Tools for Management Research",
+    "section": "A short history of Git",
+    "text": "A short history of Git\nGit came out of Linux kernel development in 2005, after the BitKeeper CEO pulled the free license in response to a Linux developer writing a tool to interact with BitKeeper to help development.\nLinus Torvalds wrote the original Git code in 10 days, and he designed it with practical goals: speed, simple design, distributed work, support for many parallel lines of development, and the ability to handle a very large project efficiently.\nThe Pro Git short history has the fuller version.\nBitKeeper is no longer in business. 😬🤦‍♂️"
+  },
+  {
+    "objectID": "slides/2a.html#what-git-is-for",
+    "href": "slides/2a.html#what-git-is-for",
+    "title": "Python Tools for Management Research",
+    "section": "What Git is for",
+    "text": "What Git is for\n\n\nHistory\nWhat changed, when it changed, and who changed it.\n\n\nMeaning\nCommit messages can explain what the change meant.\n\n\nVersions\nTags annotate commits, and are useful to note ones sent to coauthors, conferences, or journals."
+  },
+  {
+    "objectID": "slides/2a.html#what-not-to-put-in-git",
+    "href": "slides/2a.html#what-not-to-put-in-git",
+    "title": "Python Tools for Management Research",
+    "section": "What not to put in Git",
+    "text": "What not to put in Git\nGit is mostly for source material, and particularly code and writing that are plain text (at least in the underlying representation).\nWe generally do not want to put large data files or intermediate output in Git. Store large data safely separately, and remember that intermediate output can be reproduced with code and raw data."
+  },
+  {
+    "objectID": "slides/2a.html#differentiating-git-and-github",
+    "href": "slides/2a.html#differentiating-git-and-github",
+    "title": "Python Tools for Management Research",
+    "section": "Differentiating Git and GitHub",
+    "text": "Differentiating Git and GitHub\nGit is the local version-control system. It runs on our own computer or in a container like Codespaces.\nGitHub is a website that stores the repository, shows its history, and makes it easier to share. It has a lot of added tools that make Git nice to work with, too.\nIn this course, we will mostly use Git through VS Code Web in Codespaces and inspect the remote copy on GitHub."
+  },
+  {
+    "objectID": "slides/2a.html#best-locations-in-general",
+    "href": "slides/2a.html#best-locations-in-general",
+    "title": "Python Tools for Management Research",
+    "section": "Best locations in general",
+    "text": "Best locations in general\n\n\nGit\nCode, notebooks, Quarto source, README files, small durable data, configuration.\n\n\nElsewhere\nRestricted data, raw data that are too large, generated outputs, and exports."
+  },
+  {
+    "objectID": "slides/2a.html#git-stores-the-recipe",
+    "href": "slides/2a.html#git-stores-the-recipe",
+    "title": "Python Tools for Management Research",
+    "section": "Git stores the recipe",
+    "text": "Git stores the recipe\nThe best candidates for Git are usually source material:\n\ncode that reads or creates data;\nsource writing in Quarto or Markdown;\nconfiguration such as pyproject.toml;\nsmall research files that document decisions."
+  },
+  {
+    "objectID": "slides/2a.html#small-data-can-belong-in-git",
+    "href": "slides/2a.html#small-data-can-belong-in-git",
+    "title": "Python Tools for Management Research",
+    "section": "Small data can belong in Git",
+    "text": "Small data can belong in Git\nSmall data like identifier mappings and data corrections are good examples of data to include in Git. A dropped-observations file is another.\nExample columns: observation_id, drop, rationale, source, researcher, date_reviewed.\nThe analysis can merge that rationale into the original data and filter transparently."
+  },
+  {
+    "objectID": "slides/2a.html#raw-data-and-generated-output",
+    "href": "slides/2a.html#raw-data-and-generated-output",
+    "title": "Python Tools for Management Research",
+    "section": "Raw data and generated output",
+    "text": "Raw data and generated output\n\n\nRaw data\nKeep in secure synced storage, recreate with code, or ideally both.\n\n\nGenerated files\nKeep locally or in an output folder when they can be recreated."
+  },
+  {
+    "objectID": "slides/2a.html#secrets-are-different",
+    "href": "slides/2a.html#secrets-are-different",
+    "title": "Python Tools for Management Research",
+    "section": "Secrets are different",
+    "text": "Secrets are different\nIf you commit a password, API key, token, private certificate, or restricted data file, assume it has been exposed.\nDeleting it later, or even rewriting history, does not reliably fix the problem because the secret may still be in Git history, remote copies, forks, caches, or clones.\nWhen you notice that, the top priority is making the secret inoperable (e.g., changing a password; revoking and replacing an API key)."
+  },
+  {
+    "objectID": "slides/2a.html#commit-messages-carry-rationale",
+    "href": "slides/2a.html#commit-messages-carry-rationale",
+    "title": "Python Tools for Management Research",
+    "section": "Commit messages carry rationale",
+    "text": "Commit messages carry rationale\nNot great:\nupdate stuff\nMuch better:\nScale assets variable per typesetter request.\nMuch better:\nIntegrating SG's 2026-03-15 draft comments."
+  },
+  {
+    "objectID": "slides/2a.html#semantic-commits",
+    "href": "slides/2a.html#semantic-commits",
+    "title": "Python Tools for Management Research",
+    "section": "Semantic commits",
+    "text": "Semantic commits\nA good commit is a coherent set of changes that accomplish something. It might revise a measure, add a robustness check, or integrate one set of coauthor comments.\nThe content and commit message are how we package up the work we do in ways that are meaningful to us.\nOne really helpful feature is the ability to stage only specific changes in a file, so that we can separate out different changes into different commits, even if we already edited both into the same file."
+  },
+  {
+    "objectID": "slides/2a.html#tags-mark-notable-commits",
+    "href": "slides/2a.html#tags-mark-notable-commits",
+    "title": "Python Tools for Management Research",
+    "section": "Tags mark notable commits",
+    "text": "Tags mark notable commits\nA normal workflow is committing as you work.\nThen, when you’re reasonably sure that you’re happy with the changes you’ve made, push to GitHub. When in doubt, push and carry on, because the history isn’t supposed to be pretty.\nFor particular notable commits (i.e. not many of them), we can add tags. I like these for versions that I share with coauthors or submit somewhere.\n\n2026-04-20-to-JB-for-friendly\n2026-05-25-amj-R1-submission\n2026-01-15-sms-conference-submission\n\n\nUntil you push, it is possible to remove commits or change them without making a mess of the shared history. This is a useful thing to know later, but not something we need to practice today."
+  },
+  {
+    "objectID": "slides/2a.html#vs-code-web-workflow",
+    "href": "slides/2a.html#vs-code-web-workflow",
+    "title": "Python Tools for Management Research",
+    "section": "VS Code Web workflow",
+    "text": "VS Code Web workflow\n\nMake a change.\nOpen Source Control.\nReview the diff.\nStage related files.\nWrite a descriptive commit message.\nCommit.\nSync or push."
+  },
+  {
+    "objectID": "slides/2a.html#github-workflow",
+    "href": "slides/2a.html#github-workflow",
+    "title": "Python Tools for Management Research",
+    "section": "GitHub workflow",
+    "text": "GitHub workflow\nOn GitHub, we can:\n\nconfirm the commit appears online;\nbrowse the commit history;\ninspect files at a prior commit;\nfind tags for shared versions."
+  },
+  {
+    "objectID": "slides/2a.html#collaboration-with-git",
+    "href": "slides/2a.html#collaboration-with-git",
+    "title": "Python Tools for Management Research",
+    "section": "Collaboration with Git",
+    "text": "Collaboration with Git\nMost coauthors don’t use Git. That is fine.\nWe can use Git to help us organize our work, and integrate coauthor comments and work, even if they don’t use Git themselves. As I said before, tags are a great feature to help bridge work that happens inside and outside of Git."
+  },
+  {
+    "objectID": "slides/2a.html#hands-on",
+    "href": "slides/2a.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 2a activity page."
+  },
+  {
+    "objectID": "materials/2a_github.html",
+    "href": "materials/2a_github.html",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#goal",
+    "href": "materials/2a_github.html#goal",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#activity",
+    "href": "materials/2a_github.html#activity",
+    "title": "2a Activity: Git and GitHub",
+    "section": "Activity",
+    "text": "Activity\n\n1. Create A Repository2. Open it in Codespaces3. Make One Change4. Commit the Change5. Push To GitHub6. Mark A Shared Version\n\n\nStart on GitHub in Chrome or Edge.\n\nGo to https://github.com.\nClick + in the upper-right corner.\nChoose New repository.\nName the repository python_tmr_practice.\nChoose Private.\nCheck Add a README file.\nClick Create repository.\n\n\n  I created a new private GitHub repository with a README. \n  I confirmed this is a new practice repository, not my fork of the course repository. \n\n\n\nFrom the new repository page:\n\nClick the green Code button.\nClick the Codespaces tab.\nClick Create codespace on main.\nWait for VS Code Web to open.\n\nIf GitHub asks whether you trust the authors of the files, choose the “Yes” option.\n\n  I opened the new practice repository in Codespaces. \n  I opened Source Control in VS Code Web. \n\n\n\nOpen README.md.\nAdd a short research-project note, such as:\n## Project Notes\n\nThis repository is a practice project for learning Git and GitHub.\nSave the file.\nReturn to Source Control and click the changed file to review the diff.\n\n  I edited and saved README.md. \n  I reviewed the diff in Source Control. \n\nUseful terminal reference:\ngit status --short\ngit diff\n\n\nIn Source Control:\n\nFind README.md under Changes.\nHover over README.md and click the + button to stage it.\nConfirm that README.md moved from Changes to Staged Changes.\nWrite a descriptive commit message in the message box.\nClick Commit.\n\nIf you have multiple changed files, stage only the files that belong together in this commit.\nA good message for this practice change might be:\nAdded project notes to README.\n\n  I staged README.md. \n  I wrote a descriptive commit message. \n  I committed the change. \n\nUseful terminal reference:\ngit add README.md\ngit commit -m \"Added project notes to README.\"\ngit log --oneline --max-count=5\n\n\nIn VS Code Web, use Sync Changes or Push (from the … menu) in Source Control.\nThen return to the repository page on GitHub and confirm the README change appears there.\n\n  I pushed or synced the commit to GitHub. \n  I found the updated README on GitHub. \n\nUseful terminal reference:\ngit push\n\n\nNow pretend this repository contains a draft you are sending to coauthors.\nIn Source Control:\n\nFind the Graph section.\nRight-click the most recent commit.\nChoose Create Tag….\nName the tag 2026-06-03-to-MP, or substitute “MP” with the initials of your imaginary coauthor.\nConfirm the tag.\n\nThen push the tag to GitHub from the terminal:\ngit push origin 2026-06-03-to-MP\nReturn to the repository page on GitHub and confirm that the tag appears.\n\n  I created a tag from the Source Control graph. \n  I found the tag on GitHub. \n  I can explain why a tag is useful when sending a draft or submitting a paper."
   }
 ]
