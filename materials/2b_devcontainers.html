@@ -237,6 +237,19 @@ Reset progress
   const count = document.querySelector("[data-progress-count]");
   const total = document.querySelector("[data-progress-total]");
   const reset = document.querySelector("[data-progress-reset]");
+  const externalLinks = [
+    ...document.querySelectorAll('a[href^="http://"], a[href^="https://"]'),
+  ];
+  const copySources = [...document.querySelectorAll(".copy-source")];
+
+  externalLinks.forEach((link) => {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  });
+
+  copySources.forEach((source) => {
+    source.addEventListener("focus", () => source.select());
+  });
 
   if (total) {
     total.textContent = checks.length;

@@ -63,3 +63,26 @@
     font-size: 0.9rem;
     padding: 0.35rem 0.65rem;
 }
+
+.copy-source {
+    background: #f7f8fa;
+    border: 1px solid #cfd6de;
+    border-radius: 6px;
+    color: #1f2933;
+    display: block;
+    font-family: var(--bs-font-monospace);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin: 0.75rem 0 1rem;
+    min-height: 34rem;
+    padding: 0.85rem;
+    resize: vertical;
+    white-space: pre;
+    width: 100%;
+}
+
+.copy-note {
+    color: #59636e;
+    font-size: 0.92rem;
+    margin-bottom: 0.35rem;
+}

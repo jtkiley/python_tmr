@@ -1,45 +1,269 @@
 [
   {
-    "objectID": "materials/2c_pyproject.html",
-    "href": "materials/2c_pyproject.html",
-    "title": "2c Activity: Python Project Management",
+    "objectID": "materials/3c_presentations.html",
+    "href": "materials/3c_presentations.html",
+    "title": "3c Activity: Presentations and Other Outputs",
     "section": "",
-    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add a Quarto slide deck to the same practice project, reuse generated values and a figure in the slides, render the project, and commit the source files.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2c_pyproject.html#goal",
-    "href": "materials/2c_pyproject.html#goal",
-    "title": "2c Activity: Python Project Management",
+    "objectID": "materials/3c_presentations.html#goal",
+    "href": "materials/3c_presentations.html#goal",
+    "title": "3c Activity: Presentations and Other Outputs",
     "section": "",
-    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add a Quarto slide deck to the same practice project, reuse generated values and a figure in the slides, render the project, and commit the source files.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2c_pyproject.html#activity",
-    "href": "materials/2c_pyproject.html#activity",
-    "title": "2c Activity: Python Project Management",
+    "objectID": "materials/3c_presentations.html#activity",
+    "href": "materials/3c_presentations.html#activity",
+    "title": "3c Activity: Presentations and Other Outputs",
     "section": "Activity",
-    "text": "Activity\n\n1. Open The Practice Repo2. Create pyproject.toml3. Read The File4. Install From The Project5. Pin The Versions We Care About6. Reinstall From The Pinned Project7. Test In A Notebook8. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces.\nThis should be the same repository you used for 2a and 2b.\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn the Explorer, create a file named pyproject.toml at the top level of the repository.\nThere are tools that can generate a starter pyproject.toml, such as uv init, Poetry, and Hatch. For this activity, we will write a very small one ourselves so we can see exactly what each piece does.\nAdd this starter content:\n[build-system]\nrequires = [\"setuptools\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"python-tmr-practice\"\nversion = \"0.1.0\"\nrequires-python = \"&gt;=3.13\"\ndependencies = [\n    \"ipykernel\",\n    \"nbformat\",\n    \"pandas\",\n    \"plotly\",\n    \"polars\",\n]\n\n[tool.setuptools]\npy-modules = []\nSave the file.\n\n  I created and saved pyproject.toml. \n\n\n\nNotice the pieces:\n\nname: the project name;\nversion: a project version;\nrequires-python: the Python version expectation;\ndependencies: Python packages the project needs;\ntool.setuptools: a small setting that says this practice project does not define an importable Python package.\n\nRight now the dependency list names the packages we want, without requiring exact versions. This file stores the project configuration, but it does not install anything just by existing.\n\n  I can identify the dependency list in pyproject.toml. \n\n\n\nOpen a terminal and run:\npython -m pip install -e .\nThis installs from the project file. Since the dependency list does not specify exact versions yet, pip will choose current compatible versions.\nThen check that Polars imports:\npython -c \"import polars as pl; print(pl.__version__)\"\n\n  I installed from pyproject.toml with python -m pip install -e .. \n  I confirmed that Polars imports. \n\n\n\nAfter installing, ask Python what is installed:\npython -m pip freeze\nThe terminal will print a long list of installed packages. We are using this as a readout, not saving it to a file.\nFind the lines for the packages we intentionally installed:\nipykernel==...\nnbformat==...\npandas==...\nplotly==...\npolars==...\nEdit the dependencies part of pyproject.toml so it looks like this, using the version numbers from your terminal:\ndependencies = [\n    \"ipykernel==...\",\n    \"nbformat==...\",\n    \"pandas==...\",\n    \"plotly==...\",\n    \"polars==...\",\n]\nDo not copy every package from pip freeze. Many of those are packages that our chosen packages need. The installer can solve those later.\n\n  I ran python -m pip freeze in the terminal. \n  I copied the package versions I care about into pyproject.toml. \n\n\n\nThe file now records the packages this project needs and the versions we want to keep using.\nRun:\npython -m pip install -e .\nIn this Codespace, most of the work may already be done. The important point is that pyproject.toml is now a recipe that a future environment can use.\n\n  I reinstalled from the pinned pyproject.toml. \n\n\n\nCreate a new notebook named environment_check.ipynb.\nIf VS Code asks you to choose a kernel, choose the Python environment for this Codespace.\nIn the first code cell, paste and run:\nimport pandas as pd\nimport plotly.express as px\nimport polars as pl\n\nprint(\"Polars:\", pl.__version__)\nprint(\"pandas:\", pd.__version__)\nIn a second code cell, paste and run:\nsample_pl = pl.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\nsample_pd = pd.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\ntotal_projects = sample_pl.select(pl.col(\"projects\").sum()).item()\nprint(\"Total projects:\", total_projects)\n\nfig = px.line(\n    sample_pd,\n    x=\"year\",\n    y=\"projects\",\n    markers=True,\n)\nfig.show()\n\n  I created environment_check.ipynb. \n  I ran a notebook cell that imports Polars, pandas, and Plotly. \n  I ran a notebook cell that creates a small Plotly figure. \n\n\n\nUse Source Control:\n\nReview the changes.\nFind pyproject.toml and environment_check.ipynb under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python project environment files.\nPush or sync the commit to GitHub.\n\n  I reviewed the environment file changes. \n  I committed the environment files. \n  I pushed or synced the commit to GitHub."
+    "text": "Activity\n\n1. Open The Practice Repo2. Add A Slide Deck3. Add Slides To The Project4. Link The Slides From The Home Page5. Render And Check6. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces.\nThis should be the same repository you used for the manuscript and generated-results activities.\n\n  I opened the practice repository in Codespaces. \n\n\n\nAt the top level of the repository, create a file named slides.qmd.\nPaste this starter deck into the file:\n\nClick inside the block to select it, then copy and paste it into slides.qmd.\n\n---\ntitle: \"A Short Research Talk\"\nsubtitle: \"Python TMR Practice\"\nauthor: \"Your Name\"\nformat:\n  revealjs:\n    theme: simple\n    slide-number: true\n    preview-links: false\n    link-external-newwindow: true\nexecute:\n  echo: false\n  warning: false\n  message: false\n---\n\n```{python}\n#| label: setup-slides\n\nfrom random import Random\n\nimport matplotlib.pyplot as plt\nimport pandas as pd\nimport statsmodels.formula.api as smf\nfrom pandas.plotting import scatter_matrix\n\n\nrng = Random(2026)\n\nrows = []\nfor firm_id in range(1, 121):\n    size = rng.gauss(0, 1)\n    attention = rng.gauss(0, 1)\n    slack = 0.35 * size + rng.gauss(0, 0.8)\n    performance = (\n        0.75 * attention\n        + 0.25 * slack\n        + 0.20 * size\n        + rng.gauss(0, 1)\n    )\n\n    rows.append(\n        {\n            \"firm_id\": firm_id,\n            \"attention\": attention,\n            \"slack\": slack,\n            \"size\": size,\n            \"performance\": performance,\n        }\n    )\n\nresults_data = pd.DataFrame(rows)\nanalysis_vars = [\"performance\", \"attention\", \"slack\", \"size\"]\n\nmodel = smf.ols(\n    \"performance ~ attention + slack + size\",\n    data=results_data,\n).fit()\n\nsample_size = len(results_data)\nattention_coef = model.params[\"attention\"]\nattention_p = model.pvalues[\"attention\"]\nattention_coef_text = f\"{attention_coef:.2f}\"\nattention_p_text = \"&lt; .001\" if attention_p &lt; 0.001 else f\"{attention_p:.3f}\"\n```\n\n## Research question\n\nHow does stakeholder attention relate to firm performance?\n\n\n## Data and sample\n\nThe sample includes `{python} sample_size` simulated firm-year observations.\n\n\n## Main result\n\nAttention is positively associated with performance in the simulated data.\n\nb = `{python} attention_coef_text`\n\np = `{python} attention_p_text`\n\n\n## Figure\n\n```{python}\n#| label: fig-slide-scatter-matrix\n#| fig-width: 6\n#| fig-height: 5\n#| out-width: \"78%\"\n\naxes = scatter_matrix(\n    results_data[analysis_vars],\n    figsize=(6, 5),\n    diagonal=\"kde\",\n    alpha=0.7,\n)\nfig = axes[0, 0].figure\nfig.tight_layout()\nplt.show()\n```\n\n\n## Takeaway\n\n- Quarto can make manuscripts and slides from the same project.\n- Generated values help keep research outputs in sync.\n- Small workflow changes can reduce copy/paste errors.\n\nSave the file.\n\n  I created slides.qmd with the starter deck. \n  I updated the author name or title in the slide deck. \n\n\n\nOpen _quarto.yml.\nIn the render list, add slides.qmd:\n  render:\n    - index.qmd\n    - paper.qmd\n    - slides.qmd\nIn the navigation list, add a link to the slides:\n      - text: \"Slides\"\n        href: slides.qmd\nThe full _quarto.yml should still include the bibliography, CSL, and HTML format settings from the manuscript activity.\n\n  I added slides.qmd to the _quarto.yml render list. \n  I added a Slides link to the website navigation. \n\n\n\nOpen index.qmd.\nAdd a link to the slide deck under ## Outputs:\n- [Research Presentation](slides.qmd)\nSave the file.\n\n  I linked the slide deck from index.qmd. \n\n\n\nRender the slide deck:\nquarto render slides.qmd\nThen render the whole project:\nquarto render\nOpen the rendered slide deck and look for:\n\nthe title slide;\nthe inline sample size;\nthe inline coefficient and p value;\nthe scatter matrix figure.\n\n\n  I rendered slides.qmd. \n  I rendered the whole project. \n  I found the generated values and figure in the rendered slides. \n\n\n\nUse Source Control:\n\nReview the changes.\nStage slides.qmd, _quarto.yml, and index.qmd.\nCommit with a message such as:\n\nAdded Quarto research slides.\nPush or sync the commit to GitHub.\n\n  I reviewed the slide deck and project configuration changes. \n  I committed the slide deck changes. \n  I pushed or synced the commit to GitHub."
   },
   {
-    "objectID": "materials/2a_github.html",
-    "href": "materials/2a_github.html",
-    "title": "2a Activity: Git and GitHub",
+    "objectID": "materials/3a_quarto.html",
+    "href": "materials/3a_quarto.html",
+    "title": "3a Activity: Quarto Documents and Citations",
     "section": "",
-    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add Quarto to the same practice repository, create a small Quarto website project, write a document called “An Example Manuscript,” add citations with BibTeX, render HTML and PDF outputs, and commit the source files.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2a_github.html#goal",
-    "href": "materials/2a_github.html#goal",
-    "title": "2a Activity: Git and GitHub",
+    "objectID": "materials/3a_quarto.html#goal",
+    "href": "materials/3a_quarto.html#goal",
+    "title": "3a Activity: Quarto Documents and Citations",
     "section": "",
-    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "text": "We will add Quarto to the same practice repository, create a small Quarto website project, write a document called “An Example Manuscript,” add citations with BibTeX, render HTML and PDF outputs, and commit the source files.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
   },
   {
-    "objectID": "materials/2a_github.html#activity",
-    "href": "materials/2a_github.html#activity",
-    "title": "2a Activity: Git and GitHub",
+    "objectID": "materials/3a_quarto.html#activity",
+    "href": "materials/3a_quarto.html#activity",
+    "title": "3a Activity: Quarto Documents and Citations",
     "section": "Activity",
-    "text": "Activity\n\n1. Create A Repository2. Open it in Codespaces3. Make One Change4. Commit the Change5. Push To GitHub6. Mark A Shared Version\n\n\nStart on GitHub in Chrome or Edge.\n\nGo to https://github.com.\nClick + in the upper-right corner.\nChoose New repository.\nName the repository python_tmr_practice.\nChoose Private.\nCheck Add a README file.\nClick Create repository.\n\n\n  I created a new private GitHub repository with a README. \n  I confirmed this is a new practice repository, not my fork of the course repository. \n\n\n\nFrom the new repository page:\n\nClick the green Code button.\nClick the Codespaces tab.\nClick Create codespace on main.\nWait for VS Code Web to open.\n\nIf GitHub asks whether you trust the authors of the files, choose the “Yes” option.\n\n  I opened the new practice repository in Codespaces. \n  I opened Source Control in VS Code Web. \n\n\n\nOpen README.md.\nAdd a short research-project note, such as:\n## Project Notes\n\nThis repository is a practice project for learning Git and GitHub.\nSave the file.\nReturn to Source Control and click the changed file to review the diff.\n\n  I edited and saved README.md. \n  I reviewed the diff in Source Control. \n\nUseful terminal reference:\ngit status --short\ngit diff\n\n\nIn Source Control:\n\nFind README.md under Changes.\nHover over README.md and click the + button to stage it.\nConfirm that README.md moved from Changes to Staged Changes.\nWrite a descriptive commit message in the message box.\nClick Commit.\n\nIf you have multiple changed files, stage only the files that belong together in this commit.\nA good message for this practice change might be:\nAdded project notes to README.\n\n  I staged README.md. \n  I wrote a descriptive commit message. \n  I committed the change. \n\nUseful terminal reference:\ngit add README.md\ngit commit -m \"Added project notes to README.\"\ngit log --oneline --max-count=5\n\n\nIn VS Code Web, use Sync Changes or Push (from the … menu) in Source Control.\nThen return to the repository page on GitHub and confirm the README change appears there.\n\n  I pushed or synced the commit to GitHub. \n  I found the updated README on GitHub. \n\nUseful terminal reference:\ngit push\n\n\nNow pretend this repository contains a draft you are sending to coauthors.\nIn Source Control:\n\nFind the Graph section.\nRight-click the most recent commit.\nChoose Create Tag….\nName the tag 2026-06-03-to-MP, or substitute “MP” with the initials of your imaginary coauthor.\nConfirm the tag.\n\nThen push the tag to GitHub from the terminal:\ngit push origin 2026-06-03-to-MP\nReturn to the repository page on GitHub and confirm that the tag appears.\n\n  I created a tag from the Source Control graph. \n  I found the tag on GitHub. \n  I can explain why a tag is useful when sending a draft or submitting a paper."
+    "text": "Activity\n\n1. Add Quarto2. Create Project Files3. Create references.bib4. Create The Manuscript5. Render The Manuscript6. Add Another Reference7. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces. This should be the same repository you used for the Git, devcontainer, and pyproject.toml activities.\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for codespaces and choose Codespaces: Add Dev Container Configuration Files….\nWhen VS Code asks what to do, choose Modify your active configuration….\nSearch for quarto and choose the Quarto CLI feature:\nghcr.io/rocker-org/devcontainer-features/quarto-cli\nAccept the default or latest version.\nThe GUI will edit .devcontainer/devcontainer.json for you. The Quarto CLI feature also asks VS Code to install the Quarto extension inside the devcontainer.\nIf VS Code asks to rebuild the container, follow that prompt. You can also open the Command Palette and choose Codespaces: Rebuild Container.\n\n  I opened the practice repository in Codespaces. \n  I added the Quarto devcontainer feature. \n  I rebuilt or reopened the Codespace after adding the feature. \n\n\n\nAt the top level of the repository, create a file named _quarto.yml.\nPaste this into the file:\nproject:\n  type: website\n  output-dir: _site\n  render:\n    - index.qmd\n    - paper.qmd\n\nwebsite:\n  title: \"Python TMR Practice\"\n  navbar:\n    left:\n      - text: \"Home\"\n        href: index.qmd\n      - text: \"Paper\"\n        href: paper.qmd\n\nbibliography: references.bib\ncsl: https://www.zotero.org/styles/academy-of-management-review\n\nformat:\n  html:\n    theme: cosmo\n    toc: true\nThis file says that our repository contains a small Quarto website project. It also says that the project will use references.bib for citations and an Academy of Management CSL style from the Zotero Style Repository.\nOpen .gitignore.\nAdd this line if it is not already there:\n_site/\nThe _site/ folder will hold rendered website files. For now, we want Git to track the source files, not the generated website folder.\nAt the top level of the repository, create a file named index.qmd.\nPaste this into the file:\n---\ntitle: \"Python TMR Practice\"\n---\n\nThis site collects research outputs from this practice repository.\n\n## Outputs\n\n- [An Example Manuscript](paper.qmd)\nSave the file.\n\n  I created _quarto.yml. \n  I added _site/ to .gitignore or confirmed that it was already there. \n  I created index.qmd. \n\n\n\nAt the top level of the repository, create a file named references.bib.\nPaste these starter references into the file:\n@article{boivie_2016,\n  author = {Boivie, Steven and Graffin, Scott D. and Oliver, Abbie G. and Withers, Michael C.},\n  title = {Come Aboard! Exploring the Effects of Directorships in the Executive Labor Market},\n  journal = {Academy of Management Journal},\n  volume = {59},\n  number = {5},\n  pages = {1681--1706},\n  year = {2016},\n  doi = {10.5465/amj.2014.0840}\n}\n\n@article{kiley_2023,\n  author = {Kiley, Jason and McKenny, Aaron and Short, Jeremy and Smith, Anne},\n  title = {Call for Papers for a Feature Topic: Having A Way with Words: Innovations and Improvements in Text Analysis Methods},\n  journal = {Organizational Research Methods},\n  volume = {26},\n  number = {4},\n  pages = {752--755},\n  year = {2023},\n  doi = {10.1177/10944281231195704}\n}\nEach reference starts with a cite key, such as boivie_2016. That key is what we will use in the manuscript.\n\n  I created references.bib with the starter references. \n\n\n\nAt the top level of the repository, create a file named paper.qmd.\nPaste this into the file:\n---\ntitle: \"An Example Manuscript\"\nauthor: \"Your Name\"\nformat:\n  html:\n    toc: true\n    code-fold: true\n  typst:\n    toc: true\n    citeproc: true\n  docx: default\n---\n\n## Introduction\n\nThis document is a small example of a research manuscript written in Quarto.\n\nWe can cite research from our field using cite keys from `references.bib`.\nFor example, prior work examines how directorships can matter in the executive labor market [@boivie_2016].\nWe can also cite work on text analysis methods in organizational research [@kiley_2023].\n\n## A Small Code Example\n\nQuarto documents can include executable Python code.\n\n::: {#e59d2d6b .cell}\n``` {.python .cell-code}\nimport polars as pl\n\narticles = pl.DataFrame(\n    {\n        \"publisher\": [\"AOM\", \"SAGE\"],\n        \"starter_references\": [1, 1],\n    }\n)\n\narticles\n```\n:::\n\n\n## References\nSave the file.\nWith paper.qmd open, look at the bottom of the VS Code window. You should see Quarto in the status bar.\n\n  I created paper.qmd. \n  I saw Quarto in the VS Code status bar. \n\n\n\nIn the terminal, render the manuscript:\nquarto render paper.qmd\nThis should create an HTML version, a PDF version, and a Word document. The PDF uses Quarto’s Typst backend because the document uses format: typst. The Word document is useful when coauthors need to use track changes.\nThen render the whole project:\nquarto render\nOpen the rendered website preview when VS Code offers it, or open _site/index.html from the file explorer. The Word version should be at _site/paper.docx.\n\n  I rendered paper.qmd. \n  I rendered the Quarto project. \n  I opened the rendered output and found the reference list and Word file. \n\n\n\nChoose one article to add to references.bib:\n\nJournal of Management article from SAGE\nStrategic Management Journal article from Wiley\nAcademy of Management Review article from AOM\n\nOn the article page, look for the citation tool. Choose BibTeX. If the page gives you an option like direct import, uncheck it so the BibTeX opens in the browser. Then use Command+A and Command+C to copy the BibTeX, and paste it at the bottom of references.bib.\nAdd one sentence to paper.qmd that cites the new reference. Render the manuscript again.\n\n  I added one more BibTeX reference. \n  I cited the new reference in paper.qmd. \n  I re-rendered the manuscript and found the new reference. \n\n\n\nUse Source Control:\n\nReview the changes.\nStage .devcontainer/devcontainer.json, because the GUI edited it when you added the Quarto feature.\nStage the Quarto source files: _quarto.yml, index.qmd, paper.qmd, references.bib, and .gitignore.\nCommit with a message such as:\n\nAdded Quarto manuscript files.\nPush or sync the commit to GitHub.\n\n  I reviewed the Quarto project changes. \n  I committed the Quarto source files. \n  I pushed or synced the commit to GitHub."
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html",
+    "href": "materials/2b_devcontainers.html",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#goal",
+    "href": "materials/2b_devcontainers.html#goal",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "",
+    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2b_devcontainers.html#activity",
+    "href": "materials/2b_devcontainers.html#activity",
+    "title": "2b Activity: Devcontainers and Codespaces",
+    "section": "Activity",
+    "text": "Activity\n\n1. Open The Practice Repo2. Add Devcontainer Files3. Inspect the Recipe4. Rebuild if Prompted5. Commit And Push\n\n\nStart on GitHub in Chrome or Edge.\n\nOpen the python_tmr_practice repository you created in 2a.\nClick the green Code button.\nClick the Codespaces tab.\nOpen the existing Codespace, or create a new one if needed.\n\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn VS Code Web:\n\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for add dev.\nChoose Codespaces: Add Dev Container Configuration Files….\nChoose a Python configuration.\nIf asked for a Python version, choose Python 3.13 if it is available. Otherwise, accept the default.\nAccept the remaining default options.\n\nThe exact list of choices can change a little over time. The important thing is that we are adding a .devcontainer/ folder to the repository.\n\n  I added devcontainer configuration files from the Command Palette. \n  I found the .devcontainer/ folder in the Explorer. \n\n\n\nOpen .devcontainer/devcontainer.json.\nLook for:\n\nthe name of the configuration;\nthe base image or feature choices;\nany VS Code extension recommendations;\nany setup commands.\n\nDo not worry if your file does not match the course repository.\n\n  I opened .devcontainer/devcontainer.json. \n  I identified at least one thing this file controls. \n\n\n\nVS Code may ask whether you want to rebuild or reopen the Codespace using the new configuration.\nOnce you’re finished editing, you can follow the prompts to rebuild or use the Command Palette to search for and choose Codespaces: Rebuild Container.\nThe key thing to note is that the repository now contains our environment recipe.\n\n  I can explain why changing the devcontainer may require rebuilding the Codespace. \n\n\n\nUse Source Control:\n\nReview the .devcontainer/ changes.\nFind the .devcontainer/ files under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python devcontainer configuration.\nPush or sync the commit to GitHub.\n\n  I reviewed the .devcontainer/ changes. \n  I committed the .devcontainer/ configuration. \n  I pushed or synced the commit to GitHub."
+  },
+  {
+    "objectID": "slides/3c.html#from-manuscript-to-research-outputs",
+    "href": "slides/3c.html#from-manuscript-to-research-outputs",
+    "title": "Python Tools for Management Research",
+    "section": "From manuscript to research outputs",
+    "text": "From manuscript to research outputs\n\nQuarto is one tool for many kinds of output we use in research, teaching, and life in general.\n\nWe can get a lot of mileage from a relatively small set of tools."
+  },
+  {
+    "objectID": "slides/3c.html#more-mileage-from-the-same-skillset",
+    "href": "slides/3c.html#more-mileage-from-the-same-skillset",
+    "title": "Python Tools for Management Research",
+    "section": "More mileage from the same skillset",
+    "text": "More mileage from the same skillset\nQuarto is versatile.\n\n\nManuscripts\nWrite prose, citations, tables, figures, and code-generated results in one source file.\n\n\nPresentations\nTurn the same project into slides for workshops, conferences, and coauthor meetings.\n\n\nWebsites\nShare project pages, documentation, teaching materials, and supplementary resources."
+  },
+  {
+    "objectID": "slides/3c.html#why-slides-from-the-project",
+    "href": "slides/3c.html#why-slides-from-the-project",
+    "title": "Python Tools for Management Research",
+    "section": "Why slides from the project?",
+    "text": "Why slides from the project?\nPresentations have the same copy/paste risks as manuscripts:\n\nsample sizes drift;\nfigures get updated in one place but not another;\nregression results change after the slide deck is built;\ntables and text quietly stop matching.\n\nIf the talk draws from the project, we reduce those failure points."
+  },
+  {
+    "objectID": "slides/3c.html#quarto-presentations",
+    "href": "slides/3c.html#quarto-presentations",
+    "title": "Python Tools for Management Research",
+    "section": "Quarto presentations",
+    "text": "Quarto presentations\nQuarto revealjs slides are still .qmd files.\n---\ntitle: \"A Short Research Talk\"\nformat: revealjs\n---\n\n## Research question\n\nWhy do some firms attract more stakeholder attention?\nHeadings become slides, and the same Markdown basics still work."
+  },
+  {
+    "objectID": "slides/3c.html#reuse-a-result",
+    "href": "slides/3c.html#reuse-a-result",
+    "title": "Python Tools for Management Research",
+    "section": "Reuse a result",
+    "text": "Reuse a result\nThe sample includes `{python} n` firm-year observations.\n\nAttention is associated with performance\n(b = `{python} round(attention_coef, 2)`,\np = `{python} f\"{attention_p:.3f}\"`).\nThis is the same idea from the paper: values come from the analysis, not from retyping."
+  },
+  {
+    "objectID": "slides/3c.html#reuse-a-figure",
+    "href": "slides/3c.html#reuse-a-figure",
+    "title": "Python Tools for Management Research",
+    "section": "Reuse a figure",
+    "text": "Reuse a figure\naxes = scatter_matrix(results_data[analysis_vars])\nfig = axes[0, 0].figure\nfig\nA figure can appear in the paper and in the slides without saving and inserting it by hand."
+  },
+  {
+    "objectID": "slides/3c.html#other-outputs",
+    "href": "slides/3c.html#other-outputs",
+    "title": "Python Tools for Management Research",
+    "section": "Other outputs",
+    "text": "Other outputs\nThe same project can grow into other useful artifacts:\n\na project website;\nan appendix or supplement;\na polished PDF;\na Word document for coauthor track changes;\na slide deck for a research talk.\n\nEasy things easy. Hard things possible."
+  },
+  {
+    "objectID": "slides/3c.html#hands-on",
+    "href": "slides/3c.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 3c activity page."
+  },
+  {
+    "objectID": "slides/3c.html#what-we-learned-foundations",
+    "href": "slides/3c.html#what-we-learned-foundations",
+    "title": "Python Tools for Management Research",
+    "section": "What we learned: foundations",
+    "text": "What we learned: foundations\n\n\nPython\nNames, objects, functions, control flow, notebooks, and enough syntax to read and adapt useful code.\n\n\nData\nPolars for reading, inspecting, transforming, joining, aggregating, and saving research datasets.\n\n\nProjects\nGit, GitHub, devcontainers, Codespaces, and pyproject.toml for more reproducible research work."
+  },
+  {
+    "objectID": "slides/3c.html#what-we-learned-outputs",
+    "href": "slides/3c.html#what-we-learned-outputs",
+    "title": "Python Tools for Management Research",
+    "section": "What we learned: outputs",
+    "text": "What we learned: outputs\n\n\nDocuments\nQuarto manuscripts with citations, references, HTML, PDF, and Word output.\n\n\nResults\nGenerated sample sizes, tables, figures, regression results, and in-text values.\n\n\nOutputs\nSlides and other research products that can draw from the same project."
+  },
+  {
+    "objectID": "slides/3c.html#start-small",
+    "href": "slides/3c.html#start-small",
+    "title": "Python Tools for Management Research",
+    "section": "Start small",
+    "text": "Start small\nYou do not have to change your whole workflow at once.\nStart with one part:\n\nclean one dataset in Python;\ngenerate one table from code;\nput one paper draft in Quarto;\nuse Git for one project.\n\nBuild toward a more integrated workflow over time. It took me years to figure out what I thought the best combination was for me, and I did it incrementally."
+  },
+  {
+    "objectID": "slides/3c.html#tools-can-meet-at-the-boundaries",
+    "href": "slides/3c.html#tools-can-meet-at-the-boundaries",
+    "title": "Python Tools for Management Research",
+    "section": "Tools can meet at the boundaries",
+    "text": "Tools can meet at the boundaries\nReading and writing data gives you a lot of flexibility.\nspreadsheet -&gt; Python -&gt; CSV or Parquet -&gt; Stata, R, Python, or Quarto\nThat means you can adopt one tool where it helps and get comfortable before adding more."
+  },
+  {
+    "objectID": "slides/3c.html#watch-for-updates",
+    "href": "slides/3c.html#watch-for-updates",
+    "title": "Python Tools for Management Research",
+    "section": "Watch for updates",
+    "text": "Watch for updates\nMany of these tools are under active development:\n\nPython data tools are getting faster and more capable;\nQuarto keeps adding output features;\nVS Code and Codespaces keep improving;\npackage ecosystems keep filling practical gaps.\n\nStaying current helps get more mileage from the tools. I like to star things on GitHub and occasionally look at that feed."
+  },
+  {
+    "objectID": "slides/3c.html#join-the-community",
+    "href": "slides/3c.html#join-the-community",
+    "title": "Python Tools for Management Research",
+    "section": "Join the community",
+    "text": "Join the community\nThere is now a solid network of computationally minded researchers in our field and adjacent fields.\nThe AOM Content Analysis PDW is one good outlet, both for presentations and for proposal expert roundtables.\nIt’s nice to talk shop or to simply hang out and not talk shop with like-minded folks."
+  },
+  {
+    "objectID": "slides/3c.html#keep-in-touch",
+    "href": "slides/3c.html#keep-in-touch",
+    "title": "Python Tools for Management Research",
+    "section": "Keep in touch",
+    "text": "Keep in touch\n\nI am always interested to hear what you build, what works, and what gets in your way.\n\nThank you for spending the week learning these tools together."
+  },
+  {
+    "objectID": "slides/3a.html#from-project-recipe-to-research-output",
+    "href": "slides/3a.html#from-project-recipe-to-research-output",
+    "title": "Python Tools for Management Research",
+    "section": "From project recipe to research output",
+    "text": "From project recipe to research output\n\nQuarto gives us a consistent interface to a set of powerful tools that can automate tedious and error-prone manual processes.\n\nWe will continue to build in our practice repository using Quarto."
+  },
+  {
+    "objectID": "slides/3a.html#what-quarto-does",
+    "href": "slides/3a.html#what-quarto-does",
+    "title": "Python Tools for Management Research",
+    "section": "What Quarto does",
+    "text": "What Quarto does\nQuarto gives us one reasonably consistent authoring interface for:\n\nMarkdown prose;\nexecutable code chunks;\ndocument metadata;\ncitations and references;\noutput formats such as HTML, PDF, Word, and slides."
+  },
+  {
+    "objectID": "slides/3a.html#where-it-comes-from",
+    "href": "slides/3a.html#where-it-comes-from",
+    "title": "Python Tools for Management Research",
+    "section": "Where it comes from",
+    "text": "Where it comes from\nQuarto grows out of the same reproducible-document tradition that made R Markdown and R Notebooks popular.\nThe big expansion is that Quarto is not just an RStudio/R workflow. It is a standalone publishing system built around Markdown, executable code, and Pandoc, with first-class support for Python, R, Julia, and JavaScript."
+  },
+  {
+    "objectID": "slides/3a.html#a-.qmd-file",
+    "href": "slides/3a.html#a-.qmd-file",
+    "title": "Python Tools for Management Research",
+    "section": "A .qmd file",
+    "text": "A .qmd file\n---\ntitle: \"An Example Manuscript\"\nauthor: \"Your Name\"\nformat:\n  html:\n    toc: true\n  typst:\n    toc: true\n---\n\n## Introduction\n\nThis is a cited sentence [@kiley_2023]."
+  },
+  {
+    "objectID": "slides/3a.html#the-repository-can-hold-the-whole-story",
+    "href": "slides/3a.html#the-repository-can-hold-the-whole-story",
+    "title": "Python Tools for Management Research",
+    "section": "The repository can hold the whole story",
+    "text": "The repository can hold the whole story\npython_tmr_practice/\n  .devcontainer/\n  pyproject.toml\n  _quarto.yml\n  index.qmd\n  paper.qmd\n  references.bib\nThe source files are the things we edit and commit."
+  },
+  {
+    "objectID": "slides/3a.html#easy-things-easy.-hard-things-possible.",
+    "href": "slides/3a.html#easy-things-easy.-hard-things-possible.",
+    "title": "Python Tools for Management Research",
+    "section": "Easy things easy. Hard things possible.",
+    "text": "Easy things easy. Hard things possible.\nThe same basic workflow can make a simple HTML page, a PDF, a Word document, a website, or slides. We do not have to learn a totally separate toolchain for every output.\nQuarto sits on top of powerful tools such as Pandoc, Typst, and revealjs.\nWe can almost always stay in the friendly layer. But, if we have highly-specific needs, we can customize the underlying tools directly, and Quarto has some features to make that easier."
+  },
+  {
+    "objectID": "slides/3a.html#what-we-commit",
+    "href": "slides/3a.html#what-we-commit",
+    "title": "Python Tools for Management Research",
+    "section": "What we commit",
+    "text": "What we commit\nCommit:\n\n.qmd source files;\n_quarto.yml;\nreferences.bib;\nproject and environment files.\n\nUsually do not commit:\n\n_site/;\ngenerated PDFs or HTML files unless there is a specific sharing reason."
+  },
+  {
+    "objectID": "slides/3a.html#bibtex-files",
+    "href": "slides/3a.html#bibtex-files",
+    "title": "Python Tools for Management Research",
+    "section": "BibTeX files",
+    "text": "BibTeX files\nA .bib file stores reference metadata in plain text.\n@article{kiley_2023,\n  author = {Kiley, Jason and McKenny, Aaron and Short, Jeremy and Smith, Anne},\n  title = {Call for Papers for a Feature Topic: Having A Way with Words},\n  journal = {Organizational Research Methods},\n  year = {2023},\n  doi = {10.1177/10944281231195704}\n}"
+  },
+  {
+    "objectID": "slides/3a.html#cite-keys",
+    "href": "slides/3a.html#cite-keys",
+    "title": "Python Tools for Management Research",
+    "section": "Cite keys",
+    "text": "Cite keys\nThe label after the opening brace is the cite key.\nText analysis methods keep evolving in organizational research [@kiley_2023].\nQuarto uses the cite key to find the reference and build the reference list."
+  },
+  {
+    "objectID": "slides/3a.html#csl-files",
+    "href": "slides/3a.html#csl-files",
+    "title": "Python Tools for Management Research",
+    "section": "CSL files",
+    "text": "CSL files\nCSL files control how citations and references are formatted.\nbibliography: references.bib\ncsl: https://www.zotero.org/styles/academy-of-management-review\nThe same source references can be rendered in different journal styles, just by changing the CSL link. (But, don’t forget to rework to another journal’s norms.)"
+  },
+  {
+    "objectID": "slides/3a.html#getting-bibtex",
+    "href": "slides/3a.html#getting-bibtex",
+    "title": "Python Tools for Management Research",
+    "section": "Getting BibTeX",
+    "text": "Getting BibTeX\nCommon routes:\n\nuse the publisher’s website citation tool and choose BibTeX;\nuncheck direct import when that gives a clean browser page;\nuse DOI metadata from the terminal when it is convenient.\n\ncurl -L -H \"Accept: text/x-bibliography; style=bibtex\" \\\n  \"https://doi.org/10.1177/10944281231195704\""
+  },
+  {
+    "objectID": "slides/3a.html#typst-not-latex",
+    "href": "slides/3a.html#typst-not-latex",
+    "title": "Python Tools for Management Research",
+    "section": "Typst, not LaTeX",
+    "text": "Typst, not LaTeX\nFor PDF output, we will use Quarto’s Typst format.\nTypst is fast, modern, and much friendlier to customize later than a traditional LaTeX workflow."
+  },
+  {
+    "objectID": "slides/3a.html#multiple-formats-from-one-source",
+    "href": "slides/3a.html#multiple-formats-from-one-source",
+    "title": "Python Tools for Management Research",
+    "section": "Multiple formats from one source",
+    "text": "Multiple formats from one source\nformat:\n  html:\n    toc: true\n  typst:\n    toc: true\n  docx: default\nOne source document can produce HTML, PDF, and Word."
+  },
+  {
+    "objectID": "slides/3a.html#hands-on",
+    "href": "slides/3a.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 3a activity page."
   },
   {
     "objectID": "slides/2b.html#devcontainers-and-codespaces",
@@ -340,14 +564,14 @@
     "href": "index.html",
     "title": "Python Tools for Management Research",
     "section": "",
-    "text": "This small site will collect rendered course slides and supporting materials as they are added. The repository remains the main home for notebooks, data, and project files."
+    "text": "This small site collects rendered course slides and supporting activity materials. The repository remains the main home for notebooks, data, and project files."
   },
   {
     "objectID": "index.html#materials",
     "href": "index.html#materials",
     "title": "Python Tools for Management Research",
     "section": "Materials",
-    "text": "Materials\n\n\n\nsegment\ntopic\nmaterials\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nslides\n\n\n0b\nPython basics I\nslides\n\n\n0c\nPython basics II\nslides\n\n\n1a\nPolars: read, inspect, transform, and write data\nslides\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nslides\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nslides\n\n\n2a\nGit and GitHub for research projects\nslides / activity\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\nslides / activity\n\n\n2c\nPython project and environment management\nslides / activity\n\n\n3a\nQuarto documents, citations, and references\ncoming later\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\ncoming later\n\n\n3c\nQuarto presentations and other research outputs\ncoming later"
+    "text": "Materials\n\n\n\nsegment\ntopic\nmaterials\n\n\n\n\n0a\nPython, notebooks, and the course workflow\nslides\n\n\n0b\nPython basics I\nslides\n\n\n0c\nPython basics II\nslides\n\n\n1a\nPolars: read, inspect, transform, and write data\nslides\n\n\n1b\nPolars: aggregation, joins, and research data workflows\nslides\n\n\n1c\nPolars: reusable expressions, lazy queries, and project-scale patterns\nslides\n\n\n2a\nGit and GitHub for research projects\nslides / activity\n\n\n2b\nReproducible computing environments with devcontainers and Codespaces\nslides / activity\n\n\n2c\nPython project and environment management\nslides / activity\n\n\n3a\nQuarto documents, citations, and references\nslides / activity\n\n\n3b\nQuarto manuscripts with code-generated tables, figures, and results\nslides / activity\n\n\n3c\nQuarto presentations and other research outputs\nslides / activity"
   },
   {
     "objectID": "slides/0a.html#the-key",
@@ -742,24 +966,136 @@
     "text": "Hands-on\nOpen the 2c activity page."
   },
   {
-    "objectID": "materials/2b_devcontainers.html",
-    "href": "materials/2b_devcontainers.html",
-    "title": "2b Activity: Devcontainers and Codespaces",
-    "section": "",
-    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "objectID": "slides/3b.html#from-rendered-paper-to-reproducible-results",
+    "href": "slides/3b.html#from-rendered-paper-to-reproducible-results",
+    "title": "Python Tools for Management Research",
+    "section": "From rendered paper to reproducible results",
+    "text": "From rendered paper to reproducible results\n\nThe next step is making the paper generate its own numbers, tables, figures, and model results.\n\nThis is an elegant form of reproducible research: the paper is a recipe for the results."
   },
   {
-    "objectID": "materials/2b_devcontainers.html#goal",
-    "href": "materials/2b_devcontainers.html#goal",
-    "title": "2b Activity: Devcontainers and Codespaces",
-    "section": "",
-    "text": "We will add our own devcontainer configuration to the practice repository from 2a.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+    "objectID": "slides/3b.html#why-generate-results",
+    "href": "slides/3b.html#why-generate-results",
+    "title": "Python Tools for Management Research",
+    "section": "Why generate results?",
+    "text": "Why generate results?\nCopying results by hand creates quiet failure points:\n\nsample sizes get out of sync;\ntables lag behind data cleaning changes;\nfigures are regenerated but not replaced;\ntext reports one model while a table reports another.\n\nReviewers notice this, and you really don’t want that at the margin."
   },
   {
-    "objectID": "materials/2b_devcontainers.html#activity",
-    "href": "materials/2b_devcontainers.html#activity",
-    "title": "2b Activity: Devcontainers and Codespaces",
+    "objectID": "slides/3b.html#what-code-can-write-for-us",
+    "href": "slides/3b.html#what-code-can-write-for-us",
+    "title": "Python Tools for Management Research",
+    "section": "What code can write for us",
+    "text": "What code can write for us\nSome useful examples:\n\n\nInline values\nSample size, coefficient estimates, p values, and other single numbers in the text.\n\n\nTables\nDescriptives, correlations, model summaries, and robustness checks.\n\n\nFigures\nScatter matrices, distributions, diagnostics, and coefficient plots."
+  },
+  {
+    "objectID": "slides/3b.html#in-text-values",
+    "href": "slides/3b.html#in-text-values",
+    "title": "Python Tools for Management Research",
+    "section": "In-text values",
+    "text": "In-text values\nThe sample includes `{python} n` observations.\nThe n value in the sentence comes from Python. If the data changes and we render again, the sentence updates."
+  },
+  {
+    "objectID": "slides/3b.html#code-can-stay-out-of-the-way",
+    "href": "slides/3b.html#code-can-stay-out-of-the-way",
+    "title": "Python Tools for Management Research",
+    "section": "Code can stay out of the way",
+    "text": "Code can stay out of the way\n#| echo: false\n#| warning: false\n#| message: false\n\n# setup code here\nSome code is part of the paper’s machinery rather than part of the visible paper. These settings turn off code, warnings, and messages in the rendered paper, but the code still runs."
+  },
+  {
+    "objectID": "slides/3b.html#add-the-analysis-tools",
+    "href": "slides/3b.html#add-the-analysis-tools",
+    "title": "Python Tools for Management Research",
+    "section": "Add the analysis tools",
+    "text": "Add the analysis tools\nFor this segment, the project needs a few more packages:\n\nmaketables for descriptive, correlation, and regression tables;\nmatplotlib for static figures that work well in Word and PDF;\nstatsmodels for regression models and model summaries.\n\nWe add them to pyproject.toml because they are now part of the project recipe."
+  },
+  {
+    "objectID": "slides/3b.html#tables",
+    "href": "slides/3b.html#tables",
+    "title": "Python Tools for Management Research",
+    "section": "Tables",
+    "text": "Tables\ndescriptives\ncorrelations\nregression_table\nThe table objects are built in code, then displayed in the paper."
+  },
+  {
+    "objectID": "slides/3b.html#figures",
+    "href": "slides/3b.html#figures",
+    "title": "Python Tools for Management Research",
+    "section": "Figures",
+    "text": "Figures\naxes = scatter_matrix(results_data[analysis_vars])\nfig = axes[0, 0].figure\nfig\nWhenever we use some of the more interesting interactive visualizations, we need to make a static version for the paper."
+  },
+  {
+    "objectID": "slides/3b.html#in-text-model-results",
+    "href": "slides/3b.html#in-text-model-results",
+    "title": "Python Tools for Management Research",
+    "section": "In-text model results",
+    "text": "In-text model results\nAttention is associated with performance\n(b = `{python} round(attention_coef, 2)`,\np = `{python} f\"{attention_p:.3f}\"`).\nThis is the same fitted model used for the regression table."
+  },
+  {
+    "objectID": "slides/3b.html#hands-on",
+    "href": "slides/3b.html#hands-on",
+    "title": "Python Tools for Management Research",
+    "section": "Hands-on",
+    "text": "Hands-on\nOpen the 3b activity page."
+  },
+  {
+    "objectID": "materials/2a_github.html",
+    "href": "materials/2a_github.html",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#goal",
+    "href": "materials/2a_github.html#goal",
+    "title": "2a Activity: Git and GitHub",
+    "section": "",
+    "text": "We will create a brand-new practice repository on GitHub, open it in Codespaces, make one change, commit it, push it, and mark a shared version with a tag.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2a_github.html#activity",
+    "href": "materials/2a_github.html#activity",
+    "title": "2a Activity: Git and GitHub",
     "section": "Activity",
-    "text": "Activity\n\n1. Open The Practice Repo2. Add Devcontainer Files3. Inspect the Recipe4. Rebuild if Prompted5. Commit And Push\n\n\nStart on GitHub in Chrome or Edge.\n\nOpen the python_tmr_practice repository you created in 2a.\nClick the green Code button.\nClick the Codespaces tab.\nOpen the existing Codespace, or create a new one if needed.\n\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn VS Code Web:\n\nOpen the Command Palette with F1 or Shift+Command+P.\nSearch for add dev.\nChoose Codespaces: Add Dev Container Configuration Files….\nChoose a Python configuration.\nIf asked for a Python version, choose Python 3.13 if it is available. Otherwise, accept the default.\nAccept the remaining default options.\n\nThe exact list of choices can change a little over time. The important thing is that we are adding a .devcontainer/ folder to the repository.\n\n  I added devcontainer configuration files from the Command Palette. \n  I found the .devcontainer/ folder in the Explorer. \n\n\n\nOpen .devcontainer/devcontainer.json.\nLook for:\n\nthe name of the configuration;\nthe base image or feature choices;\nany VS Code extension recommendations;\nany setup commands.\n\nDo not worry if your file does not match the course repository.\n\n  I opened .devcontainer/devcontainer.json. \n  I identified at least one thing this file controls. \n\n\n\nVS Code may ask whether you want to rebuild or reopen the Codespace using the new configuration.\nOnce you’re finished editing, you can follow the prompts to rebuild or use the Command Palette to search for and choose Codespaces: Rebuild Container.\nThe key thing to note is that the repository now contains our environment recipe.\n\n  I can explain why changing the devcontainer may require rebuilding the Codespace. \n\n\n\nUse Source Control:\n\nReview the .devcontainer/ changes.\nFind the .devcontainer/ files under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python devcontainer configuration.\nPush or sync the commit to GitHub.\n\n  I reviewed the .devcontainer/ changes. \n  I committed the .devcontainer/ configuration. \n  I pushed or synced the commit to GitHub."
+    "text": "Activity\n\n1. Create A Repository2. Open it in Codespaces3. Make One Change4. Commit the Change5. Push To GitHub6. Mark A Shared Version\n\n\nStart on GitHub in Chrome or Edge.\n\nGo to https://github.com.\nClick + in the upper-right corner.\nChoose New repository.\nName the repository python_tmr_practice.\nChoose Private.\nCheck Add a README file.\nClick Create repository.\n\n\n  I created a new private GitHub repository with a README. \n  I confirmed this is a new practice repository, not my fork of the course repository. \n\n\n\nFrom the new repository page:\n\nClick the green Code button.\nClick the Codespaces tab.\nClick Create codespace on main.\nWait for VS Code Web to open.\n\nIf GitHub asks whether you trust the authors of the files, choose the “Yes” option.\n\n  I opened the new practice repository in Codespaces. \n  I opened Source Control in VS Code Web. \n\n\n\nOpen README.md.\nAdd a short research-project note, such as:\n## Project Notes\n\nThis repository is a practice project for learning Git and GitHub.\nSave the file.\nReturn to Source Control and click the changed file to review the diff.\n\n  I edited and saved README.md. \n  I reviewed the diff in Source Control. \n\nUseful terminal reference:\ngit status --short\ngit diff\n\n\nIn Source Control:\n\nFind README.md under Changes.\nHover over README.md and click the + button to stage it.\nConfirm that README.md moved from Changes to Staged Changes.\nWrite a descriptive commit message in the message box.\nClick Commit.\n\nIf you have multiple changed files, stage only the files that belong together in this commit.\nA good message for this practice change might be:\nAdded project notes to README.\n\n  I staged README.md. \n  I wrote a descriptive commit message. \n  I committed the change. \n\nUseful terminal reference:\ngit add README.md\ngit commit -m \"Added project notes to README.\"\ngit log --oneline --max-count=5\n\n\nIn VS Code Web, use Sync Changes or Push (from the … menu) in Source Control.\nThen return to the repository page on GitHub and confirm the README change appears there.\n\n  I pushed or synced the commit to GitHub. \n  I found the updated README on GitHub. \n\nUseful terminal reference:\ngit push\n\n\nNow pretend this repository contains a draft you are sending to coauthors.\nIn Source Control:\n\nFind the Graph section.\nRight-click the most recent commit.\nChoose Create Tag….\nName the tag 2026-06-03-to-MP, or substitute “MP” with the initials of your imaginary coauthor.\nConfirm the tag.\n\nThen push the tag to GitHub from the terminal:\ngit push origin 2026-06-03-to-MP\nReturn to the repository page on GitHub and confirm that the tag appears.\n\n  I created a tag from the Source Control graph. \n  I found the tag on GitHub. \n  I can explain why a tag is useful when sending a draft or submitting a paper."
+  },
+  {
+    "objectID": "materials/2c_pyproject.html",
+    "href": "materials/2c_pyproject.html",
+    "title": "2c Activity: Python Project Management",
+    "section": "",
+    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2c_pyproject.html#goal",
+    "href": "materials/2c_pyproject.html#goal",
+    "title": "2c Activity: Python Project Management",
+    "section": "",
+    "text": "We will add a small pyproject.toml file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/2c_pyproject.html#activity",
+    "href": "materials/2c_pyproject.html#activity",
+    "title": "2c Activity: Python Project Management",
+    "section": "Activity",
+    "text": "Activity\n\n1. Open The Practice Repo2. Create pyproject.toml3. Read The File4. Install From The Project5. Pin The Versions We Care About6. Reinstall From The Pinned Project7. Test In A Notebook8. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces.\nThis should be the same repository you used for 2a and 2b.\n\n  I opened the practice repository in Codespaces. \n\n\n\nIn the Explorer, create a file named pyproject.toml at the top level of the repository.\nThere are tools that can generate a starter pyproject.toml, such as uv init, Poetry, and Hatch. For this activity, we will write a very small one ourselves so we can see exactly what each piece does.\nAdd this starter content:\n[build-system]\nrequires = [\"setuptools\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"python-tmr-practice\"\nversion = \"0.1.0\"\nrequires-python = \"&gt;=3.13\"\ndependencies = [\n    \"ipykernel\",\n    \"nbformat\",\n    \"pandas\",\n    \"plotly\",\n    \"polars\",\n]\n\n[tool.setuptools]\npy-modules = []\nSave the file.\n\n  I created and saved pyproject.toml. \n\n\n\nNotice the pieces:\n\nname: the project name;\nversion: a project version;\nrequires-python: the Python version expectation;\ndependencies: Python packages the project needs;\ntool.setuptools: a small setting that says this practice project does not define an importable Python package.\n\nRight now the dependency list names the packages we want, without requiring exact versions. This file stores the project configuration, but it does not install anything just by existing.\n\n  I can identify the dependency list in pyproject.toml. \n\n\n\nOpen a terminal and run:\npython -m pip install -e .\nThis installs from the project file. Since the dependency list does not specify exact versions yet, pip will choose current compatible versions.\nThen check that Polars imports:\npython -c \"import polars as pl; print(pl.__version__)\"\n\n  I installed from pyproject.toml with python -m pip install -e .. \n  I confirmed that Polars imports. \n\n\n\nAfter installing, ask Python what is installed:\npython -m pip freeze\nThe terminal will print a long list of installed packages. We are using this as a readout, not saving it to a file.\nFind the lines for the packages we intentionally installed:\nipykernel==...\nnbformat==...\npandas==...\nplotly==...\npolars==...\nEdit the dependencies part of pyproject.toml so it looks like this, using the version numbers from your terminal:\ndependencies = [\n    \"ipykernel==...\",\n    \"nbformat==...\",\n    \"pandas==...\",\n    \"plotly==...\",\n    \"polars==...\",\n]\nDo not copy every package from pip freeze. Many of those are packages that our chosen packages need. The installer can solve those later.\n\n  I ran python -m pip freeze in the terminal. \n  I copied the package versions I care about into pyproject.toml. \n\n\n\nThe file now records the packages this project needs and the versions we want to keep using.\nRun:\npython -m pip install -e .\nIn this Codespace, most of the work may already be done. The important point is that pyproject.toml is now a recipe that a future environment can use.\n\n  I reinstalled from the pinned pyproject.toml. \n\n\n\nCreate a new notebook named environment_check.ipynb.\nIf VS Code asks you to choose a kernel, choose the Python environment for this Codespace.\nIn the first code cell, paste and run:\nimport pandas as pd\nimport plotly.express as px\nimport polars as pl\n\nprint(\"Polars:\", pl.__version__)\nprint(\"pandas:\", pd.__version__)\nIn a second code cell, paste and run:\nsample_pl = pl.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\nsample_pd = pd.DataFrame(\n    {\n        \"year\": [2022, 2023, 2024],\n        \"projects\": [1, 2, 4],\n    }\n)\n\ntotal_projects = sample_pl.select(pl.col(\"projects\").sum()).item()\nprint(\"Total projects:\", total_projects)\n\nfig = px.line(\n    sample_pd,\n    x=\"year\",\n    y=\"projects\",\n    markers=True,\n)\nfig.show()\n\n  I created environment_check.ipynb. \n  I ran a notebook cell that imports Polars, pandas, and Plotly. \n  I ran a notebook cell that creates a small Plotly figure. \n\n\n\nUse Source Control:\n\nReview the changes.\nFind pyproject.toml and environment_check.ipynb under Changes.\nHover over each file and click the + button to stage it.\nConfirm that the files moved from Changes to Staged Changes.\nCommit with a message such as:\n\nAdded Python project environment files.\nPush or sync the commit to GitHub.\n\n  I reviewed the environment file changes. \n  I committed the environment files. \n  I pushed or synced the commit to GitHub."
+  },
+  {
+    "objectID": "materials/3b_results.html",
+    "href": "materials/3b_results.html",
+    "title": "3b Activity: Code-Generated Results",
+    "section": "",
+    "text": "We will add a few analysis tools to the practice project, update paper.qmd so it generates results from code, and render the paper again.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/3b_results.html#goal",
+    "href": "materials/3b_results.html#goal",
+    "title": "3b Activity: Code-Generated Results",
+    "section": "",
+    "text": "We will add a few analysis tools to the practice project, update paper.qmd so it generates results from code, and render the paper again.\nNote: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.\n\nProgress: 0 / 0 steps complete.\n\nReset progress"
+  },
+  {
+    "objectID": "materials/3b_results.html#activity",
+    "href": "materials/3b_results.html#activity",
+    "title": "3b Activity: Code-Generated Results",
+    "section": "Activity",
+    "text": "Activity\n\n1. Add Analysis Packages2. Add Results Boilerplate3. Render The Paper4. Try One Change5. Commit And Push\n\n\nOpen the python_tmr_practice repository in Codespaces.\nOpen pyproject.toml and add three packages to the dependencies list:\n\"maketables==0.1.8\",\n\"matplotlib==3.10.9\",\n\"statsmodels==0.14.6\",\nInstall from the project:\npython -m pip install -e .\n\n  I added the pinned analysis packages to pyproject.toml. \n  I installed from the updated project file. \n\n\n\nOpen paper.qmd.\nFind the section named ## A Small Code Example.\nReplace that section, stopping before ## References, with this:\n\nClick inside the block to select it, then copy and paste it into paper.qmd.\n\n## Data and Results\n\n```{python}\n#| label: setup-results\n#| echo: false\n#| warning: false\n#| message: false\n\nfrom random import Random\n\nimport maketables as mt\nimport matplotlib.pyplot as plt\nimport pandas as pd\nimport statsmodels.formula.api as smf\nfrom pandas.plotting import scatter_matrix\n\n\nrng = Random(2026)\n\nrows = []\nfor firm_id in range(1, 121):\n    size = rng.gauss(0, 1)\n    attention = rng.gauss(0, 1)\n    slack = 0.35 * size + rng.gauss(0, 0.8)\n    performance = (\n        0.45 * attention\n        + 0.25 * slack\n        + 0.20 * size\n        + rng.gauss(0, 1)\n    )\n\n    rows.append(\n        {\n            \"firm_id\": firm_id,\n            \"attention\": attention,\n            \"slack\": slack,\n            \"size\": size,\n            \"performance\": performance,\n        }\n    )\n\nresults_data = pd.DataFrame(rows)\nanalysis_vars = [\"performance\", \"attention\", \"slack\", \"size\"]\nvariable_labels = {\n    \"performance\": \"Performance\",\n    \"attention\": \"Attention\",\n    \"slack\": \"Slack\",\n    \"size\": \"Size\",\n    \"Intercept\": \"Constant\",\n}\n\ndescriptives_table = mt.DTable(\n    results_data,\n    vars=analysis_vars,\n    stats=[\"count\", \"mean\", \"std\", \"min\", \"max\"],\n    labels=variable_labels,\n    stats_labels={\"count\": \"N\", \"std\": \"SD\"},\n)\n\ncorrelations = results_data[analysis_vars].corr().round(2)\nfor row_number in range(len(correlations)):\n    for column_number in range(row_number + 1, len(correlations.columns)):\n        correlations.iat[row_number, column_number] = pd.NA\ncorrelations = (\n    correlations.astype(object)\n    .where(pd.notna(correlations), \"\")\n)\ncorrelations.index = [variable_labels[name] for name in correlations.index]\ncorrelations.columns = [variable_labels[name] for name in correlations.columns]\ncorrelation_table = mt.MTable(correlations)\n\nmodel = smf.ols(\n    \"performance ~ attention + slack + size\",\n    data=results_data,\n).fit()\n\nregression_table = mt.ETable(\n    [model],\n    labels=variable_labels,\n    model_stats=[\"N\", \"r2\", \"adj_r2\"],\n    coef_fmt=\"b:.3f* \\n (se:.3f)\",\n    signif_code=[0.001, 0.01, 0.05],\n)\n\nregression_display = regression_table.df.copy()\nregression_display.index = regression_display.index.get_level_values(-1)\nregression_display.columns = regression_display.columns.get_level_values(0)\nregression_display = regression_display.rename_axis(\"Variable\").reset_index()\n\nsample_size = len(results_data)\nattention_coef = model.params[\"attention\"]\nattention_p = model.pvalues[\"attention\"]\nattention_coef_text = f\"{attention_coef:.2f}\"\nattention_p_text = \"&lt; .001\" if attention_p &lt; 0.001 else f\"{attention_p:.3f}\"\n```\n\nThe sample includes `{python} sample_size` firm-year observations.\n\n### Descriptive Statistics\n\n```{python}\n#| label: tbl-descriptives\n#| tbl-cap: \"Descriptive statistics for simulated firm-year data.\"\n#| output: asis\n#| echo: false\n\nprint(descriptives_table.df.to_markdown(floatfmt=\".2f\"))\n```\n\n### Correlations\n\n```{python}\n#| label: tbl-correlations\n#| tbl-cap: \"Correlations among simulated analysis variables.\"\n#| output: asis\n#| echo: false\n\nprint(correlation_table.df.to_markdown())\n```\n\n### Scatter Matrix\n\n```{python}\n#| label: fig-scatter-matrix\n#| fig-cap: \"Scatter matrix for simulated analysis variables.\"\n#| fig-width: 5.5\n#| fig-height: 5.5\n#| out-width: \"85%\"\n#| echo: false\n\naxes = scatter_matrix(\n    results_data[analysis_vars],\n    figsize=(5.5, 5.5),\n    diagonal=\"kde\",\n    alpha=0.7,\n)\nfig = axes[0, 0].figure\nfig.tight_layout()\nplt.show()\n```\n\n### Regression Results\n\nAttention is associated with performance in the simulated data\n(b = `{python} attention_coef_text`, p = `{python} attention_p_text`).\n\n```{python}\n#| label: tbl-regression\n#| tbl-cap: \"Regression predicting simulated performance.\"\n#| output: asis\n#| echo: false\n\nprint(regression_display.to_markdown(index=False))\n```\n\nStandard errors are in parentheses.\nSignificance levels: * p &lt; .05, ** p &lt; .01, *** p &lt; .001.\n\nSave the file.\n\n  I replaced the small code example with the generated-results section. \n\n\n\nIn the terminal, render the paper:\nquarto render paper.qmd\nThen render the whole project:\nquarto render\nOpen the rendered output and look for:\n\nthe inline sample size;\nthe descriptive statistics table;\nthe lower-triangle correlation table;\nthe scatter matrix;\nthe regression table with model diagnostics;\nthe inline regression coefficient and p value.\n\n\n  I rendered paper.qmd. \n  I found the generated numbers, tables, figure, and regression result. \n\n\n\nIn the hidden setup chunk, find this line:\n0.45 * attention\nChange 0.45 to 0.75.\nRender paper.qmd again.\nCheck whether the regression table and inline coefficient changed.\n\n  I changed one data-generating value and rendered the paper again. \n  I saw the generated results update. \n\n\n\nUse Source Control:\n\nReview the changes.\nStage pyproject.toml and paper.qmd.\nCommit with a message such as:\n\nAdded code-generated paper results.\nPush or sync the commit to GitHub.\n\n  I reviewed the generated-results changes. \n  I committed the updated project and paper files. \n  I pushed or synced the commit to GitHub."
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2c Activity: Python Project Management – Python Tools for Management Research</title>
+<title>3a Activity: Quarto Documents and Citations – Python Tools for Management Research</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -157,7 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">2c Activity: Python Project Management</h1>
+<h1 class="title">3a Activity: Quarto Documents and Citations</h1>
 </div>
 
 
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="goal" class="level2">
 <h2 class="anchored" data-anchor-id="goal">Goal</h2>
-<p>We will add a small <code>pyproject.toml</code> file to the same practice repository, list a few packages, install them, pin the versions we care about, and test the environment in a notebook.</p>
+<p>We will add Quarto to the same practice repository, create a small Quarto website project, write a document called “An Example Manuscript,” add citations with BibTeX, render HTML and PDF outputs, and commit the source files.</p>
 <p>Note: The checkboxes on this page are only stored locally in your browser. They are not submitted or synced anywhere.</p>
 <div class="guide-progress">
 <p>Progress: <span data-progress-count="">0</span> / <span data-progress-total="">0</span> steps complete.</p>
@@ -188,156 +188,196 @@ Reset progress
 <section id="activity" class="level2">
 <h2 class="anchored" data-anchor-id="activity">Activity</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">1. Open The Practice Repo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">2. Create <code>pyproject.toml</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">3. Read The File</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">4. Install From The Project</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">5. Pin The Versions We Care About</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">6. Reinstall From The Pinned Project</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">7. Test In A Notebook</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">8. Commit And Push</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">1. Add Quarto</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">2. Create Project Files</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">3. Create <code>references.bib</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">4. Create The Manuscript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">5. Render The Manuscript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">6. Add Another Reference</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">7. Commit And Push</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Open the <code>python_tmr_practice</code> repository in Codespaces.</p>
-<p>This should be the same repository you used for <code>2a</code> and <code>2b</code>.</p>
+<p>Open the <code>python_tmr_practice</code> repository in Codespaces. This should be the same repository you used for the Git, devcontainer, and <code>pyproject.toml</code> activities.</p>
+<p>Open the Command Palette with <strong>F1</strong> or <strong>Shift+Command+P</strong>.</p>
+<p>Search for <strong>codespaces</strong> and choose <strong>Codespaces: Add Dev Container Configuration Files…</strong>.</p>
+<p>When VS Code asks what to do, choose <strong>Modify your active configuration…</strong>.</p>
+<p>Search for <strong>quarto</strong> and choose the Quarto CLI feature:</p>
+<pre class="text"><code>ghcr.io/rocker-org/devcontainer-features/quarto-cli</code></pre>
+<p>Accept the default or latest version.</p>
+<p>The GUI will edit <code>.devcontainer/devcontainer.json</code> for you. The Quarto CLI feature also asks VS Code to install the Quarto extension inside the devcontainer.</p>
+<p>If VS Code asks to rebuild the container, follow that prompt. You can also open the Command Palette and choose <strong>Codespaces: Rebuild Container</strong>.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-open-practice-repo"> <span>I opened the practice repository in Codespaces.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-open-practice-repo"> <span>I opened the practice repository in Codespaces.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-add-quarto-feature"> <span>I added the Quarto devcontainer feature.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-quarto-version-works"> <span>I rebuilt or reopened the Codespace after adding the feature.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>In the Explorer, create a file named <code>pyproject.toml</code> at the top level of the repository.</p>
-<p>There are tools that can generate a starter <code>pyproject.toml</code>, such as <code>uv init</code>, Poetry, and Hatch. For this activity, we will write a very small one ourselves so we can see exactly what each piece does.</p>
-<p>Add this starter content:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[build-system]</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"setuptools"</span><span class="op">]</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"setuptools.build_meta"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"python-tmr-practice"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.13"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ipykernel"</span><span class="op">,</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nbformat"</span><span class="op">,</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas"</span><span class="op">,</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"plotly"</span><span class="op">,</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"polars"</span><span class="op">,</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.setuptools]</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="dt">py-modules</span> <span class="op">=</span> <span class="op">[]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At the top level of the repository, create a file named <code>_quarto.yml</code>.</p>
+<p>Paste this into the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _site</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.qmd</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> paper.qmd</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Python TMR Practice"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Home"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.qmd</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Paper"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> paper.qmd</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">csl</span><span class="kw">:</span><span class="at"> https://www.zotero.org/styles/academy-of-management-review</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This file says that our repository contains a small Quarto website project. It also says that the project will use <code>references.bib</code> for citations and an Academy of Management CSL style from the Zotero Style Repository.</p>
+<p>Open <code>.gitignore</code>.</p>
+<p>Add this line if it is not already there:</p>
+<pre class="text"><code>_site/</code></pre>
+<p>The <code>_site/</code> folder will hold rendered website files. For now, we want Git to track the source files, not the generated website folder.</p>
+<p>At the top level of the repository, create a file named <code>index.qmd</code>.</p>
+<p>Paste this into the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python TMR Practice"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>This site collects research outputs from this practice repository.</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outputs</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">An Example Manuscript</span><span class="co">](paper.qmd)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Save the file.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-create-pyproject"> <span>I created and saved <code>pyproject.toml</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-create-quarto-yml"> <span>I created <code>_quarto.yml</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-ignore-site"> <span>I added <code>_site/</code> to <code>.gitignore</code> or confirmed that it was already there.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-create-index"> <span>I created <code>index.qmd</code>.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p>Notice the pieces:</p>
-<ul>
-<li><code>name</code>: the project name;</li>
-<li><code>version</code>: a project version;</li>
-<li><code>requires-python</code>: the Python version expectation;</li>
-<li><code>dependencies</code>: Python packages the project needs;</li>
-<li><code>tool.setuptools</code>: a small setting that says this practice project does not define an importable Python package.</li>
-</ul>
-<p>Right now the dependency list names the packages we want, without requiring exact versions. This file stores the project configuration, but it does not install anything just by existing.</p>
+<p>At the top level of the repository, create a file named <code>references.bib</code>.</p>
+<p>Paste these starter references into the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">boivie_2016</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span> = {Boivie, Steven and Graffin, Scott D. and Oliver, Abbie G. and Withers, Michael C.},</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span> = {Come Aboard! Exploring the Effects of Directorships in the Executive Labor Market},</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span> = {Academy of Management Journal},</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span> = {59},</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span> = {5},</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span> = {1681--1706},</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span> = {2016},</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">doi</span> = {10.5465/amj.2014.0840}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">kiley_2023</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span> = {Kiley, Jason and McKenny, Aaron and Short, Jeremy and Smith, Anne},</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span> = {Call for Papers for a Feature Topic: Having A Way with Words: Innovations and Improvements in Text Analysis Methods},</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span> = {Organizational Research Methods},</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span> = {26},</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span> = {4},</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span> = {752--755},</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span> = {2023},</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">doi</span> = {10.1177/10944281231195704}</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each reference starts with a cite key, such as <code>boivie_2016</code>. That key is what we will use in the manuscript.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-read-pyproject"> <span>I can identify the dependency list in <code>pyproject.toml</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-create-references-bib"> <span>I created <code>references.bib</code> with the starter references.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p>Open a terminal and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This installs from the project file. Since the dependency list does not specify exact versions yet, <code>pip</code> will choose current compatible versions.</p>
-<p>Then check that Polars imports:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import polars as pl; print(pl.__version__)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At the top level of the repository, create a file named <code>paper.qmd</code>.</p>
+<p>Paste this into the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "An Example Manuscript"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Your Name"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  typst:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    citeproc: true</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  docx: default</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>This document is a small example of a research manuscript written in Quarto.</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>We can cite research from our field using cite keys from <span class="in">`references.bib`</span>.</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>For example, prior work examines how directorships can matter in the executive labor market <span class="co">[</span><span class="ot">@boivie_2016</span><span class="co">]</span>.</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>We can also cite work on text analysis methods in organizational research <span class="co">[</span><span class="ot">@kiley_2023</span><span class="co">]</span>.</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Small Code Example</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>Quarto documents can include executable Python code.</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>::: {#e59d2d6b .cell}</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>articles <span class="op">=</span> pl.DataFrame(</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"publisher"</span>: [<span class="st">"AOM"</span>, <span class="st">"SAGE"</span>],</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"starter_references"</span>: [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>articles</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Save the file.</p>
+<p>With <code>paper.qmd</code> open, look at the bottom of the VS Code window. You should see Quarto in the status bar.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-install-from-pyproject"> <span>I installed from <code>pyproject.toml</code> with <code>python -m pip install -e .</code>.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-import-polars"> <span>I confirmed that Polars imports.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-create-manuscript"> <span>I created <code>paper.qmd</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-see-quarto-status"> <span>I saw Quarto in the VS Code status bar.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<p>After installing, ask Python what is installed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The terminal will print a long list of installed packages. We are using this as a readout, not saving it to a file.</p>
-<p>Find the lines for the packages we intentionally installed:</p>
-<pre class="text"><code>ipykernel==...
-nbformat==...
-pandas==...
-plotly==...
-polars==...</code></pre>
-<p>Edit the <code>dependencies</code> part of <code>pyproject.toml</code> so it looks like this, using the version numbers from your terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ipykernel==..."</span><span class="op">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nbformat==..."</span><span class="op">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas==..."</span><span class="op">,</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"plotly==..."</span><span class="op">,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"polars==..."</span><span class="op">,</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Do not copy every package from <code>pip freeze</code>. Many of those are packages that our chosen packages need. The installer can solve those later.</p>
+<p>In the terminal, render the manuscript:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render paper.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This should create an HTML version, a PDF version, and a Word document. The PDF uses Quarto’s Typst backend because the document uses <code>format: typst</code>. The Word document is useful when coauthors need to use track changes.</p>
+<p>Then render the whole project:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open the rendered website preview when VS Code offers it, or open <code>_site/index.html</code> from the file explorer. The Word version should be at <code>_site/paper.docx</code>.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-run-pip-freeze"> <span>I ran <code>python -m pip freeze</code> in the terminal.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-find-package-versions"> <span>I copied the package versions I care about into <code>pyproject.toml</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-render-manuscript"> <span>I rendered <code>paper.qmd</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-render-project"> <span>I rendered the Quarto project.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-open-output"> <span>I opened the rendered output and found the reference list and Word file.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<p>The file now records the packages this project needs and the versions we want to keep using.</p>
-<p>Run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In this Codespace, most of the work may already be done. The important point is that <code>pyproject.toml</code> is now a recipe that a future environment can use.</p>
+<p>Choose one article to add to <code>references.bib</code>:</p>
+<ul>
+<li><a href="https://journals.sagepub.com/doi/10.1177/01492063261416425">Journal of Management article from SAGE</a></li>
+<li><a href="https://sms.onlinelibrary.wiley.com/doi/10.1002/smj.3134">Strategic Management Journal article from Wiley</a></li>
+<li><a href="https://journals.aom.org/doi/10.5465/amr.2020.0371">Academy of Management Review article from AOM</a></li>
+</ul>
+<p>On the article page, look for the citation tool. Choose BibTeX. If the page gives you an option like <strong>direct import</strong>, uncheck it so the BibTeX opens in the browser. Then use <strong>Command+A</strong> and <strong>Command+C</strong> to copy the BibTeX, and paste it at the bottom of <code>references.bib</code>.</p>
+<p>Add one sentence to <code>paper.qmd</code> that cites the new reference. Render the manuscript again.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-reinstall-from-pinned-pyproject"> <span>I reinstalled from the pinned <code>pyproject.toml</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-add-reference"> <span>I added one more BibTeX reference.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-cite-new-reference"> <span>I cited the new reference in <code>paper.qmd</code>.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-rerender-citations"> <span>I re-rendered the manuscript and found the new reference.</span> </label></p>
 </div>
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
-<p>Create a new notebook named <code>environment_check.ipynb</code>.</p>
-<p>If VS Code asks you to choose a kernel, choose the Python environment for this Codespace.</p>
-<p>In the first code cell, paste and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Polars:"</span>, pl.__version__)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"pandas:"</span>, pd.__version__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In a second code cell, paste and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_pl <span class="op">=</span> pl.DataFrame(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>: [<span class="dv">2022</span>, <span class="dv">2023</span>, <span class="dv">2024</span>],</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"projects"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>sample_pd <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>: [<span class="dv">2022</span>, <span class="dv">2023</span>, <span class="dv">2024</span>],</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"projects"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>total_projects <span class="op">=</span> sample_pl.select(pl.col(<span class="st">"projects"</span>).<span class="bu">sum</span>()).item()</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total projects:"</span>, total_projects)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    sample_pd,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"year"</span>,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"projects"</span>,</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    markers<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-create-notebook"> <span>I created <code>environment_check.ipynb</code>.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-run-import-cell"> <span>I ran a notebook cell that imports Polars, pandas, and Plotly.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-run-plot-cell"> <span>I ran a notebook cell that creates a small Plotly figure.</span> </label></p>
-</div>
-</div>
-<div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
 <p>Use Source Control:</p>
 <ol type="1">
 <li>Review the changes.</li>
-<li>Find <code>pyproject.toml</code> and <code>environment_check.ipynb</code> under <strong>Changes</strong>.</li>
-<li>Hover over each file and click the <strong>+</strong> button to stage it.</li>
-<li>Confirm that the files moved from <strong>Changes</strong> to <strong>Staged Changes</strong>.</li>
+<li>Stage <code>.devcontainer/devcontainer.json</code>, because the GUI edited it when you added the Quarto feature.</li>
+<li>Stage the Quarto source files: <code>_quarto.yml</code>, <code>index.qmd</code>, <code>paper.qmd</code>, <code>references.bib</code>, and <code>.gitignore</code>.</li>
 <li>Commit with a message such as:</li>
 </ol>
-<pre class="text"><code>Added Python project environment files.</code></pre>
+<pre class="text"><code>Added Quarto manuscript files.</code></pre>
 <p>Push or sync the commit to GitHub.</p>
 <div class="task-list">
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-review-environment-diff"> <span>I reviewed the environment file changes.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-commit-environment-files"> <span>I committed the environment files.</span> </label></p>
-<p><label class="task-check"> <input type="checkbox" data-progress-id="2c-push-pyproject"> <span>I pushed or synced the commit to GitHub.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-review-quarto-diff"> <span>I reviewed the Quarto project changes.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-commit-quarto-files"> <span>I committed the Quarto source files.</span> </label></p>
+<p><label class="task-check"> <input type="checkbox" data-progress-id="3a-push-quarto-files"> <span>I pushed or synced the commit to GitHub.</span> </label></p>
 </div>
 </div>
 </div>
@@ -491,6 +531,11 @@ polars==...</code></pre>
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

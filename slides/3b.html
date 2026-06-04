@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">1a: Polars I</p>
+  <p class="subtitle">3b: Code-Generated Tables, Figures, and Results</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,110 +209,103 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="polars-i" class="slide level2">
-<h2>Polars I</h2>
+<section id="from-rendered-paper-to-reproducible-results" class="slide level2">
+<h2>From rendered paper to reproducible results</h2>
 <div class="big-claim">
-<p>Let’s turn tabular data work into clear, reproducible Python.</p>
+<p>The next step is making the paper generate its own numbers, tables, figures, and model results.</p>
 </div>
-<p>This segment is the basic workflow: read data, inspect it, clean it, transform it, and write it back out.</p>
+<p>This is an elegant form of reproducible research: the paper is a recipe for the results.</p>
 </section>
-<section id="why-dataframes" class="slide level2">
-<h2>Why dataframes?</h2>
-<p>Most empirical research data work is tabular data work.</p>
+<section>
+<section id="generated-results" class="title-slide slide level1 center">
+<h1>Generated results</h1>
+
+</section>
+<section id="why-generate-results" class="slide level2">
+<h2>Why generate results?</h2>
+<p>Copying results by hand creates quiet failure points:</p>
+<ul>
+<li>sample sizes get out of sync;</li>
+<li>tables lag behind data cleaning changes;</li>
+<li>figures are regenerated but not replaced;</li>
+<li>text reports one model while a table reports another.</li>
+</ul>
+<p>Reviewers notice this, and you really don’t want that at the margin.</p>
+</section>
+<section id="what-code-can-write-for-us" class="slide level2">
+<h2>What code can write for us</h2>
+<p>Some useful examples:</p>
 <div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Rows</span></p>
-<p>Observations, records, documents, firm-years, estimates, events.</p>
-</div>
 <div class="type-card">
-<p><span class="card-title">Columns</span></p>
-<p>Variables, identifiers, timestamps, measures, labels.</p>
+<p><span class="card-title">Inline values</span></p>
+<p>Sample size, coefficient estimates, p values, and other single numbers in the text.</p>
+</div>
+<div class="type-card green-left">
+<p><span class="card-title">Tables</span></p>
+<p>Descriptives, correlations, model summaries, and robustness checks.</p>
 </div>
 <div class="type-card gold-left">
-<p><span class="card-title">Operations</span></p>
-<p>Select, filter, transform, aggregate, join, and write.</p>
+<p><span class="card-title">Figures</span></p>
+<p>Scatter matrices, distributions, diagnostics, and coefficient plots.</p>
 </div>
 </div>
 </section>
-<section id="pandas-and-polars" class="slide level2">
-<h2>Pandas and Polars</h2>
-<div class="columns">
-<div class="column plain-card" style="width:50%;">
-<p><span class="card-title">Pandas</span></p>
-<p>Older, everywhere, and deeply connected to the Python data ecosystem.</p>
-<p>Extremely useful when another package hands us a pandas object, or when pandas reads a format we need.</p>
-</div><div class="column plain-card green-left" style="width:50%;">
-<p><span class="card-title">Polars</span></p>
-<p>Newer, fast, expression-oriented, and designed around efficient dataframe operations.</p>
-<p>Useful for research pipelines where we care about readable transformations and performance.</p>
-</div></div>
-<p><a href="https://docs.pola.rs/user-guide/migration/pandas/" target="_blank">Polars has a short guide for users coming from pandas</a>.</p>
+<section id="in-text-values" class="slide level2">
+<h2>In-text values</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a></a>The sample includes <span class="in">`{python} n`</span> observations.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>n</code> value in the sentence comes from Python. If the data changes and we render again, the sentence updates.</p>
 </section>
-<section id="how-well-use-both" class="slide level2">
-<h2>How we’ll use both</h2>
-<p>Some research formats are still easiest to read with pandas.</p>
-<div id="d1d5492d" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>firmyear_pd <span class="op">=</span> pd.read_stata(<span class="st">"../data/firmyear.dta"</span>)</span>
-<span id="cb1-5"><a></a>firmyear <span class="op">=</span> pl.from_pandas(firmyear_pd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then we do the dataframe work in Polars.</p>
-<p><a href="https://docs.pola.rs/api/python/stable/reference/api/polars.from_pandas.html" target="_blank"><code>pl.from_pandas()</code></a> gives us an easy way to use pandas to read data and then work with it in Polars.</p>
+<section id="code-can-stay-out-of-the-way" class="slide level2">
+<h2>Code can stay out of the way</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co">#| echo: false</span></span>
+<span id="cb2-2"><a></a><span class="co">#| warning: false</span></span>
+<span id="cb2-3"><a></a><span class="co">#| message: false</span></span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a><span class="co"># setup code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Some code is part of the paper’s machinery rather than part of the visible paper. These settings turn off code, warnings, and messages in the rendered paper, but the code still runs.</p>
+</section></section>
+<section>
+<section id="results-workflow" class="title-slide slide level1 center">
+<h1>Results workflow</h1>
+
 </section>
-<section id="polars-philosophy" class="slide level2">
-<h2>Polars philosophy</h2>
-<p>Polars benefitted from observing the many years of pandas and starting with a clean slate.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Expressions</span></p>
-<p>Use <code>pl.col()</code> and friends to describe column computations.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Pipelines</span></p>
-<p>Chain operations so the data work reads as a sequence of decisions.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Lazy option</span></p>
-<p>Build a query first, then run it when we ask for the result.</p>
-</div>
-</div>
-<p>The <a href="https://docs.pola.rs/user-guide/expressions/" target="_blank">Polars expression docs</a> are the main reference.</p>
+<section id="add-the-analysis-tools" class="slide level2">
+<h2>Add the analysis tools</h2>
+<p>For this segment, the project needs a few more packages:</p>
+<ul>
+<li><a href="https://py-econometrics.github.io/maketables/" target="_blank"><code>maketables</code></a> for descriptive, correlation, and regression tables;</li>
+<li><a href="https://matplotlib.org/" target="_blank"><code>matplotlib</code></a> for static figures that work well in Word and PDF;</li>
+<li><a href="https://www.statsmodels.org/" target="_blank"><code>statsmodels</code></a> for regression models and model summaries.</li>
+</ul>
+<p>We add them to <code>pyproject.toml</code> because they are now part of the project recipe.</p>
 </section>
-<section id="why-the-design-matters" class="slide level2">
-<h2>Why the design matters</h2>
-<p>Polars is designed to stay inside optimized dataframe operations instead of bouncing in and out of slow row-by-row Python work.</p>
-<p>The lazy API can see a whole query before running it, which enables query optimization and can reduce unnecessary work. We’ll talk about that in <code>1c</code>.</p>
-<p>The <a href="https://docs.pola.rs/user-guide/concepts/lazy-api/" target="_blank">lazy API docs</a> have the deeper version.</p>
+<section id="tables" class="slide level2">
+<h2>Tables</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>descriptives</span>
+<span id="cb3-2"><a></a>correlations</span>
+<span id="cb3-3"><a></a>regression_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The table objects are built in code, then displayed in the paper.</p>
 </section>
-<section id="what-we-will-practice" class="slide level2">
-<h2>What we will practice</h2>
-<div class="syntax-grid">
-<div class="syntax-card green-left">
-<p><span class="card-title">Read and inspect</span></p>
-<p>Load a Stata file through pandas, convert to Polars, and inspect shape, columns, schema, and nulls.</p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Clean and transform</span></p>
-<p>Cast types, rename columns, select columns, filter rows, and create new variables.</p>
-</div>
-<div class="syntax-card gold-left">
-<p><span class="card-title">Work by group</span></p>
-<p>Use <code>.over()</code> for firm-level calculations inside firm-year data.</p>
-</div>
-<div class="syntax-card red-left">
-<p><span class="card-title">Write outputs</span></p>
-<p>Write dated CSV and Parquet files that can be reused later.</p>
-</div>
-</div>
+<section id="figures" class="slide level2">
+<h2>Figures</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>axes <span class="op">=</span> scatter_matrix(results_data[analysis_vars])</span>
+<span id="cb4-2"><a></a>fig <span class="op">=</span> axes[<span class="dv">0</span>, <span class="dv">0</span>].figure</span>
+<span id="cb4-3"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Whenever we use some of the more interesting interactive visualizations, we need to make a static version for the paper.</p>
+</section>
+<section id="in-text-model-results" class="slide level2">
+<h2>In-text model results</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a></a>Attention is associated with performance</span>
+<span id="cb5-2"><a></a>(b = <span class="in">`{python} round(attention_coef, 2)`</span>,</span>
+<span id="cb5-3"><a></a>p = <span class="in">`{python} f"{attention_p:.3f}"`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is the same fitted model used for the regression table.</p>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/1a_polars.ipynb</code>.</p>
+<p>Open the <code>3b</code> activity page.</p>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -471,7 +464,7 @@ Jason T. Kiley
         hideCursorTime: 5000,
 
         // Opens links in an iframe preview overlay
-        previewLinks: true,
+        previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
         transition: 'fade',
@@ -612,6 +605,11 @@ Jason T. Kiley
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
             }
           }
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">1a: Polars I</p>
+  <p class="subtitle">3a: Quarto Documents, Citations, and References</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,110 +209,153 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="polars-i" class="slide level2">
-<h2>Polars I</h2>
+<section id="from-project-recipe-to-research-output" class="slide level2">
+<h2>From project recipe to research output</h2>
 <div class="big-claim">
-<p>Let’s turn tabular data work into clear, reproducible Python.</p>
+<p>Quarto gives us a consistent interface to a set of powerful tools that can automate tedious and error-prone manual processes.</p>
 </div>
-<p>This segment is the basic workflow: read data, inspect it, clean it, transform it, and write it back out.</p>
+<p>We will continue to build in our practice repository using Quarto.</p>
 </section>
-<section id="why-dataframes" class="slide level2">
-<h2>Why dataframes?</h2>
-<p>Most empirical research data work is tabular data work.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Rows</span></p>
-<p>Observations, records, documents, firm-years, estimates, events.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Columns</span></p>
-<p>Variables, identifiers, timestamps, measures, labels.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Operations</span></p>
-<p>Select, filter, transform, aggregate, join, and write.</p>
-</div>
-</div>
+<section>
+<section id="quarto-documents" class="title-slide slide level1 center">
+<h1>Quarto documents</h1>
+
 </section>
-<section id="pandas-and-polars" class="slide level2">
-<h2>Pandas and Polars</h2>
-<div class="columns">
-<div class="column plain-card" style="width:50%;">
-<p><span class="card-title">Pandas</span></p>
-<p>Older, everywhere, and deeply connected to the Python data ecosystem.</p>
-<p>Extremely useful when another package hands us a pandas object, or when pandas reads a format we need.</p>
-</div><div class="column plain-card green-left" style="width:50%;">
-<p><span class="card-title">Polars</span></p>
-<p>Newer, fast, expression-oriented, and designed around efficient dataframe operations.</p>
-<p>Useful for research pipelines where we care about readable transformations and performance.</p>
-</div></div>
-<p><a href="https://docs.pola.rs/user-guide/migration/pandas/" target="_blank">Polars has a short guide for users coming from pandas</a>.</p>
+<section id="what-quarto-does" class="slide level2">
+<h2>What Quarto does</h2>
+<p><a href="https://quarto.org/" target="_blank">Quarto</a> gives us one reasonably consistent authoring interface for:</p>
+<ul>
+<li>Markdown prose;</li>
+<li>executable code chunks;</li>
+<li>document metadata;</li>
+<li>citations and references;</li>
+<li>output formats such as HTML, PDF, Word, and slides.</li>
+</ul>
 </section>
-<section id="how-well-use-both" class="slide level2">
-<h2>How we’ll use both</h2>
-<p>Some research formats are still easiest to read with pandas.</p>
-<div id="d1d5492d" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>firmyear_pd <span class="op">=</span> pd.read_stata(<span class="st">"../data/firmyear.dta"</span>)</span>
-<span id="cb1-5"><a></a>firmyear <span class="op">=</span> pl.from_pandas(firmyear_pd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then we do the dataframe work in Polars.</p>
-<p><a href="https://docs.pola.rs/api/python/stable/reference/api/polars.from_pandas.html" target="_blank"><code>pl.from_pandas()</code></a> gives us an easy way to use pandas to read data and then work with it in Polars.</p>
+<section id="where-it-comes-from" class="slide level2">
+<h2>Where it comes from</h2>
+<p>Quarto grows out of the same reproducible-document tradition that made R Markdown and R Notebooks popular.</p>
+<p>The big expansion is that Quarto is not just an RStudio/R workflow. It is a standalone publishing system built around Markdown, executable code, and Pandoc, with first-class support for Python, R, Julia, and JavaScript.</p>
 </section>
-<section id="polars-philosophy" class="slide level2">
-<h2>Polars philosophy</h2>
-<p>Polars benefitted from observing the many years of pandas and starting with a clean slate.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Expressions</span></p>
-<p>Use <code>pl.col()</code> and friends to describe column computations.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Pipelines</span></p>
-<p>Chain operations so the data work reads as a sequence of decisions.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Lazy option</span></p>
-<p>Build a query first, then run it when we ask for the result.</p>
-</div>
-</div>
-<p>The <a href="https://docs.pola.rs/user-guide/expressions/" target="_blank">Polars expression docs</a> are the main reference.</p>
+<section id="a-.qmd-file" class="slide level2">
+<h2>A <code>.qmd</code> file</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a></a><span class="co">---</span></span>
+<span id="cb1-2"><a></a><span class="an">title:</span><span class="co"> "An Example Manuscript"</span></span>
+<span id="cb1-3"><a></a><span class="an">author:</span><span class="co"> "Your Name"</span></span>
+<span id="cb1-4"><a></a><span class="an">format:</span></span>
+<span id="cb1-5"><a></a><span class="co">  html:</span></span>
+<span id="cb1-6"><a></a><span class="co">    toc: true</span></span>
+<span id="cb1-7"><a></a><span class="co">  typst:</span></span>
+<span id="cb1-8"><a></a><span class="co">    toc: true</span></span>
+<span id="cb1-9"><a></a><span class="co">---</span></span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="fu">## Introduction</span></span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a>This is a cited sentence <span class="co">[</span><span class="ot">@kiley_2023</span><span class="co">]</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="one-interface-many-outputs" class="title-slide slide level1 center">
+<h1>One interface, many outputs</h1>
+
 </section>
-<section id="why-the-design-matters" class="slide level2">
-<h2>Why the design matters</h2>
-<p>Polars is designed to stay inside optimized dataframe operations instead of bouncing in and out of slow row-by-row Python work.</p>
-<p>The lazy API can see a whole query before running it, which enables query optimization and can reduce unnecessary work. We’ll talk about that in <code>1c</code>.</p>
-<p>The <a href="https://docs.pola.rs/user-guide/concepts/lazy-api/" target="_blank">lazy API docs</a> have the deeper version.</p>
+<section id="the-repository-can-hold-the-whole-story" class="slide level2">
+<h2>The repository can hold the whole story</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>python_tmr_practice/</span>
+<span id="cb2-2"><a></a>  .devcontainer/</span>
+<span id="cb2-3"><a></a>  pyproject.toml</span>
+<span id="cb2-4"><a></a>  _quarto.yml</span>
+<span id="cb2-5"><a></a>  index.qmd</span>
+<span id="cb2-6"><a></a>  paper.qmd</span>
+<span id="cb2-7"><a></a>  references.bib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The source files are the things we edit and commit.</p>
 </section>
-<section id="what-we-will-practice" class="slide level2">
-<h2>What we will practice</h2>
-<div class="syntax-grid">
-<div class="syntax-card green-left">
-<p><span class="card-title">Read and inspect</span></p>
-<p>Load a Stata file through pandas, convert to Polars, and inspect shape, columns, schema, and nulls.</p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Clean and transform</span></p>
-<p>Cast types, rename columns, select columns, filter rows, and create new variables.</p>
-</div>
-<div class="syntax-card gold-left">
-<p><span class="card-title">Work by group</span></p>
-<p>Use <code>.over()</code> for firm-level calculations inside firm-year data.</p>
-</div>
-<div class="syntax-card red-left">
-<p><span class="card-title">Write outputs</span></p>
-<p>Write dated CSV and Parquet files that can be reused later.</p>
-</div>
-</div>
+<section id="easy-things-easy.-hard-things-possible." class="slide level2">
+<h2>Easy things easy. Hard things possible.</h2>
+<p>The same basic workflow can make a simple HTML page, a PDF, a Word document, a website, or slides. We do not have to learn a totally separate toolchain for every output.</p>
+<p>Quarto sits on top of powerful tools such as Pandoc, Typst, and revealjs.</p>
+<p>We can almost always stay in the friendly layer. But, if we have highly-specific needs, we can customize the underlying tools directly, and Quarto has some features to make that easier.</p>
+</section>
+<section id="what-we-commit" class="slide level2">
+<h2>What we commit</h2>
+<p>Commit:</p>
+<ul>
+<li><code>.qmd</code> source files;</li>
+<li><code>_quarto.yml</code>;</li>
+<li><code>references.bib</code>;</li>
+<li>project and environment files.</li>
+</ul>
+<p>Usually do not commit:</p>
+<ul>
+<li><code>_site/</code>;</li>
+<li>generated PDFs or HTML files unless there is a specific sharing reason.</li>
+</ul>
+</section></section>
+<section>
+<section id="citations-and-references" class="title-slide slide level1 center">
+<h1>Citations and references</h1>
+
+</section>
+<section id="bibtex-files" class="slide level2">
+<h2>BibTeX files</h2>
+<p>A <code>.bib</code> file stores reference metadata in plain text.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bibtex number-lines code-with-copy"><code class="sourceCode bibtex"><span id="cb3-1"><a></a><span class="va">@article</span>{<span class="ot">kiley_2023</span>,</span>
+<span id="cb3-2"><a></a>  <span class="dt">author</span> = {Kiley, Jason and McKenny, Aaron and Short, Jeremy and Smith, Anne},</span>
+<span id="cb3-3"><a></a>  <span class="dt">title</span> = {Call for Papers for a Feature Topic: Having A Way with Words},</span>
+<span id="cb3-4"><a></a>  <span class="dt">journal</span> = {Organizational Research Methods},</span>
+<span id="cb3-5"><a></a>  <span class="dt">year</span> = {2023},</span>
+<span id="cb3-6"><a></a>  <span class="dt">doi</span> = {10.1177/10944281231195704}</span>
+<span id="cb3-7"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="cite-keys" class="slide level2">
+<h2>Cite keys</h2>
+<p>The label after the opening brace is the cite key.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a></a>Text analysis methods keep evolving in organizational research <span class="co">[</span><span class="ot">@kiley_2023</span><span class="co">]</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quarto uses the cite key to find the reference and build the reference list.</p>
+</section>
+<section id="csl-files" class="slide level2">
+<h2>CSL files</h2>
+<p>CSL files control how citations and references are formatted.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb5-2"><a></a><span class="fu">csl</span><span class="kw">:</span><span class="at"> https://www.zotero.org/styles/academy-of-management-review</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The same source references can be rendered in different journal styles, just by changing the CSL link. (But, don’t forget to rework to another journal’s norms.)</p>
+</section>
+<section id="getting-bibtex" class="slide level2">
+<h2>Getting BibTeX</h2>
+<p>Common routes:</p>
+<ul>
+<li>use the publisher’s website citation tool and choose BibTeX;</li>
+<li>uncheck direct import when that gives a clean browser page;</li>
+<li>use DOI metadata from the terminal when it is convenient.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-H</span> <span class="st">"Accept: text/x-bibliography; style=bibtex"</span> <span class="dt">\</span></span>
+<span id="cb6-2"><a></a>  <span class="st">"https://doi.org/10.1177/10944281231195704"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="pdf-output" class="title-slide slide level1 center">
+<h1>PDF output</h1>
+
+</section>
+<section id="typst-not-latex" class="slide level2">
+<h2>Typst, not LaTeX</h2>
+<p>For PDF output, we will use Quarto’s <a href="https://typst.app/" target="_blank">Typst</a> format.</p>
+<p>Typst is fast, modern, and much friendlier to customize later than a traditional LaTeX workflow.</p>
+</section>
+<section id="multiple-formats-from-one-source" class="slide level2">
+<h2>Multiple formats from one source</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb7-2"><a></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb7-3"><a></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-4"><a></a><span class="at">  </span><span class="fu">typst</span><span class="kw">:</span></span>
+<span id="cb7-5"><a></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-6"><a></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>One source document can produce HTML, PDF, and Word.</p>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/1a_polars.ipynb</code>.</p>
+<p>Open the <code>3a</code> activity page.</p>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -471,7 +514,7 @@ Jason T. Kiley
         hideCursorTime: 5000,
 
         // Opens links in an iframe preview overlay
-        previewLinks: true,
+        previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
         transition: 'fade',
@@ -612,6 +655,11 @@ Jason T. Kiley
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
             }
           }
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

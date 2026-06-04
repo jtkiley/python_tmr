@@ -198,7 +198,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Python Tools for Management Research</h1>
-  <p class="subtitle">1a: Polars I</p>
+  <p class="subtitle">3c: Presentations and Other Research Outputs</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,107 +209,175 @@ Jason T. Kiley
 </div>
 
 </section>
-<section id="polars-i" class="slide level2">
-<h2>Polars I</h2>
+<section id="from-manuscript-to-research-outputs" class="slide level2">
+<h2>From manuscript to research outputs</h2>
 <div class="big-claim">
-<p>Let’s turn tabular data work into clear, reproducible Python.</p>
+<p>Quarto is one tool for many kinds of output we use in research, teaching, and life in general.</p>
 </div>
-<p>This segment is the basic workflow: read data, inspect it, clean it, transform it, and write it back out.</p>
+<p>We can get a lot of mileage from a relatively small set of tools.</p>
 </section>
-<section id="why-dataframes" class="slide level2">
-<h2>Why dataframes?</h2>
-<p>Most empirical research data work is tabular data work.</p>
+<section>
+<section id="more-outputs" class="title-slide slide level1 center">
+<h1>More outputs</h1>
+
+</section>
+<section id="more-mileage-from-the-same-skillset" class="slide level2">
+<h2>More mileage from the same skillset</h2>
+<p>Quarto is versatile.</p>
 <div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Rows</span></p>
-<p>Observations, records, documents, firm-years, estimates, events.</p>
-</div>
 <div class="type-card">
-<p><span class="card-title">Columns</span></p>
-<p>Variables, identifiers, timestamps, measures, labels.</p>
+<p><span class="card-title">Manuscripts</span></p>
+<p>Write prose, citations, tables, figures, and code-generated results in one source file.</p>
+</div>
+<div class="type-card green-left">
+<p><span class="card-title">Presentations</span></p>
+<p>Turn the same project into slides for workshops, conferences, and coauthor meetings.</p>
 </div>
 <div class="type-card gold-left">
-<p><span class="card-title">Operations</span></p>
-<p>Select, filter, transform, aggregate, join, and write.</p>
+<p><span class="card-title">Websites</span></p>
+<p>Share project pages, documentation, teaching materials, and supplementary resources.</p>
 </div>
 </div>
 </section>
-<section id="pandas-and-polars" class="slide level2">
-<h2>Pandas and Polars</h2>
-<div class="columns">
-<div class="column plain-card" style="width:50%;">
-<p><span class="card-title">Pandas</span></p>
-<p>Older, everywhere, and deeply connected to the Python data ecosystem.</p>
-<p>Extremely useful when another package hands us a pandas object, or when pandas reads a format we need.</p>
-</div><div class="column plain-card green-left" style="width:50%;">
-<p><span class="card-title">Polars</span></p>
-<p>Newer, fast, expression-oriented, and designed around efficient dataframe operations.</p>
-<p>Useful for research pipelines where we care about readable transformations and performance.</p>
-</div></div>
-<p><a href="https://docs.pola.rs/user-guide/migration/pandas/" target="_blank">Polars has a short guide for users coming from pandas</a>.</p>
+<section id="why-slides-from-the-project" class="slide level2">
+<h2>Why slides from the project?</h2>
+<p>Presentations have the same copy/paste risks as manuscripts:</p>
+<ul>
+<li>sample sizes drift;</li>
+<li>figures get updated in one place but not another;</li>
+<li>regression results change after the slide deck is built;</li>
+<li>tables and text quietly stop matching.</li>
+</ul>
+<p>If the talk draws from the project, we reduce those failure points.</p>
 </section>
-<section id="how-well-use-both" class="slide level2">
-<h2>How we’ll use both</h2>
-<p>Some research formats are still easiest to read with pandas.</p>
-<div id="d1d5492d" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>firmyear_pd <span class="op">=</span> pd.read_stata(<span class="st">"../data/firmyear.dta"</span>)</span>
-<span id="cb1-5"><a></a>firmyear <span class="op">=</span> pl.from_pandas(firmyear_pd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then we do the dataframe work in Polars.</p>
-<p><a href="https://docs.pola.rs/api/python/stable/reference/api/polars.from_pandas.html" target="_blank"><code>pl.from_pandas()</code></a> gives us an easy way to use pandas to read data and then work with it in Polars.</p>
+<section id="quarto-presentations" class="slide level2">
+<h2>Quarto presentations</h2>
+<p><a href="https://quarto.org/docs/presentations/revealjs/" target="_blank">Quarto revealjs</a> slides are still <code>.qmd</code> files.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a></a><span class="co">---</span></span>
+<span id="cb1-2"><a></a><span class="an">title:</span><span class="co"> "A Short Research Talk"</span></span>
+<span id="cb1-3"><a></a><span class="an">format:</span><span class="co"> revealjs</span></span>
+<span id="cb1-4"><a></a><span class="co">---</span></span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="fu">## Research question</span></span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>Why do some firms attract more stakeholder attention?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Headings become slides, and the same Markdown basics still work.</p>
 </section>
-<section id="polars-philosophy" class="slide level2">
-<h2>Polars philosophy</h2>
-<p>Polars benefitted from observing the many years of pandas and starting with a clean slate.</p>
-<div class="type-grid">
-<div class="type-card green-left">
-<p><span class="card-title">Expressions</span></p>
-<p>Use <code>pl.col()</code> and friends to describe column computations.</p>
-</div>
-<div class="type-card">
-<p><span class="card-title">Pipelines</span></p>
-<p>Chain operations so the data work reads as a sequence of decisions.</p>
-</div>
-<div class="type-card gold-left">
-<p><span class="card-title">Lazy option</span></p>
-<p>Build a query first, then run it when we ask for the result.</p>
-</div>
-</div>
-<p>The <a href="https://docs.pola.rs/user-guide/expressions/" target="_blank">Polars expression docs</a> are the main reference.</p>
+<section id="reuse-a-result" class="slide level2">
+<h2>Reuse a result</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a></a>The sample includes <span class="in">`{python} n`</span> firm-year observations.</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>Attention is associated with performance</span>
+<span id="cb2-4"><a></a>(b = <span class="in">`{python} round(attention_coef, 2)`</span>,</span>
+<span id="cb2-5"><a></a>p = <span class="in">`{python} f"{attention_p:.3f}"`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is the same idea from the paper: values come from the analysis, not from retyping.</p>
 </section>
-<section id="why-the-design-matters" class="slide level2">
-<h2>Why the design matters</h2>
-<p>Polars is designed to stay inside optimized dataframe operations instead of bouncing in and out of slow row-by-row Python work.</p>
-<p>The lazy API can see a whole query before running it, which enables query optimization and can reduce unnecessary work. We’ll talk about that in <code>1c</code>.</p>
-<p>The <a href="https://docs.pola.rs/user-guide/concepts/lazy-api/" target="_blank">lazy API docs</a> have the deeper version.</p>
+<section id="reuse-a-figure" class="slide level2">
+<h2>Reuse a figure</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>axes <span class="op">=</span> scatter_matrix(results_data[analysis_vars])</span>
+<span id="cb3-2"><a></a>fig <span class="op">=</span> axes[<span class="dv">0</span>, <span class="dv">0</span>].figure</span>
+<span id="cb3-3"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A figure can appear in the paper and in the slides without saving and inserting it by hand.</p>
 </section>
-<section id="what-we-will-practice" class="slide level2">
-<h2>What we will practice</h2>
-<div class="syntax-grid">
-<div class="syntax-card green-left">
-<p><span class="card-title">Read and inspect</span></p>
-<p>Load a Stata file through pandas, convert to Polars, and inspect shape, columns, schema, and nulls.</p>
-</div>
-<div class="syntax-card">
-<p><span class="card-title">Clean and transform</span></p>
-<p>Cast types, rename columns, select columns, filter rows, and create new variables.</p>
-</div>
-<div class="syntax-card gold-left">
-<p><span class="card-title">Work by group</span></p>
-<p>Use <code>.over()</code> for firm-level calculations inside firm-year data.</p>
-</div>
-<div class="syntax-card red-left">
-<p><span class="card-title">Write outputs</span></p>
-<p>Write dated CSV and Parquet files that can be reused later.</p>
-</div>
-</div>
+<section id="other-outputs" class="slide level2">
+<h2>Other outputs</h2>
+<p>The same project can grow into other useful artifacts:</p>
+<ul>
+<li>a project website;</li>
+<li>an appendix or supplement;</li>
+<li>a polished PDF;</li>
+<li>a Word document for coauthor track changes;</li>
+<li>a slide deck for a research talk.</li>
+</ul>
+<p>Easy things easy. Hard things possible.</p>
 </section>
 <section id="hands-on" class="slide level2">
 <h2>Hands-on</h2>
-<p>Open <code>notebooks/1a_polars.ipynb</code>.</p>
+<p>Open the <code>3c</code> activity page.</p>
+</section></section>
+<section>
+<section id="course-summary" class="title-slide slide level1 center">
+<h1>Course summary</h1>
+
+</section>
+<section id="what-we-learned-foundations" class="slide level2">
+<h2>What we learned: foundations</h2>
+<div class="type-grid">
+<div class="type-card">
+<p><span class="card-title">Python</span></p>
+<p>Names, objects, functions, control flow, notebooks, and enough syntax to read and adapt useful code.</p>
+</div>
+<div class="type-card green-left">
+<p><span class="card-title">Data</span></p>
+<p>Polars for reading, inspecting, transforming, joining, aggregating, and saving research datasets.</p>
+</div>
+<div class="type-card gold-left">
+<p><span class="card-title">Projects</span></p>
+<p>Git, GitHub, devcontainers, Codespaces, and <code>pyproject.toml</code> for more reproducible research work.</p>
+</div>
+</div>
+</section>
+<section id="what-we-learned-outputs" class="slide level2">
+<h2>What we learned: outputs</h2>
+<div class="type-grid">
+<div class="type-card">
+<p><span class="card-title">Documents</span></p>
+<p>Quarto manuscripts with citations, references, HTML, PDF, and Word output.</p>
+</div>
+<div class="type-card green-left">
+<p><span class="card-title">Results</span></p>
+<p>Generated sample sizes, tables, figures, regression results, and in-text values.</p>
+</div>
+<div class="type-card gold-left">
+<p><span class="card-title">Outputs</span></p>
+<p>Slides and other research products that can draw from the same project.</p>
+</div>
+</div>
+</section>
+<section id="start-small" class="slide level2">
+<h2>Start small</h2>
+<p>You do not have to change your whole workflow at once.</p>
+<p>Start with one part:</p>
+<ul>
+<li>clean one dataset in Python;</li>
+<li>generate one table from code;</li>
+<li>put one paper draft in Quarto;</li>
+<li>use Git for one project.</li>
+</ul>
+<p>Build toward a more integrated workflow over time. It took me years to figure out what I thought the best combination was for me, and I did it incrementally.</p>
+</section>
+<section id="tools-can-meet-at-the-boundaries" class="slide level2">
+<h2>Tools can meet at the boundaries</h2>
+<p>Reading and writing data gives you a lot of flexibility.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a>spreadsheet -&gt; Python -&gt; CSV or Parquet -&gt; Stata, R, Python, or Quarto</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That means you can adopt one tool where it helps and get comfortable before adding more.</p>
+</section>
+<section id="watch-for-updates" class="slide level2">
+<h2>Watch for updates</h2>
+<p>Many of these tools are under active development:</p>
+<ul>
+<li>Python data tools are getting faster and more capable;</li>
+<li>Quarto keeps adding output features;</li>
+<li>VS Code and Codespaces keep improving;</li>
+<li>package ecosystems keep filling practical gaps.</li>
+</ul>
+<p>Staying current helps get more mileage from the tools. I like to star things on GitHub and occasionally look at that feed.</p>
+</section>
+<section id="join-the-community" class="slide level2">
+<h2>Join the community</h2>
+<p>There is now a solid network of computationally minded researchers in our field and adjacent fields.</p>
+<p>The AOM Content Analysis PDW is one good outlet, both for presentations and for proposal expert roundtables.</p>
+<p>It’s nice to talk shop or to simply hang out and not talk shop with like-minded folks.</p>
+</section>
+<section id="keep-in-touch" class="slide level2">
+<h2>Keep in touch</h2>
+<div class="big-claim">
+<p>I am always interested to hear what you build, what works, and what gets in your way.</p>
+</div>
+<p>Thank you for spending the week learning these tools together.</p>
+</section></section>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank you!</h1>
 
 
 </section>
@@ -471,7 +539,7 @@ Jason T. Kiley
         hideCursorTime: 5000,
 
         // Opens links in an iframe preview overlay
-        previewLinks: true,
+        previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
         transition: 'fade',
@@ -612,6 +680,11 @@ Jason T. Kiley
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
             }
           }
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
